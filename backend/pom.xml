@@ -8,10 +8,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.sasa</groupId>
-    <artifactId>medmanage</artifactId>
+    <artifactId>plantpalace</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>MedManage</name>
-    <description>Patient management system backend using Spring</description>
+    <name>PlantPalace</name>
+    <description>Advanced e-commerce platform tailored for herbal and cannabis product retailers.</description>
     <properties>
         <java.version>22</java.version>
         <junit.jupiter.version>5.10.0</junit.jupiter.version> <!-- Updated version -->
@@ -129,6 +129,6 @@
 				</executions>
 			</plugin>
         </plugins>
-        <finalName>MedManage</finalName>
+        <finalName>PlantPalace</finalName>
     </build>
 </project>
