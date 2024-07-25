@@ -1,0 +1,149 @@
+/* Header.css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+/* General header styling */
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for the top section of the header */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  background-color: black;
+}
+
+/* Styling for the logo */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo text styling */
+.logo h1 {
+  margin: 0;
+  font-size: 34px;
+  color: white;
+  text-decoration: none;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Search bar container styling */
+.search-bar {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  margin-right: 2rem;
+}
+
+/* Search input styling */
+.search-bar input[type="text"] {
+  background-color: black;
+  color: white;
+  padding: 10px 10px;
+  font-size: 12px;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif; /* Use the imported font */
+  font-weight: 700; /* Bold font weight */
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px; /* Rounded corners on the left side */
+  border-right: none; /* Removes the right border to merge with button */
+  flex: 1; /* Allows input to grow and fill available space */
+  width: 17rem;
+}
+
+/* Search button styling */
+.search-bar button {
+  padding: 10px 10px;
+  font-size: 16px;
+  border: none;
+  background-color: #60a2ea;
+  color: white;
+  border-radius: 0 4px 4px 0; /* Rounded corners on the right side */
+  cursor: pointer;
+}
+
+/* Search button hover effect */
+.search-bar button:hover {
+  background-color: #0056b3;
+}
+
+.header-middle {
+  background-color: black;
+  padding: 10px 20px;
+}
+
+/* Styling for the bottom section of the header */
+.header-bottom {
+  background-color: #333333; /* Dark gray color */
+  padding: 10px 20px;
+}
+
+/* NavBar styling */
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-bar {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .search-bar input[type="text"] {
+    width: calc(100% - 50px);
+    margin-right: 0;
+  }
+
+  .search-bar button {
+    width: 50px;
+  }
+
+  .sidebar-toggle {
+    display: block;
+  }
+
+  .header-middle,
+  .header-bottom,
+  .search-bar {
+    display: none; /* Hide NavBar and Menu on small screens */
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: black;
+    color: white;
+    width: 250px;
+    height: 100%;
+    padding: 20px;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    transform: translateX(100%); /* Start off-screen */
+  }
+
+  .sidebar.active {
+    transform: translateX(0); /* Slide in when active */
+  }
+
+  .menu ul {
+    display: block;
+  }
+}

@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-right: 40px;
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    font-weight: 500; /* Bold font weight */
+}
+
+nav ul li .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: black;
+    list-style: none;
+    width: 10rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+nav ul li:hover .dropdown {
+    display: block;
+}
+
+nav ul li .dropdown li {
+    padding: 10px;
+}
+
+nav ul li .dropdown li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    font-weight: 700; /* Bold font weight */
+}
+
+nav ul li .dropdown li a:hover {
+    color: #60a2ea;
+}

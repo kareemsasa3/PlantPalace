@@ -1,0 +1,40 @@
+/* Styling for the menu container */
+.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333333; /* Dark gray color for the background */
+    padding: 10px 20px; /* Adjust padding as needed */
+  }
+  
+  /* Styling for the list items */
+  .menu ul {
+    display: flex;
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu ul li {
+    margin: 0 15px; /* Adjust spacing between items */
+  }
+  
+  /* Styling for menu links */
+  .menu ul li a {
+    color: white; /* Text color */
+    font-size: 12px; /* Font size */
+    border: 2px solid white; /* Border styling */
+    border-radius: 8px; /* Rounded corners */
+    padding: 8px 12px; /* Adjust padding for spacing inside the button */
+    display: inline-block; /* Ensure border and padding are applied */
+    box-sizing: border-box; /* Ensure padding and border are included in the element’s width and height */
+    white-space: nowrap;
+}
+
+  
+  /* Hover effect for menu links */
+  .menu ul li a:hover {
+    color: black; /* Text color on hover */
+    background-color: #dddddd; /* Background color on hover */
+  }
+  
