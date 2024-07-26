@@ -1,4 +1,4 @@
-package com.sasa.plantpalace.service;
+package com.sasa.backend.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,6 @@ import com.sasa.backend.entity.Patient;
 import com.sasa.backend.exception.ResourceNotFoundException;
 import com.sasa.backend.mapper.PatientMapper;
 import com.sasa.backend.repository.PatientRepository;
-import com.sasa.backend.service.AddressServiceInterface;
-import com.sasa.backend.service.PatientService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

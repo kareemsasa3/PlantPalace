@@ -1,4 +1,4 @@
-package com.sasa.plantpalace.service;
+package com.sasa.backend.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,6 @@ import com.sasa.backend.entity.AddressType;
 import com.sasa.backend.exception.ResourceNotFoundException;
 import com.sasa.backend.mapper.AddressMapper;
 import com.sasa.backend.repository.AddressRepository;
-import com.sasa.backend.service.AddressService;
 
 import java.util.Arrays;
 import java.util.List;
