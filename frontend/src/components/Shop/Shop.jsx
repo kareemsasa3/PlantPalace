@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Shop.css';
 import Breadcrumbs from '../Breadcrumbs';
@@ -19,16 +19,28 @@ const Shop = () => {
     const scrollerRef = useRef(null);
     const location = useLocation();
 
-    // Find the current category based on the path
     const currentCategory = categories.find(category => category.path === location.pathname);
 
     const scrollLeft = () => {
-        scrollerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+        scrollerRef.current.scrollBy({ left: -250, behavior: 'smooth' });
     };
 
     const scrollRight = () => {
-        scrollerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+        scrollerRef.current.scrollBy({ left: 250, behavior: 'smooth' });
     };
+
+    useEffect(() => {
+        const scroller = scrollerRef.current;
+        const handleScroll = () => {
+            if (scroller.scrollLeft === 0) {
+                scroller.scrollLeft = scroller.scrollWidth / 2;
+            } else if (scroller.scrollLeft + scroller.clientWidth >= scroller.scrollWidth) {
+                scroller.scrollLeft = scroller.scrollWidth / 2 - scroller.clientWidth;
+            }
+        };
+        scroller.addEventListener('scroll', handleScroll);
+        return () => scroller.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <>
@@ -41,8 +53,8 @@ const Shop = () => {
                 <div className="scroller-wrapper">
                     <button className="scroll-button left" onClick={scrollLeft}>◀</button>
                     <ul className="scroller" ref={scrollerRef}>
-                        {categories.map(category => (
-                            <li key={category.label} className="category-item">
+                        {categories.concat(categories).map((category, index) => (
+                            <li key={index} className="category-item">
                                 <Link to={category.path}>
                                     <div className="category-content">
                                         <img src={category.image} alt={category.label} className="category-image" />

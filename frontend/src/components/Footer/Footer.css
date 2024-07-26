@@ -1,16 +1,44 @@
 /* Footer.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 .footer {
-    background-color: #333; /* Dark background for contrast */
+    background-color: #1a1a1a; /* Dark background for contrast */
     color: white; /* Light text color */
     text-align: center; /* Center align text */
-    padding: 20px; /* Add padding */
-    position: relative; /* Ensure it stays at the bottom if needed */
-    bottom: 0;
     width: 100%;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
 }
 
-.footer h1 {
-    font-size: 16px; /* Adjust font size if needed */
+.footer-text {
+    font-size: 0.9em;
+    margin: 3rem;
+    padding-top: 2rem;
+}
+
+.footer-bottom {
+    display: flex; /* Enable flexbox layout */
+    justify-content: space-between; /* Space out items */
+    align-items: center; /* Center items vertically */
+    padding: 20px 20px; /* Add horizontal padding */
+    padding-bottom: 1rem;
+    background-color: #f4c542;
+    color: black;
+}
+
+.footer-copyright {
+    font-size: 14px; /* Standard font size for copyright text */
     margin: 0; /* Remove default margin */
-    font-family: Arial, sans-serif; /* Use a web-safe font */
+}
+
+.footer-link {
+    font-size: 14px; /* Standard font size for the link */
+    color: black; /* Color for the link */
+    text-decoration: none; /* Remove underline from the link */
+    margin-right: 2rem;
+    padding: 5px;
+}
+
+.footer-link:hover {
+    border: 1px solid black;
+    border-radius: 8px;
 }

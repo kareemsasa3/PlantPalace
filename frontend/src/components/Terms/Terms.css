@@ -1,0 +1,37 @@
+/* Terms.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.terms-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    color: #fff; /* Changed to white for better readability */
+    line-height: 1.6;
+}
+
+.terms-section h1 {
+    font-size: 3em;
+    margin: 2rem 0; /* Adjusted margins for better spacing */
+    color: #f4c542; /* Bright yellow for the heading */
+}
+
+.terms-section h2 {
+    font-size: 1.5em;
+    margin: 2rem 0 1rem 0; /* Adjusted margins for better spacing */
+    color: #f4c542; /* Bright yellow for subheadings */
+}
+
+.terms-section p {
+    margin-bottom: 1rem; /* Adjusted margin for better spacing */
+    color: #d3d3d3; /* Light gray text color */
+}
+
+.terms-section a {
+    color: #60a2ea; /* Bright blue for links */
+    text-decoration: none;
+}
+
+.terms-section a:hover {
+    text-decoration: underline;
+}

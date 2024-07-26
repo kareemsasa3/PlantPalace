@@ -2,6 +2,7 @@
   text-align: center;
   overflow-x: hidden;
   background-color: black;
+  user-select: none;
 }
 
 .App-logo {

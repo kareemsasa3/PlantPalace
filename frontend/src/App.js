@@ -7,6 +7,8 @@ import Shop from './components/Shop';
 import Footer from './components/Footer';
 
 import './App.css';
+import Terms from './components/Terms/Terms';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
           <Route path="/categories" />
           <Route path="/contact" />
           <Route path="/more" />
+          <Route path="/cart" />
+          <Route path="/login" element={<Login />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/categories/flower" element={<Shop />} />
           <Route path="/categories/concentrates" element={<Shop />} />
           <Route path="/categories/edibles" element={<Shop />} />
