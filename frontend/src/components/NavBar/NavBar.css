@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+nav {
+    background: black; /* Background color for the entire nav */
+}
+
 nav ul {
     display: flex;
     list-style: none;
@@ -8,17 +12,25 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: 40px;
     position: relative;
+    margin-right: 40px;
 }
 
 nav ul li a {
     text-decoration: none;
     color: white;
     font-size: 1em;
-    text-decoration: none;
     font-family: 'Orbitron', sans-serif; /* Use the imported font */
-    font-weight: 500; /* Bold font weight */
+    font-weight: 500; /* Regular font weight */
+    padding: 10px 15px; /* Add padding for better click area */
+    display: block; /* Ensure link covers the entire area */
+    background: transparent; /* Ensure background color for links */
+    border-radius: 4px; /* Add some border radius for rounded corners */
+}
+
+nav ul li a:hover {
+    background: transparent; /* Darker background on hover for visibility */
+    color: #60a2ea; /* Change text color on hover */
 }
 
 nav ul li .dropdown {
@@ -28,11 +40,11 @@ nav ul li .dropdown {
     left: 0;
     background: black;
     list-style: none;
-    width: 10rem;
-    padding: 5px;
+    width: 200px; /* Adjust width as needed */
+    padding: 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-    white-space: nowrap;
+    z-index: 1000; /* Ensure dropdown appears above other content */
 }
 
 nav ul li:hover .dropdown {
@@ -40,18 +52,36 @@ nav ul li:hover .dropdown {
 }
 
 nav ul li .dropdown li {
-    padding: 10px;
+    padding: 10px 15px; /* Ensure padding for items */
+    white-space: nowrap;
 }
 
 nav ul li .dropdown li a {
+    text-align: left;
     text-decoration: none;
     color: white;
     font-size: 1em;
-    text-decoration: none;
     font-family: 'Orbitron', sans-serif; /* Use the imported font */
-    font-weight: 700; /* Bold font weight */
+    font-weight: 500; /* Regular font weight */
+    display: block; /* Ensure link covers the entire area */
 }
 
 nav ul li .dropdown li a:hover {
-    color: #60a2ea;
+    color: #60a2ea; /* Change text color on hover */
+}
+
+/* Optional: Adjust for mobile view */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    nav ul li .dropdown {
+        position: static;
+        width: 100%;
+    }
 }

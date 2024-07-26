@@ -1,0 +1,16 @@
+/* Footer.css */
+.footer {
+    background-color: #333; /* Dark background for contrast */
+    color: white; /* Light text color */
+    text-align: center; /* Center align text */
+    padding: 20px; /* Add padding */
+    position: relative; /* Ensure it stays at the bottom if needed */
+    bottom: 0;
+    width: 100%;
+}
+
+.footer h1 {
+    font-size: 16px; /* Adjust font size if needed */
+    margin: 0; /* Remove default margin */
+    font-family: Arial, sans-serif; /* Use a web-safe font */
+}
