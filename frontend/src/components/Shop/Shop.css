@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.shop-header {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('/public/background3.jpg');
+    background-size: cover; /* Ensure the entire image is visible */
+    background-position: center; /* Center the image in the header */
+    padding: 1rem; /* Adjust padding as needed */
+    color: white; /* Ensure text is readable on top of the image */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    height: 150px; /* Adjust height as needed */
+    width: 97.7%; /* Ensure it takes full width */
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    border: 1px solid white;
+}
+
+
+.category-scroller-container {
+    padding-top: 5px;
+    padding-left: 13em;
+    padding-right: 13em;
+    background-color: black;
+    color: white;
+}
+
+.category-scroller-container h3 {
+    text-align: left; /* Align text to the left */
+    font-size: 24px;
+    margin-top: 10px;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+}
+
+.scroller-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure buttons and scroller are spaced correctly */
+}
+
+.scroll-button {
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+.scroll-button.left {
+    margin-right: 10px;
+}
+
+.scroll-button.right {
+    margin-left: 10px;
+}
+
+.scroller {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    width: 100%;
+    list-style: none; /* Remove default list styling */
+    margin: 0;
+    padding: 0;
+    scroll-snap-type: x mandatory; /* Snap scrolling */
+}
+
+.scroller::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.scroller {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+.category-item {
+    flex: 0 0 auto;
+    margin: 0 26px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    text-decoration: none;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+    text-align: center; /* Center text under the image */
+    scroll-snap-align: start; /* Snap items to start */
+}
+
+.category-item a {
+    color: white;
+    text-decoration: none;
+}
+
+.category-item:hover {
+    background-color: #dddddd;
+}
+
+.category-item a:hover {
+    color: black;
+}
+
+.category-item img {
+    display: block;
+    width: 100px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    object-fit: contain; /* Ensure the entire image is visible */
+    border-radius: 4px;
+    margin: 0 auto 10px; /* Center image and add space below */
+}

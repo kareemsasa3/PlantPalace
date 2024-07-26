@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
+import Shop from './components/Shop';
 
 import './App.css';
 
@@ -12,16 +13,16 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" />
-          <Route path="/shop" />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/categories" />
-          <Route path="/categories/flower" />
-          <Route path="/categories/concentrates" />
-          <Route path="/categories/edibles" />
-          <Route path="/categories/pre-rolls" />
-          <Route path="/categories/vaporizers" />
-          <Route path="/categories/topicals" />
-          <Route path="/categories/tinctures" />
-          <Route path="/categories/accessories" />
+          <Route path="/categories/flower" element={<Shop />} />
+          <Route path="/categories/concentrates" element={<Shop />} />
+          <Route path="/categories/edibles" element={<Shop />} />
+          <Route path="/categories/pre-rolls" element={<Shop />} />
+          <Route path="/categories/vaporizers" element={<Shop />} />
+          <Route path="/categories/topicals" element={<Shop />} />
+          <Route path="/categories/tinctures" element={<Shop />} />
+          <Route path="/categories/accessories" element={<Shop />} />
         </Routes>
       </Router>
     </div>

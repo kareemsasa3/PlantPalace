@@ -7,14 +7,14 @@ const Menu = () => {
     <nav className="menu">
       <ul>
         <li><Link to="/shop">SHOP ALL</Link></li>
-        <li><Link to="/shop/flower">FLOWER</Link></li>
-        <li><Link to="/shop/concentrates">CONCENTRATES</Link></li>
-        <li><Link to="/shop/edibles">EDIBLES</Link></li>
-        <li><Link to="/shop/pre-rolls">PRE-ROLLS</Link></li>
-        <li><Link to="/shop/vaporizers">VAPORIZERS</Link></li>
-        <li><Link to="/shop/topicals">TOPICALS</Link></li>
-        <li><Link to="/shop/tinctures">TINCTURES</Link></li>
-        <li><Link to="/shop/accessories">ACCESSORIES</Link></li>
+        <li><Link to="/categories/flower">FLOWER</Link></li>
+        <li><Link to="/categories/concentrates">CONCENTRATES</Link></li>
+        <li><Link to="/categories/edibles">EDIBLES</Link></li>
+        <li><Link to="/categories/pre-rolls">PRE-ROLLS</Link></li>
+        <li><Link to="/categories/vaporizers">VAPORIZERS</Link></li>
+        <li><Link to="/categories/topicals">TOPICALS</Link></li>
+        <li><Link to="/categories/tinctures">TINCTURES</Link></li>
+        <li><Link to="/categories/accessories">ACCESSORIES</Link></li>
       </ul>
     </nav>
   );

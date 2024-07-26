@@ -81,8 +81,8 @@ header {
 
 /* Styling for the bottom section of the header */
 .header-bottom {
-  background-color: #333333; /* Dark gray color */
-  padding: 10px 20px;
+  background-color: black;
+  padding: 20px 20px;
 }
 
 /* NavBar styling */

@@ -1,0 +1,23 @@
+/* Breadcrumbs.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.breadcrumbs {
+    text-align: left;
+    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.breadcrumb-item {
+    display: inline;
+    text-transform: uppercase;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
