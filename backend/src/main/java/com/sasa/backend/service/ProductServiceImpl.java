@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream()
@@ -35,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<ProductDTO> getProductById(Long id) throws ResourceNotFoundException {
         return Optional.of(productRepository.findById(id)
                                 .map(ProductMapper::toDTO)
@@ -42,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTO saveProduct(ProductDTO productDTO) {
         Product product = ProductMapper.toEntity(productDTO);
         Product savedProduct = productRepository.save(product);
@@ -49,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTO updateProduct(Long id, ProductDTO productDTO) throws ResourceNotFoundException {
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Constants.PRODUCT_NOT_FOUND_MESSAGE + id));
@@ -61,6 +66,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void deleteProduct(Long id) throws ResourceNotFoundException {
         Product product = productRepository.findById(id)
                                            .orElseThrow(() -> new ResourceNotFoundException(Constants.PRODUCT_NOT_FOUND_MESSAGE + id));
