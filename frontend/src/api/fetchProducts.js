@@ -8,7 +8,7 @@ import axios from 'axios';
 export const fetchProducts = async () => {
     try {
         // Perform a GET request to the products endpoint
-        const response = await axios.get('http://localhost:8080/api/products');
+        const response = await axios.get('http://localhost:8090/api/products');
         
         // Return the data property which contains the list of products
         return response.data;

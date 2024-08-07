@@ -9,11 +9,14 @@ import {
   addToCart,
   removeFromCart,
 } from '../../redux/slices/shopSlice';
+import { fetchProducts } from '../../api/fetchProducts'; // Adjust the import path as needed
 import './ProductList.css';
 import LoadingScreen from '../../util/LoadingScreen';
 
-const ProductList = ({ products = [] }) => {
-  const [isLoading, setIsLoading] = useState(products.length === 0);
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.shop.wishlist);
   const cart = useSelector((state) => state.shop.cart);
@@ -41,13 +44,27 @@ const ProductList = ({ products = [] }) => {
   };
 
   useEffect(() => {
-    if (products.length > 0) {
-      setIsLoading(false);
-    }
-  }, [products]);
+    // Fetch products when the component mounts
+    const loadProducts = async () => {
+      try {
+        const productData = await fetchProducts();
+        setProducts(productData);
+        setIsLoading(false);
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   if (isLoading) {
     return <LoadingScreen />;
+  }
+
+  if (error) {
+    return <div className='error'>Error loading products: {error.message}</div>;
   }
 
   if (products.length === 0) {
@@ -57,41 +74,44 @@ const ProductList = ({ products = [] }) => {
   return (
     <div className="product-list">
       <Grid columns={5} stackable doubling>
-        {products.map((product) => (
-          <Grid.Column key={product.id}>
-            <Link to={`/products/${product.id}`}>
-              <div className="product">
-                <img
-                  src={product.imageUrl || 'no_image_available.jpeg'}
-                  alt={product.name || 'No Name'}
-                  className="product-image"
-                />
-                <div className="product-description">
-                  <h3>{product.description}</h3>
+        {products.map((product) => {
+          const { id, name, description, imageUrl, price } = product;
+          return (
+            <Grid.Column key={id}>
+              <Link to={`/products/${id}`}>
+                <div className="product">
+                  <img
+                    src={imageUrl || 'no_image_available.jpeg'}
+                    alt={name || 'No Name'}
+                    className="product-image"
+                  />
+                  <div className="product-description">
+                    <h3>{description}</h3>
+                    <button
+                      className="wishlist-button"
+                      onClick={(e) => handleWishlist(e, id)}
+                    >
+                      <Heart
+                        size={32}
+                        weight={isProductInWishlist(id) ? 'fill' : 'regular'}
+                      />
+                    </button>
+                  </div>
+                  <div className="product-info">
+                    <h2 className="product-name">{name}</h2>
+                  </div>
+                  <p>$ {price || 'N/A'}</p>
                   <button
-                    className="wishlist-button"
-                    onClick={(e) => handleWishlist(e, product.id)}
+                    className="cart-button"
+                    onClick={(e) => handleCart(e, id)}
                   >
-                    <Heart
-                      size={32}
-                      weight={isProductInWishlist(product.id) ? 'fill' : 'regular'}
-                    />
+                    {isProductInCart(id) ? 'Remove from Cart' : 'Add to Cart'}
                   </button>
                 </div>
-                <div className="product-info">
-                  <h2 className="product-name">{product.name}</h2>
-                </div>
-                <p>$ {product.price || 'N/A'}</p>
-                <button
-                  className="cart-button"
-                  onClick={(e) => handleCart(e, product.id)}
-                >
-                  {isProductInCart(product.id) ? 'Remove from Cart' : 'Add to Cart'}
-                </button>
-              </div>
-            </Link>
-          </Grid.Column>
-        ))}
+              </Link>
+            </Grid.Column>
+          );
+        })}
       </Grid>
     </div>
   );

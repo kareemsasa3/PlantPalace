@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Shop.css';
 import Breadcrumbs from '../Breadcrumbs';
+import ProductList from '../ProductList';
 
 const categories = [
     { label: 'SHOP ALL', path: '/shop', image: '/shop.png', text: 'SHOP MED & RECREATIONAL MARIJUANA' },
@@ -67,6 +68,7 @@ const Shop = () => {
                     <button className="scroll-button right" onClick={scrollRight}>▶</button>
                 </div>
             </div>
+            <ProductList />
         </>
     );
 };
