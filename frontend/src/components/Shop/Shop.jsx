@@ -68,6 +68,7 @@ const Shop = () => {
                     <button className="scroll-button right" onClick={scrollRight}>▶</button>
                 </div>
             </div>
+            <h1 className='products-title'>Featured</h1>
             <ProductList />
         </>
     );
