@@ -16,7 +16,7 @@
 }
 
 .category-scroller-container {
-    padding-top: 5px;
+    padding-top: 5em;
     padding-left: 7em;
     padding-right: 7em;
     background-color: black;
@@ -115,4 +115,8 @@
 
 .products-title {
     color: white;
+    text-align: left; /* Align the text to the left */
+    font-family: 'Orbitron', sans-serif; /* Ensure consistent font usage */
+    padding-top: 1em; /* Add padding to separate from the top */
+    padding-left: 2em;
 }

@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import './App.css';
 import Terms from './components/Terms/Terms';
 import Login from './components/Login';
+import CartWidget from './components/CartWidget';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/categories/tinctures" element={<Shop />} />
           <Route path="/categories/accessories" element={<Shop />} />
         </Routes>
+        <CartWidget />
         <Footer />
       </Router>
     </div>

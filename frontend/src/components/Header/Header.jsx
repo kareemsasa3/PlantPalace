@@ -15,7 +15,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="search-bar">
-          <input type="text" placeholder="Search everything at Plant Palace" />
+          <input type="text" placeholder="Search" />
           <button type="button">🔍</button>
         </div>
       </div>

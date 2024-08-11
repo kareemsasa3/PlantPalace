@@ -1,0 +1,146 @@
+/* Cart Item */
+.cart-item {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Space out the items */
+    margin-bottom: 15px; /* Spacing between items */
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Separation between items */
+    text-align: left; /* Align text to the left */
+}
+
+/* Product details container */
+.cart-item-details {
+    flex: 1; /* Allow the details to take up available space */
+    margin-right: 15px; /* Space between details and image */
+}
+
+/* Product image styling */
+.product-image {
+    width: 100px; /* Fixed width for images */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Crop image to fit */
+}
+
+/* Cart Widget */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.cart-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 5%;
+    border-radius: 100px;
+}
+ 
+.cart-button {
+    border: 2px solid white;
+    border-radius: 100px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+  
+/* Cart Container */
+.cart-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    transition: opacity 0.3s ease;
+}
+  
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+  
+.cart-content {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    z-index: 1002;
+    font-family: 'Orbitron', sans-serif;
+}
+  
+.hidden {
+    display: none;
+}
+  
+.checkout-button {
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    border-top: 1px solid #ddd; /* Added border for summary section */
+    padding-top: 10px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.summary-item.total {
+    font-weight: bold;
+}
+
+.product-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px; /* Space below the name */
+}
+
+.product-price, .product-amount, .product-type {
+    font-size: 14px;
+    color: #555; /* Slightly darker color for better readability */
+    margin-bottom: 5px; /* Space below each detail */
+}
+
+/* Quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Space above the quantity controls */
+}
+
+.quantity-button {
+    background-color: #f5f5f5; /* Light background for buttons */
+    border: 1px solid #ccc; /* Border color for buttons */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px;
+    margin: 0 5px; /* Space between buttons and quantity value */
+    cursor: pointer;
+}
+
+.quantity-value {
+    font-size: 16px; /* Size of the quantity value */
+    margin: 0 10px; /* Space around the quantity value */
+}

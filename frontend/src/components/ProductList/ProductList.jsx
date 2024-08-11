@@ -21,6 +21,9 @@ const ProductList = () => {
   const wishlist = useSelector((state) => state.shop.wishlist);
   const cart = useSelector((state) => state.shop.cart);
 
+  // New state to track which product has an active animation
+  const [animationTrigger, setAnimationTrigger] = useState(null);
+
   const isProductInWishlist = (productId) => wishlist.includes(productId);
   const isProductInCart = (productId) => cart.includes(productId);
 
@@ -30,12 +33,15 @@ const ProductList = () => {
       dispatch(removeFromWishlist(productId));
     } else {
       dispatch(addToWishlist(productId));
+      // Trigger animation
+      setAnimationTrigger(productId);
+      // Reset animation after it completes
+      setTimeout(() => setAnimationTrigger(null), 1000); // 1000ms corresponds to animation duration
     }
   };
 
   const handleCart = (e, productId) => {
     e.preventDefault();
-
     if (isProductInCart(productId)) {
       dispatch(removeFromCart(productId));
     } else {
@@ -75,18 +81,17 @@ const ProductList = () => {
     <div className="product-list">
       <Grid columns={5} stackable doubling>
         {products.map((product) => {
-          const { id, name, description, imageUrl, price } = product;
+          const { id, name, amount, image, price } = product;
           return (
             <Grid.Column key={id}>
               <Link to={`/products/${id}`}>
                 <div className="product">
                   <img
-                    src={imageUrl || 'no_image_available.jpeg'}
+                    src={image || 'no_image_available.jpeg'}
                     alt={name || 'No Name'}
                     className="product-image"
                   />
                   <div className="product-description">
-                    <h3>{description}</h3>
                     <button
                       className="wishlist-button"
                       onClick={(e) => handleWishlist(e, id)}
@@ -96,13 +101,21 @@ const ProductList = () => {
                         weight={isProductInWishlist(id) ? 'fill' : 'regular'}
                       />
                     </button>
+                    {animationTrigger === id && (
+                      <div className="confetti-container">
+                        {Array.from({ length: 12 }).map((_, i) => (
+                          <div key={i} className={`confetti confetti-${i}`}></div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   <div className="product-info">
                     <h2 className="product-name">{name}</h2>
                   </div>
+                  <p>{amount || 'N/A'} Grams</p>
                   <p>$ {price || 'N/A'}</p>
                   <button
-                    className="cart-button"
+                    className="add-to-cart-button"
                     onClick={(e) => handleCart(e, id)}
                   >
                     {isProductInCart(id) ? 'Remove from Cart' : 'Add to Cart'}
