@@ -1,150 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: black;
+  justify-content: center;
+  margin: 2rem;
+}
+
 .product {
+  border-radius: 10px;
+  height: 35rem;
+  width: 20rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
   position: relative;
   background-color: #1a1a1a;
-  border: 1px solid #1a1a1a;
   font-family: 'Orbitron', sans-serif;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 2rem;
   text-align: center;
   transition: box-shadow 0.3s;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribute space evenly */
+  justify-content: space-between;
   align-items: center;
-  height: 380px; /* Set a fixed height */
-  width: 240px; /* Set a fixed width */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
-
-.product img {
-  max-width: 100%;
-  height: 150px; /* Set a fixed height for images */
-  object-fit: cover; /* Cover the container without distorting the image */
-  border-radius: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .product:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
   transition: 0.3s ease-in;
   cursor: pointer;
 }
 
-.product h2 {
-  font-size: 13px;
-  margin-bottom: 20px;
-  font-family: 'Orbitron', sans-serif; /* Use the imported font */
+.product img {
+  margin: 8rem;
+  transform: scale(1.9);
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  vertical-align: middle;
 }
 
-.product h3 {
-  font-size: 13px;
-}
-
-.product p {
-  font-size: 13px;
-  align-self: flex-start;
-}
-
-.product-list {
-  background: black;
-  padding: 20px;
-}
-
-.product-description {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+.product-name {
+  margin: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  position: absolute;
+  left: 0;
 }
 
 .product-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  position: absolute;
+  margin-top: 27rem;
   align-items: center;
   width: 100%;
-  padding-top: 2rem;
 }
 
-.product-info h3 {
-  font-size: 12px;
-  font-weight: bold;
+.type {
+  position: absolute;
+  margin-top: 25rem;
 }
 
 .wishlist-button {
-  position: absolute; /* Position the button absolutely within the product container */
-  top: 10px; /* Offset from the top */
-  left: 90px; /* Offset from the right */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   background: transparent;
   color: white;
-  border: none; /* Remove border for cleaner appearance */
+  border: none;
   cursor: pointer;
   z-index: 2;
+  width: 4rem;
 }
 
 .wishlist-button:hover {
-  background: transparent;
+  background-color: transparent;
 }
 
 .add-to-cart-button {
+  position: absolute;
+  margin-top: 30rem;
   background: #1a1a1a;
-  border: 2px solid #1a1a1a;
   color: white;
-  border-radius: 8px;
-  padding: 5px 10px;
   width: 90%;
 }
 
 .add-to-cart-button:hover {
   background-color: white;
   color: black;
-}
-
-/* New styles for confetti animation */
-.confetti-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-}
-
-.confetti {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background-color: gold;
-  opacity: 0;
-  border-radius: 50%;
-  animation: splash 1s ease-out forwards;
-}
-
-.confetti-0 { left: 10%; animation-delay: 0s; }
-.confetti-1 { left: 20%; animation-delay: 0.1s; }
-.confetti-2 { left: 30%; animation-delay: 0.2s; }
-.confetti-3 { left: 40%; animation-delay: 0.3s; }
-.confetti-4 { left: 50%; animation-delay: 0.4s; }
-.confetti-5 { left: 60%; animation-delay: 0.5s; }
-.confetti-6 { left: 70%; animation-delay: 0.6s; }
-.confetti-7 { left: 80%; animation-delay: 0.7s; }
-.confetti-8 { left: 90%; animation-delay: 0.8s; }
-.confetti-9 { left: 15%; animation-delay: 0.9s; }
-.confetti-10 { left: 25%; animation-delay: 0.1s; }
-.confetti-11 { left: 35%; animation-delay: 0.3s; }
-
-@keyframes splash {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(-100px) scale(0);
-    opacity: 0;
-  }
 }

@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import './Footer.css';
 
 const Footer = () => {
+    // State to track the current window width
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    // Effect to update the window width on resize
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <footer className='footer'>
             <p className='footer-text'>
@@ -16,6 +32,9 @@ const Footer = () => {
                 <Link to='/terms' className='footer-link'>
                     Terms & Conditions
                 </Link>
+            </div>
+            <div className='footer-window-width'>
+                <p>Current window width: {windowWidth}px</p>
             </div>
         </footer>
     );
