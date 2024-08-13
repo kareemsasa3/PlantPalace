@@ -83,8 +83,7 @@
 }
 
 .add-to-cart-button {
-  position: absolute;
-  margin-top: 30rem;
+  position: inherit;
   background: #1a1a1a;
   color: white;
   width: 90%;
@@ -94,3 +93,4 @@
   background-color: white;
   color: black;
 }
+

@@ -13,12 +13,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
 
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> searchProducts(
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String category,
+        @RequestParam(required = false) String type,
+        @RequestParam(required = false) Double minPrice,
+        @RequestParam(required = false) Double maxPrice
+    ) {
+        List<ProductDTO> products = productService.searchProducts(name, category, type, minPrice, maxPrice);
+        return ResponseEntity.ok(products);
     }
 
     // Get all products

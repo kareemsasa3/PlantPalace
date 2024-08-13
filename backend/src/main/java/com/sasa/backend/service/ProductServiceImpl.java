@@ -29,6 +29,53 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<ProductDTO> searchProducts(String name, String category, String type, Double minPrice, Double maxPrice) {
+        List<Product> products = findProducts(name, category, type, minPrice, maxPrice);
+        return products.stream()
+                    .map(ProductMapper::toDTO)
+                    .collect(Collectors.toList());
+    }
+
+    private List<Product> findProducts(String name, String category, String type, Double minPrice, Double maxPrice) {
+        Category cat = convertToEnum(category, Category.class);
+        Type t = convertToEnum(type, Type.class);
+
+        if (name != null) {
+            if (cat != null && t != null) {
+                return productRepository.findByNameContainingIgnoreCaseAndCategoryAndType(name, cat, t);
+            } else if (cat != null) {
+                return productRepository.findByNameContainingIgnoreCaseAndCategory(name, cat);
+            } else if (t != null) {
+                return productRepository.findByNameContainingIgnoreCaseAndType(name, t);
+            } else {
+                return productRepository.findByNameContainingIgnoreCase(name);
+            }
+        } else if (cat != null && t != null) {
+            return productRepository.findByCategoryAndType(cat, t);
+        } else if (cat != null) {
+            return productRepository.findByCategory(cat);
+        } else if (t != null) {
+            return productRepository.findByType(t);
+        } else if (minPrice != null && maxPrice != null) {
+            return productRepository.findByPriceBetween(minPrice, maxPrice);
+        } else {
+            return productRepository.findAll();
+        }
+    }
+
+    private <E extends Enum<E>> E convertToEnum(String value, Class<E> enumClass) {
+        if (value != null) {
+            try {
+                return Enum.valueOf(enumClass, value.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid value for enum " + enumClass.getSimpleName() + ": " + value);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream()

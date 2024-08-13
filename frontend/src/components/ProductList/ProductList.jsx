@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+// src/components/ProductList/ProductList.js
+
+import React from "react";
 import { Grid } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Heart } from "phosphor-react";
@@ -9,14 +11,10 @@ import {
   addToCart,
   removeFromCart,
 } from "../../redux/slices/shopSlice";
-import { fetchProducts } from "../../api/fetchProducts";
 import "./ProductList.css";
 import LoadingScreen from "../../util/LoadingScreen";
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+const ProductList = ({ products, isLoading, error }) => {
   const dispatch = useDispatch();
   const wishlist = useSelector((state) => state.shop.wishlist);
   const cart = useSelector((state) => state.shop.cart);
@@ -41,21 +39,6 @@ const ProductList = () => {
       dispatch(addToCart(productId));
     }
   };
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const productData = await fetchProducts();
-        setProducts(productData);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, []);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -97,7 +80,9 @@ const ProductList = () => {
                   </div>
                   <p className="type">{type || "N/A"}</p>
                   <div className="product-info">
-                    <span className="amount">{amount || "N/A"} Grams</span>
+                    <span className="amount">
+                      {amount || "N/A"} {amount === 1 ? "Gram" : "Grams"}
+                    </span>
                     <span className="price">$ {price || "N/A"}</span>
                   </div>
                   <button

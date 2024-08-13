@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public interface ProductService {
 
+    List<ProductDTO> searchProducts(String name, String category, String type, Double minPrice, Double maxPrice);
+
     List<ProductDTO> getAllProducts();
 
     Optional<ProductDTO> getProductById(Long id) throws ResourceNotFoundException;

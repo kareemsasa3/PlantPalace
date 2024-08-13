@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.product-details {
+  background-color: #1a1a1a;
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  margin: 2rem auto;
+  max-width: 800px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.product-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.product-details p {
+  margin: 0.5rem 0;
+}
+
+.product-details .terpenes span {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.product-details .error {
+  color: red;
+}
+
+.product-details .loading {
+  color: #ccc;
+}
+
+.wishlist-button {
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin-top: 18rem;
+  margin-right: 38rem;
+  z-index: 2;
+}
+
+.wishlist-button.in-wishlist {
+  color: gold; /* Example color for items in the wishlist */
+}
+
+.add-to-cart-button {
+    position: inherit;
+    bottom: 0;
+    width: 15rem;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.add-to-cart-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.add-to-cart-button.in-cart {
+  background: white; /* Example color for items in the cart */
+    color: black;
+}
+
+.add-to-cart-button.in-cart:hover {
+    background-color: black;
+    color: white;
+}
