@@ -1,45 +1,12 @@
 // src/components/ProductList/ProductList.js
 
-import React from "react";
-import { Grid } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { Heart } from "phosphor-react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToWishlist,
-  removeFromWishlist,
-  addToCart,
-  removeFromCart,
-} from "../../redux/slices/shopSlice";
-import "./ProductList.css";
-import LoadingScreen from "../../util/LoadingScreen";
+import React from 'react';
+import { Grid } from 'semantic-ui-react';
+import ProductCard from '../ProductCard'; // Import the new ProductCard component
+import './ProductList.css';
+import LoadingScreen from '../../util/LoadingScreen';
 
 const ProductList = ({ products, isLoading, error }) => {
-  const dispatch = useDispatch();
-  const wishlist = useSelector((state) => state.shop.wishlist);
-  const cart = useSelector((state) => state.shop.cart);
-
-  const isProductInWishlist = (productId) => wishlist.includes(productId);
-  const isProductInCart = (productId) => cart.includes(productId);
-
-  const handleWishlist = (e, productId) => {
-    e.preventDefault();
-    if (isProductInWishlist(productId)) {
-      dispatch(removeFromWishlist(productId));
-    } else {
-      dispatch(addToWishlist(productId));
-    }
-  };
-
-  const handleCart = (e, productId) => {
-    e.preventDefault();
-    if (isProductInCart(productId)) {
-      dispatch(removeFromCart(productId));
-    } else {
-      dispatch(addToCart(productId));
-    }
-  };
-
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -55,47 +22,11 @@ const ProductList = ({ products, isLoading, error }) => {
   return (
     <div className="product-list">
       <Grid columns={6} stackable doubling>
-        {products.map((product) => {
-          const { id, name, amount, image, price, type } = product;
-          return (
-            <Grid.Column key={id}>
-              <Link to={`/products/${id}`}>
-                <div className="product">
-                  <h2 className="product-name">{name}</h2>
-                  <img
-                    src={image || "no_image_available.jpeg"}
-                    alt={name || "No Name"}
-                    className="product-image"
-                  />
-                  <div className="product-description">
-                    <button
-                      className="wishlist-button"
-                      onClick={(e) => handleWishlist(e, id)}
-                    >
-                      <Heart
-                        size={32}
-                        weight={isProductInWishlist(id) ? "fill" : "regular"}
-                      />
-                    </button>
-                  </div>
-                  <p className="type">{type || "N/A"}</p>
-                  <div className="product-info">
-                    <span className="amount">
-                      {amount || "N/A"} {amount === 1 ? "Gram" : "Grams"}
-                    </span>
-                    <span className="price">$ {price || "N/A"}</span>
-                  </div>
-                  <button
-                    className="add-to-cart-button"
-                    onClick={(e) => handleCart(e, id)}
-                  >
-                    {isProductInCart(id) ? "Remove from Cart" : "Add to Cart"}
-                  </button>
-                </div>
-              </Link>
-            </Grid.Column>
-          );
-        })}
+        {products.map((product) => (
+          <Grid.Column key={product.id}>
+            <ProductCard product={product} />
+          </Grid.Column>
+        ))}
       </Grid>
     </div>
   );

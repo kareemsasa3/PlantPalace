@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductById } from '../../api/fetchProducts'; // Adjust path as needed
 import { addToCart, removeFromCart, addToWishlist, removeFromWishlist } from '../../redux/slices/shopSlice'; // Adjust path as needed
 import { Heart } from 'phosphor-react';
+import { Button } from 'semantic-ui-react';
 import './Product.css';
 
 const Product = () => {
@@ -31,6 +32,7 @@ const Product = () => {
   }, [productId]);
 
   const handleWishlist = () => {
+    console.log('Current Wishlist:', wishlist);
     if (wishlist.includes(productId)) {
       dispatch(removeFromWishlist(productId));
     } else {
@@ -63,12 +65,12 @@ const Product = () => {
 
   return (
     <div className="product-details">
-      <button
-        className={`wishlist-button ${isInWishlist ? 'in-wishlist' : ''}`}
+      <Button
+        className={`wishlist-btn ${isInWishlist ? 'in-wishlist' : ''}`}
         onClick={handleWishlist}
       >
         <Heart size={32} weight={isInWishlist ? 'fill' : 'regular'} />
-      </button>
+      </Button>
       <h1 className='product-title'>{product.name}</h1>
       <img src={product.image || 'no_image_available.jpeg'} alt={product.name} className='product-image'/>
       <p>Price: ${product.price}</p>
@@ -82,7 +84,7 @@ const Product = () => {
         <span key={key}>{key}: {value}% </span>
       ))}</p>
       <button
-        className={`add-to-cart-button ${isInCart ? 'in-cart' : ''}`}
+        className={`add-to-cart-btn ${isInCart ? 'in-cart' : ''}`}
         onClick={handleCart}
       >
         {isInCart ? 'Remove from Cart' : 'Add to Cart'}

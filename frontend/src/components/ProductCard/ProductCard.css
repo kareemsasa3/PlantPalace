@@ -1,0 +1,95 @@
+/* src/components/ProductCard/ProductCard.css */
+
+.product-card {
+    border-radius: 10px;
+    height: 33rem;
+    background-color: #1a1a1a;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    transition: box-shadow 0.3s;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    transition: 0.3s ease-in;
+    cursor: pointer;
+  }
+
+  .product-card .product-name {
+    color: white;
+    text-align: left;
+    margin-top: 2rem;
+    margin-left: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .product-card .product-image {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    transform: scale(1.2);
+    width: 10rem;
+    height: 10rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .product-card .wishlist-button {
+    position: absolute;
+    margin-left: 2rem !important;
+    background: transparent !important;
+    color: gold !important;
+    border: none !important;
+    width: 3rem;
+    height: 1rem;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .product-card .wishlist-button:hover {
+    color: gold !important;
+  }
+
+  .product-card .type {
+    color: white;
+    text-align: left;
+    margin-left: 2rem;
+  }
+
+  .product-card .product-info {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+    margin-left: 2rem;
+  }
+ 
+  .product-card .wishlist-button:hover {
+    background-color: transparent;
+  }
+  
+  .product-card .add-to-cart-button {
+    position: inherit;
+    background: #1a1a1a !important;
+    color: white !important;
+    width: 80%;
+    margin-top: 1rem !important;
+    border: 2px solid white !important;
+  }
+  
+  .product-card .add-to-cart-button:hover {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .product-card .add-to-cart-button.in-cart {
+    background-color: white !important; /* Change to desired color when in cart */
+    color: black !important;
+}
+  
+  
