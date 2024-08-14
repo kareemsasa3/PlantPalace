@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 
 import './Login.css';
 
@@ -19,7 +20,7 @@ const Login = () => {
           <form className="login-form" onSubmit={handleSubmit}>
             <h2>LOGIN</h2>
             <div className="form-group">
-              <label htmlFor="email">EMAIL</label>
+              <label htmlFor="username">username</label>
               <input
                 type="text"
                 id="email"
@@ -29,7 +30,7 @@ const Login = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">password</label>
               <input
                 type="password"
                 id="password"
@@ -38,7 +39,7 @@ const Login = () => {
                 required
               />
             </div>
-            <button type="submit">Login</button>
+            <Button type="submit" className="login-btn">Login</Button>
             <div className="login-links">
                 <Link to="/forgot-password">Forgot Password?</Link>
                 <Link to="/signup">Create An Account</Link>

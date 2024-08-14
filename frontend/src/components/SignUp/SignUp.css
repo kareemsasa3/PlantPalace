@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-.login-container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,12 +10,12 @@
   padding-bottom: 6rem;
 }
 
-.login-form {
+.signup-form {
   color: gold;
   text-align: left;
 }
 
-.login-form h2 {
+.signup-form h2 {
   font-family: 'Orbitron', sans-serif;
   font-size: 5rem;
   padding-left: 6rem;
@@ -42,7 +42,7 @@
   font-family: 'Orbitron', sans-serif;
 }
 
-.login-btn {
+.signup-btn {
   text-transform: uppercase !important;
   font-family: 'Orbitron', sans-serif !important;
   width: 100% !important;
@@ -53,25 +53,24 @@
   font-size: 1em;
   cursor: pointer;
   font-weight: 700;
-  font-family: 'Orbitron', sans-serif;
 }
 
-.login-btn:hover {
+.signup-btn:hover {
   background-color: #4d8bd6;
 }
 
-.login-links {
+.signup-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 15px;
 }
 
-.login-links a {
+.signup-links a {
   color: #60a2ea;
   text-decoration: none;
   font-weight: 500;
 }
 
-.login-links a:hover {
+.signup-links a:hover {
   text-decoration: underline;
 }

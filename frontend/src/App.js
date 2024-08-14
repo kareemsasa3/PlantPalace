@@ -8,7 +8,7 @@ import Product from './components/Product';  // Import the new Product component
 import Footer from './components/Footer';
 import Terms from './components/Terms/Terms';
 import Login from './components/Login';
-import CartWidget from './components/CartWidget';
+import SignUp from './components/SignUp';
 
 import './App.css';
 
@@ -26,9 +26,9 @@ function App() {
           <Route path="/more" element={<div>More Page</div>} /> {/* Replace with actual component */}
           <Route path="/cart" element={<div>Cart Page</div>} /> {/* Replace with actual component */}
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>
-        <CartWidget />
         <Footer />
       </Router>
     </div>
