@@ -2,6 +2,7 @@ package com.sasa.backend.service;
 
 import com.sasa.backend.dto.UserDTO;
 import com.sasa.backend.entity.User;
+import com.sasa.backend.entity.UserDetailsImpl;
 import com.sasa.backend.exception.DuplicateResourceException;
 import com.sasa.backend.exception.ResourceNotFoundException;
 import com.sasa.backend.mapper.OrderMapper;
@@ -11,6 +12,8 @@ import com.sasa.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -81,5 +84,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
         userRepository.delete(user);
-    }    
+    }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        return UserDetailsImpl.build(user);
+    }
+
 }

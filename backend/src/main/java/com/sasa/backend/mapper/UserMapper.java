@@ -1,6 +1,8 @@
 package com.sasa.backend.mapper;
 
+import com.sasa.backend.dto.RoleDTO;
 import com.sasa.backend.dto.UserDTO;
+import com.sasa.backend.entity.Role;
 import com.sasa.backend.entity.User;
 
 import java.util.ArrayList;
@@ -28,6 +30,11 @@ public final class UserMapper {
                     .map(OrderMapper::toDTO)
                     .collect(Collectors.toList())
                 : new ArrayList<>())
+            .roles(user.getRoles() != null
+                ? user.getRoles().stream()
+                    .map(UserMapper::roleToDTO)
+                    .collect(Collectors.toList())
+                : new ArrayList<>())
             .build();
     }
 
@@ -43,6 +50,11 @@ public final class UserMapper {
             .firstName(userDTO.getFirstName())
             .lastName(userDTO.getLastName())
             .orderHistory(new ArrayList<>())
+            .roles(userDTO.getRoles() != null
+                ? userDTO.getRoles().stream()
+                    .map(UserMapper::roleToEntity)
+                    .collect(Collectors.toList())
+                : new ArrayList<>())
             .build();
 
         if (userDTO.getOrderHistory() != null) {
@@ -52,5 +64,16 @@ public final class UserMapper {
         }
 
         return user;
+    }
+
+    private static RoleDTO roleToDTO(Role role) {
+        return new RoleDTO(role.getId(), role.getName());
+    }
+
+    private static Role roleToEntity(RoleDTO roleDTO) {
+        return Role.builder()
+                .id(roleDTO.getId())
+                .name(roleDTO.getName())
+                .build();
     }
 }

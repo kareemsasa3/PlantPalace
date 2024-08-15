@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 
 import './SignUp.css';
@@ -15,6 +15,8 @@ const SignUp = () => {
 
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
+
+    const navigate = useNavigate();
 
     // Mark the function as async
     const handleSubmit = async (e) => {
@@ -37,6 +39,7 @@ const SignUp = () => {
           const result = await signup(userData);
           setSuccess('Sign up successful!');
           setError(null);
+          navigate('/shop');
         } catch (error) {
           setError('Sign up failed. Please try again.');
           alert(error);
