@@ -16,6 +16,7 @@ public class AddressDTO {
     private String postalCode;
     private String firstName;
     private String lastName;
+    private String emailAddress;
 
     @Override
     public boolean equals(Object o) {

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 class AddressServiceTest {
 
     @InjectMocks
-    private AddressService addressService;
+    private AddressServiceImpl addressService;
 
     @Mock
     private AddressRepository addressRepository;
@@ -57,15 +57,11 @@ class AddressServiceTest {
         assertNotNull(addressDTOs);
         assertEquals(2, addressDTOs.size());
 
-        System.out.println("AddressDTOs from service: " + addressDTOs);
-
         // Assert that the result contains the expected AddressDTOs
         // Use assertTrue with detailed failure message
         assertTrue(addressDTOs.contains(d1), "Expected AddressDTO list to contain: " + d1);
         assertTrue(addressDTOs.contains(d2), "Expected AddressDTO list to contain: " + d2);
 
-        // Additional Debugging
-        System.out.println("Expected AddressDTOs: " + Arrays.asList(d1, d2));
     }
 
     @Test

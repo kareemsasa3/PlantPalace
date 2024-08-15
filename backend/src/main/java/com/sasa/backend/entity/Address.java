@@ -22,9 +22,9 @@ public class Address {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "user_id")
     @JsonBackReference
-    private Patient patient;
+    private User user;
 
     private String streetAddress;
 

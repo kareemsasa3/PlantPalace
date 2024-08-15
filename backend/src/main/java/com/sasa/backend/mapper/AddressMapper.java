@@ -24,6 +24,9 @@ public final class AddressMapper {
         dto.setCity(address.getCity());
         dto.setState(address.getState());
         dto.setPostalCode(address.getPostalCode());
+        dto.setFirstName(address.getFirstName());
+        dto.setLastName(address.getLastName());
+        dto.setEmailAddress(address.getEmailAddress());
         return dto;
     }
 
@@ -39,6 +42,9 @@ public final class AddressMapper {
         address.setCity(dto.getCity());
         address.setState(dto.getState());
         address.setPostalCode(dto.getPostalCode());
+        address.setFirstName(dto.getFirstName());
+        address.setLastName(dto.getLastName());
+        address.setEmailAddress(dto.getEmailAddress());
         return address;
     }
 

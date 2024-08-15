@@ -3,30 +3,53 @@ import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 
 import './SignUp.css';
+import { signup } from "../../api/authApi";
 
 const SignUp = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+
+    // Mark the function as async
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
-        console.log('Username: ', username);
-        console.log('Email: ', email);
-        console.log('Password: ', password);
-    }
+        
+        const userData = {
+          username,
+          email,
+          password,
+          firstName,
+          lastName
+        };
+
+        try {
+          const result = await signup(userData);
+          setSuccess('Sign up successful!');
+          setError(null);
+        } catch (error) {
+          setError('Sign up failed. Please try again.');
+          alert(error);
+          setSuccess(null);
+        }
+    };
 
     return (
         <div className="signup-container">
           <form className="signup-form" onSubmit={handleSubmit}>
             <h2>SIGN UP</h2>
             <div className="form-group">
-              <label htmlFor="username">username</label>
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
                 id="username"
@@ -36,7 +59,7 @@ const SignUp = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -46,7 +69,7 @@ const SignUp = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 id="password"
@@ -56,7 +79,7 @@ const SignUp = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="confirm-password">confirm password</label>
+              <label htmlFor="confirm-password">Confirm Password</label>
               <input
                 type="password"
                 id="confirm-password"
