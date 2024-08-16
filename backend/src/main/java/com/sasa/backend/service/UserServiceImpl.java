@@ -74,6 +74,11 @@ public class UserServiceImpl implements UserService {
             user.setOrderHistory(userDTO.getOrderHistory().stream()
                 .map(OrderMapper::toEntity)
                 .collect(Collectors.toList()));
+            user.setFirstName(userDTO.getFirstName());
+            user.setLastName(userDTO.getLastName());
+            user.setRoles(userDTO.getRoles().stream()
+                .map(UserMapper::roleToEntity)
+                .collect(Collectors.toList()));
             User updatedUser = userRepository.save(user);
             return UserMapper.toDTO(updatedUser);
         }
@@ -90,6 +95,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
         return UserDetailsImpl.build(user);
+    }
+
+    @Override
+    public User findById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
     }
 
 }

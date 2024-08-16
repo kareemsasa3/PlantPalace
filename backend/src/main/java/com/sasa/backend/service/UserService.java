@@ -3,6 +3,7 @@ package com.sasa.backend.service;
 import java.util.List;
 
 import com.sasa.backend.dto.UserDTO;
+import com.sasa.backend.entity.User;
 
 public interface UserService {
 
@@ -15,4 +16,6 @@ public interface UserService {
     UserDTO updateUser(Long id, UserDTO userDTO);
 
     void deleteUser(Long id);
+
+    User findById(Long userId);
 }

@@ -12,10 +12,12 @@ const CartWidget = () => {
   const [products, setProducts] = useState([]);
   const cartItems = useSelector((state) => state.shop.cart);
 
+  // Toggle the cart visibility
   const handleCartClick = () => {
     setIsCartOpen(!isCartOpen);
   };
 
+  // Handle the checkout process
   const handleCheckout = () => {
     console.log('Proceeding to checkout...');
     // Optionally clear the cart or navigate to a checkout page
@@ -61,6 +63,11 @@ const CartWidget = () => {
   };
 
   const { totalPrice, tax, totalWithTax, shipping } = calculateTotals();
+
+  // Return null if the cart is empty, so the widget won't be displayed
+  if (cartItems.length === 0) {
+    return null;
+  }
 
   return (
     <>

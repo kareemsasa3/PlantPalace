@@ -35,6 +35,11 @@ public final class UserMapper {
                     .map(UserMapper::roleToDTO)
                     .collect(Collectors.toList())
                 : new ArrayList<>())
+            .addresses(user.getAddresses() != null
+                ? user.getAddresses().stream()
+                    .map(AddressMapper::toDTO)
+                    .collect(Collectors.toList())
+                : new ArrayList<>())  // Added mapping for addresses
             .build();
     }
 
@@ -43,34 +48,35 @@ public final class UserMapper {
             return null; // Handle null DTOs gracefully
         }
 
-        User user = User.builder()
+        return User.builder()
             .id(userDTO.getId())
             .username(userDTO.getUsername())
             .email(userDTO.getEmail())
             .firstName(userDTO.getFirstName())
             .lastName(userDTO.getLastName())
-            .orderHistory(new ArrayList<>())
+            .orderHistory(userDTO.getOrderHistory() != null
+                ? userDTO.getOrderHistory().stream()
+                    .map(OrderMapper::toEntity)
+                    .collect(Collectors.toList())
+                : new ArrayList<>())
             .roles(userDTO.getRoles() != null
                 ? userDTO.getRoles().stream()
                     .map(UserMapper::roleToEntity)
                     .collect(Collectors.toList())
                 : new ArrayList<>())
+            .addresses(userDTO.getAddresses() != null
+                ? userDTO.getAddresses().stream()
+                    .map(AddressMapper::toEntity)
+                    .collect(Collectors.toList())
+                : new ArrayList<>())  // Added mapping for addresses
             .build();
-
-        if (userDTO.getOrderHistory() != null) {
-            user.setOrderHistory(userDTO.getOrderHistory().stream()
-                .map(OrderMapper::toEntity)
-                .collect(Collectors.toList()));
-        }
-
-        return user;
     }
 
-    private static RoleDTO roleToDTO(Role role) {
+    public static RoleDTO roleToDTO(Role role) {
         return new RoleDTO(role.getId(), role.getName());
     }
 
-    private static Role roleToEntity(RoleDTO roleDTO) {
+    public static Role roleToEntity(RoleDTO roleDTO) {
         return Role.builder()
                 .id(roleDTO.getId())
                 .name(roleDTO.getName())

@@ -6,7 +6,7 @@
     color: white; /* Light text color */
     text-align: center; /* Center align text */
     width: 100%;
-    font-family: 'Orbitron', sans-serif; /* Use the imported font */
+    font-family: 'Courier New', Courier, monospace; /* Use the imported font */
 }
 
 .footer-text {

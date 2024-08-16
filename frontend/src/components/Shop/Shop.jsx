@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import './Shop.css';
 import Breadcrumbs from '../Breadcrumbs';
 import ProductList from '../ProductList';
+import CartWidget from '../CartWidget';
 import { fetchProducts } from '../../api/fetchProducts';
 
 const Shop = () => {
@@ -46,9 +47,10 @@ const Shop = () => {
     <>
       <header className='shop-header'>
         <Breadcrumbs />
+        <CartWidget />
       </header>
       <h1 className='products-title'>
-        {categoryName ? `Category: ${categoryName}` : 'Featured Products'}
+        {categoryName ? `Category: ${categoryName}` : 'Products'}
       </h1>
       <ProductList products={products} isLoading={isLoading} error={error} />
     </>

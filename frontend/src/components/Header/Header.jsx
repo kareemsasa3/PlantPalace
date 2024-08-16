@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 import Menu from '../Menu';
 import { searchProducts } from '../../api/fetchProducts'; // Adjust import as necessary
 
 import './Header.css';
+import { Button } from 'semantic-ui-react';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setSearchTerm('');
+  }, [location]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -38,9 +44,9 @@ const Header = () => {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <button type="button" onClick={handleSearchSubmit}>
+          <Button type="button" onClick={handleSearchSubmit}>
             🔍
-          </button>
+          </Button>
         </div>
       </div>
       <div className="header-middle">

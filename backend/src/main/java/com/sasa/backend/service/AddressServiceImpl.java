@@ -7,6 +7,7 @@ import com.sasa.backend.constant.Constants;
 import com.sasa.backend.dto.AddressDTO;
 import com.sasa.backend.entity.Address;
 import com.sasa.backend.entity.AddressType;
+import com.sasa.backend.entity.User;
 import com.sasa.backend.exception.InvalidEnumValueException;
 import com.sasa.backend.exception.ResourceNotFoundException;
 import com.sasa.backend.mapper.AddressMapper;
@@ -19,10 +20,11 @@ import java.util.stream.Collectors;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
-    
+    private final UserService userService; // Inject UserService
 
-    public AddressServiceImpl(AddressRepository addressRepository) {
+    public AddressServiceImpl(AddressRepository addressRepository, UserService userService) {
         this.addressRepository = addressRepository;
+        this.userService = userService; // Initialize UserService
     }
 
     @Override
@@ -45,6 +47,10 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     public AddressDTO createAddress(AddressDTO addressDTO) {
         Address address = AddressMapper.toEntity(addressDTO);
+        if (addressDTO.getUserId() != null) {
+            User user = userService.findById(addressDTO.getUserId());
+            address.setUser(user);
+        }
         Address createdAddress = addressRepository.save(address);
         return AddressMapper.toDTO(createdAddress);
     }
@@ -52,33 +58,50 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressDTO updateAddress(Long id, AddressDTO addressDTO) {
+        // Fetch the existing address entity
         Address existingAddress = addressRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Constants.ADDRESS_NOT_FOUND_MESSAGE + id));
-        
+
+        // Convert the DTO to an entity
+        Address updatedAddress = AddressMapper.toEntity(addressDTO);
+
+        // Copy the updated fields from the DTO to the existing entity
         if (addressDTO.getStreetAddress() != null) {
-            existingAddress.setStreetAddress(addressDTO.getStreetAddress());
+            existingAddress.setStreetAddress(updatedAddress.getStreetAddress());
         }
         if (addressDTO.getAddressType() != null) {
             existingAddress.setAddressType(convertStringToEnum(AddressType.class, addressDTO.getAddressType()));
         }
         if (addressDTO.getCity() != null) {
-            existingAddress.setCity(addressDTO.getCity());
+            existingAddress.setCity(updatedAddress.getCity());
         }
         if (addressDTO.getState() != null) {
-            existingAddress.setState(addressDTO.getState());
+            existingAddress.setState(updatedAddress.getState());
         }
         if (addressDTO.getPostalCode() != null) {
-            existingAddress.setPostalCode(addressDTO.getPostalCode());
+            existingAddress.setPostalCode(updatedAddress.getPostalCode());
         }
         if (addressDTO.getFirstName() != null) {
-            existingAddress.setFirstName(addressDTO.getFirstName());
+            existingAddress.setFirstName(updatedAddress.getFirstName());
         }
         if (addressDTO.getLastName() != null) {
-            existingAddress.setLastName(addressDTO.getLastName());
+            existingAddress.setLastName(updatedAddress.getLastName());
+        }
+        if (addressDTO.getEmailAddress() != null) {
+            existingAddress.setEmailAddress(updatedAddress.getEmailAddress());
         }
 
-        Address updatedAddress = addressRepository.save(existingAddress);
-        return AddressMapper.toDTO(updatedAddress);
+        // Set the User if userId is provided
+        if (addressDTO.getUserId() != null) {
+            User user = userService.findById(addressDTO.getUserId());
+            existingAddress.setUser(user);
+        }
+
+        // Save the updated address
+        Address savedAddress = addressRepository.save(existingAddress);
+
+        // Convert the saved entity back to DTO
+        return AddressMapper.toDTO(savedAddress);
     }
 
     @Override

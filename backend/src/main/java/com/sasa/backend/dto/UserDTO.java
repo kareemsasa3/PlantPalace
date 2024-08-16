@@ -30,4 +30,5 @@ public class UserDTO {
     
     private List<OrderDTO> orderHistory;
     private List<RoleDTO> roles;
+    private List<AddressDTO> addresses;  // Added field for addresses
 }

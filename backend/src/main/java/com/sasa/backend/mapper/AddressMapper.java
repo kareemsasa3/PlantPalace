@@ -27,6 +27,7 @@ public final class AddressMapper {
         dto.setFirstName(address.getFirstName());
         dto.setLastName(address.getLastName());
         dto.setEmailAddress(address.getEmailAddress());
+        dto.setUserId(address.getUser().getId());
         return dto;
     }
 
@@ -45,6 +46,7 @@ public final class AddressMapper {
         address.setFirstName(dto.getFirstName());
         address.setLastName(dto.getLastName());
         address.setEmailAddress(dto.getEmailAddress());
+        address.setUser(null);
         return address;
     }
 

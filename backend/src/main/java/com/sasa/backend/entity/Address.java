@@ -38,4 +38,6 @@ public class Address {
     private String firstName;
     private String lastName;
     private String emailAddress;
+
+    // Additional methods if needed
 }

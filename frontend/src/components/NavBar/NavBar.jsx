@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 const NavBar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwtToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -37,7 +46,11 @@ const NavBar = () => {
           </li>
         </ul>
         <ul className="navbar-right">
-          <li><Link to="/login">ACCOUNT</Link></li>
+          <li>
+            <Link to={isLoggedIn ? "/account" : "/login"}>
+              ACCOUNT
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
