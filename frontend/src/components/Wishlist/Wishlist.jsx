@@ -22,7 +22,7 @@ const Wishlist = ({ products, handleClearWishlist }) => {
                                 <p><strong>Amount:</strong> {product.amount} grams</p>
                                 <p><strong>Effects:</strong> {product.effects}</p>
                                 <p><strong>Description:</strong> {product.description}</p>
-                                <img src={product.image} alt={product.name} className='product-img' />
+                                <img src={product.image} alt={product.name} className='product-img-wishlist' />
                             </Link>
                         ))}
                     </div>

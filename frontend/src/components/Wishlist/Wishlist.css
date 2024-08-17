@@ -9,13 +9,14 @@
     background-color: #1a1a1a;
 }
 
-.product-img {
+.product-img-wishlist {
     width: 20rem;
     height: 20rem;
-    border-radius: 0.5rem;
+    border-radius: 12px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2rem;
 }
 
 .wishlist-item {

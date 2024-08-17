@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { List, Segment } from 'semantic-ui-react';
 import './OrderHistory.css';
 
@@ -8,8 +9,8 @@ const OrderHistory = ({ orderHistory }) => {
             <h2>Order History</h2>
             {orderHistory && orderHistory.length > 0 ? (
                 <List divided relaxed>
-                    {orderHistory.map((order, index) => (
-                        <List.Item key={index}>
+                    {orderHistory.map((order) => (
+                        <List.Item key={order.id}>
                             <List.Content>
                                 <List.Header>Order #{order.id} - Status: {order.status}</List.Header>
                                 <List.Description>
@@ -22,8 +23,8 @@ const OrderHistory = ({ orderHistory }) => {
                                     <p><strong>Total Price:</strong> ${order.priceSummary.totalPrice}</p>
                                     <strong>Products:</strong>
                                     <ul>
-                                        {order.productSummary.map((product, idx) => (
-                                            <li key={idx}>
+                                        {order.productSummary.map((product) => (
+                                            <li key={product.name}>
                                                 {product.name} - {product.amount}g at ${product.price}
                                             </li>
                                         ))}
@@ -38,6 +39,42 @@ const OrderHistory = ({ orderHistory }) => {
             )}
         </div>
     );
+};
+
+// Define prop types for the OrderHistory component
+OrderHistory.propTypes = {
+    orderHistory: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            status: PropTypes.string.isRequired,
+            orderReceivedTimestamp: PropTypes.string.isRequired,
+            expectedDeliveryTimestamp: PropTypes.string.isRequired,
+            shippingAddress: PropTypes.shape({
+                streetAddress: PropTypes.string.isRequired,
+                city: PropTypes.string.isRequired,
+                state: PropTypes.string.isRequired,
+                postalCode: PropTypes.string.isRequired,
+            }).isRequired,
+            billingAddress: PropTypes.shape({
+                streetAddress: PropTypes.string.isRequired,
+                city: PropTypes.string.isRequired,
+                state: PropTypes.string.isRequired,
+                postalCode: PropTypes.string.isRequired,
+            }).isRequired,
+            priceSummary: PropTypes.shape({
+                totalAmount: PropTypes.number.isRequired,
+                tax: PropTypes.number.isRequired,
+                totalPrice: PropTypes.number.isRequired,
+            }).isRequired,
+            productSummary: PropTypes.arrayOf(
+                PropTypes.shape({
+                    name: PropTypes.string.isRequired,
+                    amount: PropTypes.number.isRequired,
+                    price: PropTypes.number.isRequired,
+                })
+            ).isRequired,
+        })
+    ).isRequired,
 };
 
 export default OrderHistory;

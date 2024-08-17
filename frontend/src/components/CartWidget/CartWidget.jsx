@@ -11,11 +11,7 @@ const CartWidget = () => {
   const handleCartClick = () => {
     navigate('/cart'); // Navigate to the Cart page
   };
-
-  if (cartItems.length === 0) {
-    return null;
-  }
-
+  
   return (
     <div className="cart-widget">
       <Button icon onClick={handleCartClick} className="cart-button">

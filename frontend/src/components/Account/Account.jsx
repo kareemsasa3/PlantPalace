@@ -97,8 +97,9 @@ const Account = () => {
                     <Grid.Row columns={2}>
                         <Grid.Column>
                             <div className="form-group">
-                                <label>Username</label>
+                                <label htmlFor="username">Username</label>
                                 <Input
+                                    id="username"
                                     type="text"
                                     name="username"
                                     value={editUser.username}
@@ -109,8 +110,9 @@ const Account = () => {
                         </Grid.Column>
                         <Grid.Column>
                             <div className="form-group">
-                                <label>Email</label>
+                                <label htmlFor="email">Email</label>
                                 <Input
+                                    id="email"
                                     type="email"
                                     name="email"
                                     value={editUser.email}
@@ -123,8 +125,9 @@ const Account = () => {
                     <Grid.Row columns={2}>
                         <Grid.Column>
                             <div className="form-group">
-                                <label>First Name</label>
+                                <label htmlFor="firstName">First Name</label>
                                 <Input
+                                    id="firstName"
                                     type="text"
                                     name="firstName"
                                     value={editUser.firstName}
@@ -135,8 +138,9 @@ const Account = () => {
                         </Grid.Column>
                         <Grid.Column>
                             <div className="form-group">
-                                <label>Last Name</label>
+                                <label htmlFor="lastName">Last Name</label>
                                 <Input
+                                    id="lastName"
                                     type="text"
                                     name="lastName"
                                     value={editUser.lastName}

@@ -5,9 +5,10 @@
     justify-content: space-between; /* Space out the items */
     flex-wrap: wrap;
     padding: 10px;
+    margin: 2rem;
     text-align: left; /* Align text to the left */
-    border-top: solid 1px #ffcc00;
-    border-bottom: solid 1px #ffcc00;
+    border: 1px solid white;
+    border-radius: 12px;
 }
 
 /* Product details container */
@@ -34,24 +35,35 @@
     z-index: 1000;
     width: 5%;
     border-radius: 100px;
+    transition: all 0.3s ease; /* Smooth transition for color changes */
 }
  
 .cart-button {
-    border: 2px solid white !important;
     border-radius: 100px;
     background-color: transparent !important;
     color: white !important;
+    transition: color 0.3s ease; /* Smooth transition for text color change */
 }
 
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: #ff0000;
-    color: #fff;
+    top: -3px;
+    right: 10px;
+    background-color: gold;
+    color: black;
     border-radius: 50%;
     padding: 2px 6px;
     font-size: 12px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and text color changes */
+}
+
+.cart-widget:hover .cart-button {
+    color: red; /* Darker shade for button text when hovered */
+}
+
+.cart-widget:hover .cart-count {
+    background-color: red; /* Darker background for count when hovered */
+    color: #fff; /* Brighter text color for count when hovered */
 }
   
 /* Cart Container */

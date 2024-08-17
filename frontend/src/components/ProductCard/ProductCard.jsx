@@ -1,6 +1,5 @@
-// src/components/ProductCard/ProductCard.js
-
 import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 import { Link } from 'react-router-dom';
 import { Heart } from 'phosphor-react';
 import { Button } from 'semantic-ui-react';
@@ -72,6 +71,18 @@ const ProductCard = ({ product }) => {
       </Link>
     </div>
   );
+};
+
+// Define prop types
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    amount: PropTypes.number,
+    image: PropTypes.string,
+    price: PropTypes.number,
+    type: PropTypes.string,
+  }).isRequired,
 };
 
 export default ProductCard;

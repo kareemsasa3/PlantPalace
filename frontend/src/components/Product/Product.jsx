@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductById } from '../../api/fetchProducts'; // Adjust path as needed
 import { addToCart, removeFromCart, addToWishlist, removeFromWishlist } from '../../redux/slices/shopSlice'; // Adjust path as needed
 import { Heart } from 'phosphor-react';
-import { Button } from 'semantic-ui-react';
 import './Product.css';
 
 const Product = () => {
@@ -27,7 +26,7 @@ const Product = () => {
         const data = await fetchProductById(productId);
         setProduct(data);
       } catch (error) {
-        setError(error.message);
+        setError('Failed to fetch product. Please try again later.');
       } finally {
         setLoading(false);
       }
@@ -37,7 +36,6 @@ const Product = () => {
   }, [productId]);
 
   const handleWishlist = () => {
-    console.log('Current Wishlist:', wishlist);
     if (isWishlisted) {
       dispatch(removeFromWishlist(numericProductId));
     } else {
@@ -58,7 +56,7 @@ const Product = () => {
   }
 
   if (error) {
-    return <div className="error">Error: {error}</div>;
+    return <div className="error">{error}</div>;
   }
 
   if (!product) {
@@ -66,31 +64,35 @@ const Product = () => {
   }
 
   return (
-    <div className="product-details">
-      <Button
-        className={`wishlist-btn ${isWishlisted ? 'in-wishlist' : ''}`}
-        onClick={handleWishlist}
-      >
-        <Heart size={32} weight={isWishlisted ? 'fill' : 'regular'} />
-      </Button>
+    <div className='product-container'>
       <h1 className='product-title'>{product.name}</h1>
-      <img src={product.image || 'no_image_available.jpeg'} alt={product.name} className='product-image'/>
-      <p>Price: ${product.price}</p>
-      <p>Amount: {product.amount} {product.amount === 1 ? 'Gram' : 'Grams'}</p>
-      <p>Category: {product.category}</p>
-      <p>Type: {product.type}</p>
-      <p>THC: {product.thc}%</p>
-      <p>{product.description}</p>
-      <p>Effects: {product.effects}</p>
-      <p>Terpenes: {Object.entries(product.terpenes).map(([key, value]) => (
-        <span key={key}>{key}: {value}% </span>
-      ))}</p>
-      <button
-        className={`add-to-cart-btn ${isInCart ? 'in-cart' : ''}`}
-        onClick={handleCart}
-      >
-        {isInCart ? 'Remove from Cart' : 'Add to Cart'}
-      </button>
+      <img src={product.image || 'no_image_available.jpeg'} alt={product.name} className='product-img'/>
+      <div className="product-details">
+        <div className='product-desc'>
+          <p>Price: ${product.price}</p>
+          <p>Amount: {product.amount} {product.amount === 1 ? 'Gram' : 'Grams'}</p>
+          <p>Category: {product.category}</p>
+          <p>Type: {product.type}</p>
+          <p>THC: {product.thc}%</p>
+          <p>{product.description}</p>
+          <p>Effects: {product.effects}</p>
+          <p>Terpenes: {Object.entries(product.terpenes).map(([key, value]) => (
+            <span key={key}>{key}: {value}% </span>
+          ))}</p>
+        </div>
+        <button
+          className={`add-to-cart-btn ${isInCart ? 'in-cart' : ''}`}
+          onClick={handleCart}
+        >
+          {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+        </button>
+        <button
+          className={`wishlist-btn ${isWishlisted ? 'in-wishlist' : ''}`}
+          onClick={handleWishlist}
+        >
+          <Heart size={32} weight={isWishlisted ? 'fill' : 'regular'} />
+        </button>
+      </div>
     </div>
   );
 };
