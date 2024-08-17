@@ -2,22 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../api/authApi';
 import { updateUser } from '../../api/userApi';
-import { Button, Grid, Input, List, Segment } from 'semantic-ui-react';
+import { Button, Grid, Input } from 'semantic-ui-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetWishlist } from '../../redux/slices/shopSlice';
+import { fetchProductById } from '../../api/fetchProducts';
+import Wishlist from '../Wishlist';
+import OrderHistory from '../OrderHistory';
 
 import './Account.css';
 
 const Account = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [user, setUser] = useState({});
     const [editUser, setEditUser] = useState(user);
+    const [products, setProducts] = useState([]);
+    const wishlist = useSelector((state) => state.shop.wishlist);
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
         setUser(storedUser);
         setEditUser(storedUser);
         console.log('User from local storage:', storedUser);
+        console.log('wishlist products:', products);
     }, []);
+
+    useEffect(() => {
+        const fetchWishlistProducts = async () => {
+            try {
+                const productPromises = wishlist.map(id => fetchProductById(id));
+                const productResponses = await Promise.all(productPromises);
+                setProducts(productResponses);
+            } catch (error) {
+                console.error('Failed to fetch wishlist products:', error);
+            }
+        };
+
+        if (wishlist.length > 0) {
+            fetchWishlistProducts();
+        }
+    }, [wishlist]);
 
     const handleLogout = () => {
         logout();
@@ -30,7 +55,7 @@ const Account = () => {
 
     const handleCancel = () => {
         setIsEditing(false);
-        setEditUser(user); // Reset the edited user to the original user data
+        setEditUser(user);
     };
 
     const handleSave = async () => {
@@ -47,6 +72,10 @@ const Account = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setEditUser({ ...editUser, [name]: value });
+    };
+
+    const handleClearWishlist = () => {
+        dispatch(resetWishlist());
     };
 
     return (
@@ -119,39 +148,8 @@ const Account = () => {
                     </Grid.Row>
                 </Grid>
             </div>
-            <div className="order-history">
-                <h2>Order History</h2>
-                {user.orderHistory && user.orderHistory.length > 0 ? (
-                    <List divided relaxed>
-                        {user.orderHistory.map((order, index) => (
-                            <List.Item key={index}>
-                                <List.Content>
-                                    <List.Header>Order #{order.id} - Status: {order.status}</List.Header>
-                                    <List.Description>
-                                        <p><strong>Order Received:</strong> {new Date(order.orderReceivedTimestamp).toLocaleString()}</p>
-                                        <p><strong>Expected Delivery:</strong> {new Date(order.expectedDeliveryTimestamp).toLocaleString()}</p>
-                                        <p><strong>Shipping Address:</strong> {`${order.shippingAddress.streetAddress}, ${order.shippingAddress.city}, ${order.shippingAddress.state}, ${order.shippingAddress.postalCode}`}</p>
-                                        <p><strong>Billing Address:</strong> {`${order.billingAddress.streetAddress}, ${order.billingAddress.city}, ${order.billingAddress.state}, ${order.billingAddress.postalCode}`}</p>
-                                        <p><strong>Total Amount:</strong> {order.priceSummary.totalAmount}</p>
-                                        <p><strong>Tax:</strong> {order.priceSummary.tax}</p>
-                                        <p><strong>Total Price:</strong> ${order.priceSummary.totalPrice}</p>
-                                        <strong>Products:</strong>
-                                        <ul>
-                                            {order.productSummary.map((product, idx) => (
-                                                <li key={idx}>
-                                                    {product.name} - {product.amount}g at ${product.price}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </List.Description>
-                                </List.Content>
-                            </List.Item>
-                        ))}
-                    </List>
-                ) : (
-                    <Segment>No previous orders found. Your orders will go here.</Segment>
-                )}
-            </div>
+            <OrderHistory orderHistory={user.orderHistory} />
+            <Wishlist products={products} handleClearWishlist={handleClearWishlist} />
         </div>
     );
 };

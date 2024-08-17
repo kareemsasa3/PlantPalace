@@ -8,28 +8,21 @@
     font-family: 'Orbitron', sans-serif;
     padding: 2rem;
     color: white;
-    margin-left: 3rem;
-    margin-right: 3rem;
+    margin: 0 3rem;
 }
 
 .account-container h1 {
-    display: flex;
-    align-items: flex-start;
     font-family: 'Orbitron', sans-serif;
     text-transform: uppercase;
     font-size: 48px;
     padding-bottom: 1rem;
     width: 100%;
+    text-align: left;
 }
 
 .user-info {
-    display: flex;
-    align-items: flex-start;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     background-color: #1a1a1a;
     padding: 2rem;
     width: 100%;
@@ -47,17 +40,19 @@
 .user-info label {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: block;
 }
 
 .user-info input {
-    width: 100% !important;
-    font-size: 2rem;
-    font-family: 'Orbitron', sans-serif !important;
-    border-radius: 12px !important;
-    background-color: #9a9a9a !important;
+    width: 100%;
+    font-size: 1.2rem;
+    font-family: 'Orbitron', sans-serif;
+    border-radius: 12px;
+    background-color: #9a9a9a;
     color: white;
+    border: none;
+    padding: 0.5rem;
 }
 
 .user-info input:disabled {
@@ -66,23 +61,23 @@
 }
 
 .logout-btn, .edit-btn, .save-btn, .cancel-btn {
-    text-transform: uppercase !important;
-    font-family: 'Orbitron', sans-serif !important;
-    background-color: transparent !important;
-    color: white !important;
-    border: 2px solid white !important;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
     border-radius: 8px;
     padding: 0.5rem 1rem;
     font-size: 1em;
     cursor: pointer;
     font-weight: 700;
     transition: background-color 0.3s, color 0.3s;
-    width: 48%
+    width: 48%;
 }
 
 .logout-btn:hover, .edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
-    border-color: gold !important;
-    color: gold !important;
+    border-color: gold;
+    color: gold;
 }
 
 .edit-buttons, .user-buttons {
@@ -90,60 +85,4 @@
     justify-content: space-between;
     width: 100%;
     margin-top: 1rem;
-}
-
-.order-history {
-    margin-top: 2rem;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.order-history h2 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: white;
-    font-family: 'Orbitron', sans-serif !important;
-    text-transform: uppercase;
-    text-align: left;
-}
-
-.order-history .ui.segment {
-    background-color: #1a1a1a;
-    color: white;
-    width: 100%;
-}
-
-.order-history .ui.list {
-    width: 100%;
-    text-align: left;
-}
-
-.order-history .ui.list .item {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #2a2a2a;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding-left: 1rem;
-    margin-top: 2rem;
-}
-
-.order-history .ui.list .item .content {
-    color: white;
-}
-
-.order-history .ui.list .item .header {
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding-top: 2rem;
-    margin-bottom: 2.5rem;
-    color: gold;
-}
-
-.order-history .ui.list .item .description {
-    font-size: 1.2rem;
-    color: #ccc;
-    padding-bottom: 2rem;
 }

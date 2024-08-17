@@ -3,10 +3,11 @@
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Align items vertically */
     justify-content: space-between; /* Space out the items */
-    margin-bottom: 15px; /* Spacing between items */
+    flex-wrap: wrap;
     padding: 10px;
-    border-bottom: 1px solid #ddd; /* Separation between items */
     text-align: left; /* Align text to the left */
+    border-top: solid 1px #ffcc00;
+    border-bottom: solid 1px #ffcc00;
 }
 
 /* Product details container */
@@ -26,17 +27,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 .cart-widget {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    position: absolute;
+    right: 0;
+    margin-top: 12rem;
+    margin-right: 5rem;
     z-index: 1000;
     width: 5%;
     border-radius: 100px;
 }
  
 .cart-button {
-    border: 2px solid white;
+    border: 2px solid white !important;
     border-radius: 100px;
+    background-color: transparent !important;
+    color: white !important;
 }
 
 .cart-count {
@@ -57,6 +61,8 @@
     right: 0;
     width: 100%;
     height: 100%;
+    margin-top: 16rem;
+    padding-top: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,11 +78,9 @@
 }
   
 .cart-content {
-    background: #fff;
+    background: #1a1a1a;
     border-radius: 8px;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
     position: relative;
     z-index: 1002;
     font-family: 'Orbitron', sans-serif;
@@ -97,14 +101,13 @@
 
 .cart-summary {
     margin-top: 20px;
-    border-top: 1px solid #ddd; /* Added border for summary section */
     padding-top: 10px;
 }
 
 .summary-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 3rem;
 }
 
 .summary-item.total {
