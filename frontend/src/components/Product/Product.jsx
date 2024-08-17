@@ -16,6 +16,11 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const numericProductId = parseInt(productId, 10); // Convert productId to a number
+
+  const isWishlisted = wishlist.includes(numericProductId);
+  const isInCart = cart.includes(numericProductId);
+
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -33,18 +38,18 @@ const Product = () => {
 
   const handleWishlist = () => {
     console.log('Current Wishlist:', wishlist);
-    if (wishlist.includes(productId)) {
-      dispatch(removeFromWishlist(productId));
+    if (isWishlisted) {
+      dispatch(removeFromWishlist(numericProductId));
     } else {
-      dispatch(addToWishlist(productId));
+      dispatch(addToWishlist(numericProductId));
     }
   };
 
   const handleCart = () => {
-    if (cart.includes(productId)) {
-      dispatch(removeFromCart(productId));
+    if (isInCart) {
+      dispatch(removeFromCart(numericProductId));
     } else {
-      dispatch(addToCart(productId));
+      dispatch(addToCart(numericProductId));
     }
   };
 
@@ -60,16 +65,13 @@ const Product = () => {
     return <div className="no-product">Product not found</div>;
   }
 
-  const isInWishlist = wishlist.includes(productId);
-  const isInCart = cart.includes(productId);
-
   return (
     <div className="product-details">
       <Button
-        className={`wishlist-btn ${isInWishlist ? 'in-wishlist' : ''}`}
+        className={`wishlist-btn ${isWishlisted ? 'in-wishlist' : ''}`}
         onClick={handleWishlist}
       >
-        <Heart size={32} weight={isInWishlist ? 'fill' : 'regular'} />
+        <Heart size={32} weight={isWishlisted ? 'fill' : 'regular'} />
       </Button>
       <h1 className='product-title'>{product.name}</h1>
       <img src={product.image || 'no_image_available.jpeg'} alt={product.name} className='product-image'/>

@@ -5,9 +5,8 @@ const Home = () => {
     return (
         <div className='home-content'>
             <h1 className='home-title'>Cultivate Your Lifestyle With Us</h1>
-            <h3 className='home-details'>Discover a natural healing approach that your mind will thank you for!</h3>
+            <h3 className='home-subtitle'>Discover a natural healing approach that your mind will thank you for!</h3>
             <div className='home-section'>
-                <img src='/cannabis-grow.jpg' alt='Quality Compassionate Care' className='section-image-left' />
                 <div className='section-text'>
                     <h3 className='home-details'>Quality Compassionate Care</h3>
                     <p className='home-description'>
@@ -22,10 +21,8 @@ const Home = () => {
                         We offer a broad range of hemp products designed to enhance comfort and peace of mind. Our team is here to guide you through your options, ensuring you find the perfect product for your unique needs and lifestyle.
                     </p>
                 </div>
-                <img src='/granny-smoking.jpg' alt='Hemp and Healing' className='section-image-right' />
             </div>
             <div className='home-section'>
-                <img src='/maryjane.png' alt='Marijuana' className='section-image-left' />
                 <div className='section-text'>
                     <h3 className='home-details'>Our Promise</h3>
                     <p className='home-description'>
