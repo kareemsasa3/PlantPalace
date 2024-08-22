@@ -44,16 +44,16 @@ const Shop = () => {
   }, [categoryName, location.state?.searchResults]); // Re-run effect when categoryName or searchResults changes
 
   return (
-    <>
-      <header className='shop-header'>
+    <div className='shop-container'>
+      <div className='shop-header'>
         <Breadcrumbs />
         <CartWidget />
-      </header>
+      </div>
       <h1 className='products-title'>
-        {categoryName ? `Category: ${categoryName}` : 'Products'}
+        {categoryName ? `${categoryName}` : 'Products'}
       </h1>
       <ProductList products={products} isLoading={isLoading} error={error} />
-    </>
+    </div>
   );
 };
 

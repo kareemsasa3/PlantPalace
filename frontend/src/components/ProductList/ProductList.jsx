@@ -1,5 +1,3 @@
-// src/components/ProductList/ProductList.js
-
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import ProductCard from '../ProductCard'; // Import the new ProductCard component
@@ -21,10 +19,10 @@ const ProductList = ({ products, isLoading, error }) => {
 
   return (
     <div className="product-list">
-      <Grid columns={6} stackable doubling>
+      <Grid columns={4} stackable doubling>
         {products.map((product) => (
-          <Grid.Column key={product.id}>
-            <ProductCard product={product} />
+          <Grid.Column key={product.id.toString()}>
+            <ProductCard product={{ ...product, id: product.id.toString() }} />
           </Grid.Column>
         ))}
       </Grid>

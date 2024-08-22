@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Shop from './components/Shop';
 import Product from './components/Product';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 import Terms from './components/Terms/Terms';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
@@ -13,7 +15,6 @@ import AgeVerification from './components/AgeVerification';
 import Layout from './components/Layout'; // Import the Layout component
 
 import './App.css';
-import Cart from './components/Cart';
 
 function App() {
   const [isVerified, setIsVerified] = useState(false);
@@ -36,6 +37,7 @@ function App() {
               <Route path="/contact" element={<div>Contact Page</div>} />
               <Route path="/more" element={<div>More Page</div>} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/account" element={<Account />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />

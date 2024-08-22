@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
   const { id, name, amount, image, price, type } = product;
 
   const isProductInWishlist = (productId) => wishlist.includes(productId);
-  const isProductInCart = (productId) => cart.includes(productId);
+  const isProductInCart = (productId) => cart.some(item => item.productId === productId);
 
   const handleWishlist = (e, productId) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
     if (isProductInCart(productId)) {
       dispatch(removeFromCart(productId));
     } else {
-      dispatch(addToCart(productId));
+      dispatch(addToCart({ productId, quantity: 1 })); // Pass the quantity with the action
     }
   };
 

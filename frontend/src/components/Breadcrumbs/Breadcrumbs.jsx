@@ -5,10 +5,22 @@ import './Breadcrumbs.css';
 // Function to generate breadcrumb items from the path
 const generateBreadcrumbs = (pathname) => {
     const parts = pathname.split('/').filter(part => part); // Split path and remove empty parts
-    return parts.map((part, index) => ({
-        name: part.charAt(0).toUpperCase() + part.slice(1), // Capitalize first letter
-        path: '/' + parts.slice(0, index + 1).join('/') // Build breadcrumb path
-    }));
+
+    // If the path is exactly "/shop", return only the "Shop" breadcrumb
+    if (pathname === '/shop') {
+        return [{ name: 'Shop', path: '/shop' }];
+    }
+
+    // Add "Shop" as the first breadcrumb and generate the rest
+    const breadcrumbs = [
+        { name: 'Shop', path: '/shop' },
+        ...parts.map((part, index) => ({
+            name: part.charAt(0).toUpperCase() + part.slice(1), // Capitalize first letter
+            path: '/' + parts.slice(0, index + 1).join('/') // Build breadcrumb path
+        }))
+    ];
+
+    return breadcrumbs;
 };
 
 const Breadcrumbs = () => {

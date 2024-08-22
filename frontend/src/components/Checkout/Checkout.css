@@ -1,0 +1,30 @@
+/* src/components/Checkout/Checkout.css */
+
+.checkout-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .order-summary {
+    margin-bottom: 20px;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .summary-item.total {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  
+  .checkout-form {
+    display: grid;
+    grid-gap: 15px;
+  }
+  

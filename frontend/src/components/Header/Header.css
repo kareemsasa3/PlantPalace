@@ -65,7 +65,7 @@ header {
   border: none;
   background-color: #1a1a1a;
   color: white;
-  border-radius: 0 4px 4px 0; /* Rounded corners on the right side */
+  border-radius: 0 4px 4px 0 !important;
   cursor: pointer;
 }
 
