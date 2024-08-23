@@ -15,6 +15,7 @@ import AgeVerification from './components/AgeVerification';
 import Layout from './components/Layout'; // Import the Layout component
 
 import './App.css';
+import NotLoggedInSection from './components/NotLoggedInSection';
 
 function App() {
   const [isVerified, setIsVerified] = useState(false);
@@ -38,6 +39,7 @@ function App() {
               <Route path="/more" element={<div>More Page</div>} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout/login" element={<NotLoggedInSection />} />
               <Route path="/account" element={<Account />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />

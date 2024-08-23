@@ -6,27 +6,23 @@
   align-items: center;
   background-color: black;
   font-family: 'Orbitron', sans-serif;
-  padding-top: 2rem;
-  padding-bottom: 6rem;
 }
 
 .login-form {
   color: gold;
   text-align: left;
-  height: 55rem;
 }
 
 .login-form h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 5rem;
-  padding-left: 6rem;
-  padding-right: 6rem;
+  font-size: 4rem;
 }
 
 .form-group {
   text-transform: uppercase;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  width: 30rem;
 }
 
 .form-group label {
@@ -46,7 +42,7 @@
 .login-btn {
   text-transform: uppercase !important;
   font-family: 'Orbitron', sans-serif !important;
-  width: 100% !important;
+  width: 55% !important;
   background-color: gold !important;
   color: white;
   border: none;

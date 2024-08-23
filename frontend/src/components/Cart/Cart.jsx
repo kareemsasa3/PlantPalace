@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductById } from '../../api/fetchProducts';
-import { Button, Icon, Dropdown, Segment } from 'semantic-ui-react';
+import { Button, Icon, Segment } from 'semantic-ui-react';
 import { removeFromCart, updateQuantity } from '../../redux/slices/shopSlice';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumbs from '../Breadcrumbs';
@@ -57,7 +57,10 @@ const Cart = () => {
     }));
   };
 
-  // Recalculate totals whenever products or localQuantities change
+  const handleCheckout = () => {
+    navigate('/checkout/login');
+  };
+
   const calculateTotals = () => {
     let totalPrice = 0;
     products.forEach((product) => {
@@ -77,9 +80,10 @@ const Cart = () => {
     return <p>Your cart is empty.</p>;
   }
 
-  const handleCheckout = () => {
-    navigate('/checkout');
-  };
+  products.map((product) => {
+    console.log('Product:', product);
+    return product;
+  });
 
   return (
     <div className="cart-page">
@@ -93,8 +97,9 @@ const Cart = () => {
                 <img src={product.image} alt={product.name} className="item-image" />
                 <div className='cart-item-details'>
                   <p className="item-brand">{product.brand}</p>
+                  <p className="item-name">{product.name}</p>
                   <p className="item-category">{product.category}</p>
-                  <h3 className="item-name">{product.name}</h3>
+                  <p className='item-amount'>{product.amount} Grams</p>
                 </div>
               </div>
               <div className="cart-item-middle">
@@ -143,7 +148,7 @@ const Cart = () => {
             className="checkout-button"
             onClick={handleCheckout}
           >
-            Proceed to Checkout
+            Secure Checkout
           </Button>
         </div>
       </div>

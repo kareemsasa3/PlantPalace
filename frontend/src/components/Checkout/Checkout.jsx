@@ -1,23 +1,26 @@
-// src/components/Checkout/Checkout.js
-
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Form, Message } from 'semantic-ui-react';
-import './Checkout.css'; // Import the CSS file for Checkout styling
 import { useNavigate } from 'react-router-dom';
+import Breadcrumbs from '../Breadcrumbs';
+import './Checkout.css'; // Import the CSS file for Checkout styling
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.shop.cart);
-  const [formData, setFormData] = useState({
-    name: '',
+  const [formData, setFormData] = React.useState({
+    email: '',
+    phoneNumber: '',
+    firstName: '',
+    lastName: '',
     address: '',
+    apartment: '',
     city: '',
     postalCode: '',
+    country: '',
     cardNumber: '',
     expiryDate: '',
     cvv: ''
   });
-  const [error, setError] = useState('');
+  const [error, setError] = React.useState('');
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -25,27 +28,18 @@ const Checkout = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleContactSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Simulate payment processing
-      console.log('Payment processed successfully:', formData);
-      navigate('/confirmation');
-    }
+    // Add validation logic for the contact form here
+    console.log('Contact information submitted:', formData);
   };
 
-  const validateForm = () => {
-    const { name, address, city, postalCode, cardNumber, expiryDate, cvv } = formData;
-    if (!name || !address || !city || !postalCode || !cardNumber || !expiryDate || !cvv) {
-      setError('Please fill in all fields.');
-      return false;
-    }
-    if (cardNumber.length !== 16 || cvv.length !== 3) {
-      setError('Invalid card details.');
-      return false;
-    }
-    setError('');
-    return true;
+  const handleShippingSubmit = (e) => {
+    e.preventDefault();
+    // Add validation logic for the shipping form here
+    console.log('Shipping information submitted:', formData);
+    // Navigate to payment form
+    navigate('/payment');
   };
 
   const calculateTotals = () => {
@@ -65,7 +59,123 @@ const Checkout = () => {
 
   return (
     <div className="checkout-page">
-      <h2>Checkout</h2>
+      <Breadcrumbs />
+      <h2 className="checkout-title">CONTACT INFORMATION</h2>
+      <form onSubmit={handleContactSubmit} className="checkout-form">
+        {error && <div className="error-message">{error}</div>}
+        <div className="form-group">
+          <label className="form-label">Email Address</label>
+          <input
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Phone Number</label>
+          <input
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            className="form-input"
+            required
+          />
+        </div>
+      </form>
+
+      <h2 className="checkout-title">SHIPPING ADDRESS</h2>
+      <form onSubmit={handleShippingSubmit} className="checkout-form">
+        <div className="name-container">
+          <div className="form-group">
+            <label className="form-label">First Name</label>
+            <input
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Last Name</label>
+            <input
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="form-label">Address</label>
+          <input
+            name="address"
+            value={formData.address}
+            onChange={handleInputChange}
+            className="form-input"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Apartment, Suite, Etc. (Optional)</label>
+          <input
+            name="apartment"
+            value={formData.apartment}
+            onChange={handleInputChange}
+            className="form-input"
+          />
+        </div>
+        <div className='name-container'>
+          <div className="form-group">
+            <label className="form-label">City</label>
+            <input
+              name="city"
+              value={formData.city}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">State</label>
+            <input
+              name="state"
+              value={formData.state}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+            />
+          </div>
+        </div>
+        <div className='name-container'>
+          <div className="form-group">
+            <label className="form-label">ZIP Code</label>
+            <input
+              name="postalCode"
+              value={formData.postalCode}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+            />
+          </div>
+          <div className="form-group">
+          <label className="form-label">Country</label>
+          <input
+            name="country"
+            value={formData.country}
+            onChange={handleInputChange}
+            className="form-input"
+            required
+          />
+        </div>
+        </div>
+        
+        <button type="submit" className="submit-button">Continue to Payment</button>
+      </form>
+
       <div className="order-summary">
         <h3>Order Summary</h3>
         <div className="summary-item">
@@ -85,84 +195,6 @@ const Checkout = () => {
           <span>${totalWithTax.toFixed(2)}</span>
         </div>
       </div>
-      <Form onSubmit={handleSubmit} className="checkout-form">
-        {error && <Message negative>{error}</Message>}
-        <Form.Field>
-          <label>Name</label>
-          <input
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Address</label>
-          <input
-            name="address"
-            placeholder="Street Address"
-            value={formData.address}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>City</label>
-          <input
-            name="city"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Postal Code</label>
-          <input
-            name="postalCode"
-            placeholder="Postal Code"
-            value={formData.postalCode}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Card Number</label>
-          <input
-            name="cardNumber"
-            placeholder="Card Number"
-            value={formData.cardNumber}
-            onChange={handleInputChange}
-            maxLength="16"
-            required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>Expiry Date</label>
-          <input
-            name="expiryDate"
-            placeholder="MM/YY"
-            value={formData.expiryDate}
-            onChange={handleInputChange}
-            required
-          />
-        </Form.Field>
-        <Form.Field>
-          <label>CVV</label>
-          <input
-            name="cvv"
-            placeholder="CVV"
-            value={formData.cvv}
-            onChange={handleInputChange}
-            maxLength="3"
-            required
-          />
-        </Form.Field>
-        <Button primary type="submit">
-          Complete Purchase
-        </Button>
-      </Form>
     </div>
   );
 };

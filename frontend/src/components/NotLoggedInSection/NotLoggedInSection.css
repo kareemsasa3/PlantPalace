@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.login-guest-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-guest-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-button-container {
+  width: 33rem;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.back-to-cart-button {
+  font-family: 'Orbitron', sans-serif !important;
+  background-color: transparent !important;
+  color: white !important;
+}
+
+.back-to-cart-button:hover {
+  text-decoration: underline !important;
+}
+
+.new-customer-container {
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  text-align: left;
+  margin-left: 20rem;
+}
+
+.new-customer-title {
+  color: gold;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.2rem;
+  padding-top: 10rem;
+}
+
+.new-customer-description {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.continue-guest-button {
+  color: black !important;
+  background-color: gold !important;
+  width: 55%;
+}
+
+@media (max-width: 1200px) {
+  .login-guest-container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .login-guest-options {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .new-customer-container {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    align-items: center;
+  }
+
+  .continue-guest-button {
+    width: 30% !important;
+  }
+}
