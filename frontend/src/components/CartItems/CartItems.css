@@ -1,0 +1,129 @@
+/* CartItems.css */
+
+/* Content section to take up available space and allow scroll */
+.cart-items-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cart-item {
+    background-color: #1c1c1e !important;
+    border-bottom: 2px solid gold !important;
+    border-radius: 0px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-shrink: 1 !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+    flex-wrap: nowrap;
+}
+
+/* Cart Item Details */
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.item-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.item-brand, .item-category, .item-name, .item-amount {
+    color: #f8f8f8;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-brand {
+    font-size: 1.4rem;
+}
+
+.item-category {
+    font-size: 1rem;
+}
+
+.item-name {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Remove Button Styling */
+.remove-button {
+    background-color: transparent !important;
+    color: gold !important;
+    font-size: 1.2rem !important;
+    transition: background-color 0.3s ease !important;
+    margin-left: 4rem !important;
+    margin-right: 4rem !important;
+    width: 4rem !important;
+    height: 4rem !important;
+}
+
+.remove-button:hover {
+    background-color: #f8f8f8 !important;
+    color: #1c1c1e !important;
+}
+
+/* Quantity Selector Styling */
+.quantity-selector {
+    background-color: #4a4a4c;
+    color: #f8f8f8;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    width: 4rem;
+    height: 2.5rem;
+    border: 2px solid gold;
+    margin-right: 4rem;
+}
+
+/* Item Price Styling */
+.item-price {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: right;
+}
+
+
+@media (max-width: 1080px) {
+    .item-image {
+        width: 180px;
+        height: 180px;
+    }
+
+    .remove-button {
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+}
+
+@media (max-width: 815px) {
+    .cart-item {
+        flex-wrap: nowrap;
+    }
+
+    .remove-button {
+        margin-left: 0rem !important;
+        margin-right: 0rem !important;
+    }
+
+    .item-brand, .item-category, .item-name, .item-amount {
+        font-size: 1rem;
+    }
+
+    .quantity-selector {
+        margin-right: 1rem;
+    }
+}

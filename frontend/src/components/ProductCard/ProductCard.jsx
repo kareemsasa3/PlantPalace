@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Heart } from 'phosphor-react';
 import { Button } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToWishlist, removeFromWishlist, addToCart, removeFromCart } from '../../redux/slices/shopSlice';
+import { addToWishlist, removeFromWishlist, addToCart, removeFromCart, addToProducts } from '../../redux/slices/shopSlice';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
@@ -26,12 +26,15 @@ const ProductCard = ({ product }) => {
     }
   };
 
-  const handleCart = (e, productId) => {
+  const handleCart = (e, product) => {
     e.preventDefault();
-    if (isProductInCart(productId)) {
-      dispatch(removeFromCart(productId));
+    const quantity = 1; // Default quantity to 1 when adding to cart
+
+    if (isProductInCart(product.id)) {
+      dispatch(removeFromCart({ productId: product.id })); // Adjust for quantity if necessary
     } else {
-      dispatch(addToCart({ productId, quantity: 1 })); // Pass the quantity with the action
+      dispatch(addToCart({ productId: product.id, quantity })); // Pass product ID and quantity
+      dispatch(addToProducts(product)); // Add product details to products list
     }
   };
 
@@ -64,7 +67,7 @@ const ProductCard = ({ product }) => {
         </div>
         <Button
           className={`add-to-cart-button ${isProductInCart(id) ? 'in-cart' : ''}`}
-          onClick={(e) => handleCart(e, id)}
+          onClick={(e) => handleCart(e, product)}
         >
           {isProductInCart(id) ? 'Remove from Cart' : 'Add to Cart'}
         </Button>

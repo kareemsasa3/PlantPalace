@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Input, Button, Icon } from 'semantic-ui-react';
 import Breadcrumbs from '../Breadcrumbs';
-import './Checkout.css'; // Import the CSS file for Checkout styling
+import { fetchPlaceSuggestions } from '../../api/googleApi';
+import Dropdown from '../Dropdown';
+import './Checkout.css';
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.shop.cart);
-  const [formData, setFormData] = React.useState({
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // Access authentication state
+
+  const [formData, setFormData] = useState({
     email: '',
     phoneNumber: '',
     firstName: '',
@@ -14,31 +19,58 @@ const Checkout = () => {
     address: '',
     apartment: '',
     city: '',
+    state: '',
     postalCode: '',
-    country: '',
     cardNumber: '',
     expiryDate: '',
     cvv: ''
   });
-  const [error, setError] = React.useState('');
+  const [addressSuggestions, setAddressSuggestions] = useState([]);
+  const [showAddressSuggestions, setShowAddressSuggestions] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
+  useEffect(() => {
+    console.log(`User is ${isLoggedIn ? 'logged in' : 'not logged in'}`);
+  }, [isLoggedIn]); // Log when the component mounts or when the login state changes
+
+  const handleInputChange = async (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (name === 'address' && value) {
+      try {
+        const { predictions } = await fetchPlaceSuggestions(value);
+        setAddressSuggestions(predictions);
+        setShowAddressSuggestions(true);
+      } catch (err) {
+        console.error('Error fetching address suggestions:', err);
+      }
+    } else {
+      setAddressSuggestions([]);
+      setShowAddressSuggestions(false);
+    }
+  };
+
+  const handleSuggestionSelect = (selectedOption) => {
+    const [addressName, city, state] = selectedOption.value.split(',');
+    setFormData({
+      ...formData,
+      address: addressName.trim(),
+      city: city ? city.trim() : formData.city,
+      state: state ? state.trim() : formData.state
+    });
+    setShowAddressSuggestions(false);
   };
 
   const handleContactSubmit = (e) => {
     e.preventDefault();
-    // Add validation logic for the contact form here
     console.log('Contact information submitted:', formData);
   };
 
   const handleShippingSubmit = (e) => {
     e.preventDefault();
-    // Add validation logic for the shipping form here
     console.log('Shipping information submitted:', formData);
-    // Navigate to payment form
     navigate('/payment');
   };
 
@@ -57,25 +89,34 @@ const Checkout = () => {
 
   const { totalPrice, tax, totalWithTax, shipping } = calculateTotals();
 
+  const handleBackToCart = () => {
+    navigate('/cart');
+  };
+
   return (
     <div className="checkout-page">
       <Breadcrumbs />
+      <Button className="back-to-cart-button" onClick={handleBackToCart}>
+        <Icon name='arrow left' />
+        Back to Cart
+      </Button>
       <h2 className="checkout-title">CONTACT INFORMATION</h2>
       <form onSubmit={handleContactSubmit} className="checkout-form">
         {error && <div className="error-message">{error}</div>}
         <div className="form-group">
           <label className="form-label">Email Address</label>
-          <input
+          <Input
             name="email"
             value={formData.email}
             onChange={handleInputChange}
             className="form-input"
+            autoComplete="off"
             required
           />
         </div>
         <div className="form-group">
           <label className="form-label">Phone Number</label>
-          <input
+          <Input
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleInputChange}
@@ -90,89 +131,84 @@ const Checkout = () => {
         <div className="name-container">
           <div className="form-group">
             <label className="form-label">First Name</label>
-            <input
+            <Input
               name="firstName"
               value={formData.firstName}
               onChange={handleInputChange}
-              className="form-input"
+              className="form-input form-input-left"
               required
             />
           </div>
           <div className="form-group">
             <label className="form-label">Last Name</label>
-            <input
+            <Input
               name="lastName"
               value={formData.lastName}
               onChange={handleInputChange}
-              className="form-input"
+              className="form-input form-input-right"
               required
             />
           </div>
         </div>
         <div className="form-group">
           <label className="form-label">Address</label>
-          <input
+          <Input
             name="address"
             value={formData.address}
             onChange={handleInputChange}
             className="form-input"
-            required
+            autoComplete="off"
+            onFocus={() => showAddressSuggestions && setShowAddressSuggestions(true)}
+          />
+          <Dropdown
+            suggestions={addressSuggestions}
+            onSelect={handleSuggestionSelect}
+            showSuggestions={showAddressSuggestions}
+            setShowSuggestions={setShowAddressSuggestions}
           />
         </div>
         <div className="form-group">
           <label className="form-label">Apartment, Suite, Etc. (Optional)</label>
-          <input
+          <Input
             name="apartment"
             value={formData.apartment}
             onChange={handleInputChange}
             className="form-input"
           />
         </div>
-        <div className='name-container'>
+        <div className="name-container">
           <div className="form-group">
             <label className="form-label">City</label>
-            <input
+            <Input
               name="city"
               value={formData.city}
               onChange={handleInputChange}
-              className="form-input"
-              required
+              className="form-input-left"
+              autoComplete="off"
             />
           </div>
-          <div className="form-group">
-            <label className="form-label">State</label>
-            <input
-              name="state"
-              value={formData.state}
-              onChange={handleInputChange}
-              className="form-input"
-              required
-            />
-          </div>
-        </div>
-        <div className='name-container'>
           <div className="form-group">
             <label className="form-label">ZIP Code</label>
-            <input
+            <Input
               name="postalCode"
               value={formData.postalCode}
               onChange={handleInputChange}
-              className="form-input"
+              className="form-input-right"
               required
             />
           </div>
-          <div className="form-group">
-          <label className="form-label">Country</label>
-          <input
-            name="country"
-            value={formData.country}
+        </div>
+        <div className="form-group">
+          <label className="form-label">State</label>
+          <Input
+            name="state"
+            value={formData.state}
             onChange={handleInputChange}
             className="form-input"
-            required
+            autoComplete="off"
           />
         </div>
-        </div>
-        
+        <h2 className="checkout-title">DELIVERY OPTIONS</h2>
         <button type="submit" className="submit-button">Continue to Payment</button>
       </form>
 

@@ -37,6 +37,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXPIRATION: ${JWT_EXPIRATION}
+      GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY}
     depends_on:
       db:
         condition: service_healthy

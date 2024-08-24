@@ -1,0 +1,29 @@
+.dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-menu {
+    position: inherit;
+    text-align: left;
+    width: 80%;
+    color: white;
+    background-color: black;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #1a1a1a;
+}
+
+.dropdown-item:focus {
+    outline: none;
+}

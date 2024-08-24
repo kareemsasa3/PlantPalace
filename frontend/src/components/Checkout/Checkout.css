@@ -1,13 +1,15 @@
 .checkout-page {
   background-color: black;
   border-radius: 8px;
-  border: 2px solid red;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-to-cart-button {
+  text-align: left !important;
+  margin-top: 2rem !important;
 }
 
 .checkout-title {
@@ -15,19 +17,49 @@
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
   text-align: left;
-  border: 2px solid yellow;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 20px;
 }
 
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+}
+
 .name-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
   width: 100%;
+}
+
+.form-group {
+  width: 100% !important;
+  padding-top: 0px !important;
+  padding-bottom: 1rem !important;
+}
+
+.form-label {
+  color: lightgrey;
+  text-align: left;
+  font-weight: bold;
+}
+
+.form-input {
+  background-color: black;
+  color: black;
+  width: 100% !important;
+}
+
+.form-input-left {
+  float: left;
+  padding-right: 1rem;
+}
+
+.form-input-right {
+  padding-left: 1rem;
+  float: right;
 }
 
 .order-summary {
@@ -48,40 +80,9 @@
   font-size: 1.2em;
 }
 
-.checkout-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  border: 2px solid green;
-  width: 100%;
-}
 
-.form-group {
-  border: 2px solid magenta;
-  width: 100%;
-}
 
-.form-label {
-  color: lightgrey;
-  text-align: left;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
 
-.form-input {
-  width: 20rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  background-color: white;
-  border: 1px solid white;
-  color: black;
-}
-
-.form-input-left, .form-input-right {
-  width: 100% !important;
-  grid-column: span 2;
-}
 
 .breadcrumbs {
   width: 100%;
@@ -102,6 +103,16 @@ button {
 
 button:hover {
   background-color: lightgray;
+}
+
+.suggestions-dropdown {
+  border: 2px solid red;
+  color: white;
+  text-align: left;
+}
+
+.suggestion-item {
+  border-bottom: 1px solid gold;
 }
 
 /* Handle smaller screens */

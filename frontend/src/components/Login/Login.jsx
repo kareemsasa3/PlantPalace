@@ -4,17 +4,17 @@ import { Button } from "semantic-ui-react";
 import './Login.css';
 import { login } from "../../api/authApi";
 
-const Login = () => {
+const Login = ({ redirectTo = '/account' }) => {  // Default to /account if no prop is passed
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const [error, setError] = useState(null);
-    const navigate = useNavigate(); // React Router hook for navigation
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevents the default form submission behavior
+        e.preventDefault();
         try {
-            await login(credentials); // Assume login function handles storage
+            await login(credentials);
             console.log('Login successful');
-            navigate('/account'); // Redirect to the /shop route
+            navigate(redirectTo);
         } catch (err) {
             setError('Login failed. Please check your credentials and try again.');
         }

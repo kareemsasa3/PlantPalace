@@ -15,18 +15,28 @@ const Account = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        username: '',
+        email: '',
+        firstName: '',
+        lastName: '',
+        orderHistory: [],
+    });
     const [editUser, setEditUser] = useState(user);
     const [products, setProducts] = useState([]);
     const wishlist = useSelector((state) => state.shop.wishlist);
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (!storedUser) {
+            navigate('/login'); // Redirect to /shop if no user is found
+            return;
+        }
         setUser(storedUser);
         setEditUser(storedUser);
         console.log('User from local storage:', storedUser);
         console.log('wishlist products:', products);
-    }, []);
+    }, [navigate]);
 
     useEffect(() => {
         const fetchWishlistProducts = async () => {

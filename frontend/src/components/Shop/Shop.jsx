@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import './Shop.css';
 import Breadcrumbs from '../Breadcrumbs';
 import ProductList from '../ProductList';
 import CartWidget from '../CartWidget';
 import { fetchProducts } from '../../api/fetchProducts';
+import { resetCart, setProducts } from '../../redux/slices/shopSlice';
 
 const Shop = () => {
-  const { categoryName } = useParams(); // Get categoryName from URL params
-  const location = useLocation(); // Access location state
-  const [products, setProducts] = useState([]);
+  const { categoryName } = useParams();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const [products, setProductsState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const reduxProducts = useSelector((state) => state.shop.products);
+  const cartItems = useSelector((state) => state.shop.cart);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -19,19 +25,16 @@ const Shop = () => {
         let productData = location.state?.searchResults || [];
 
         if (productData.length === 0) {
-          // Fetch products if no search results are provided
           productData = await fetchProducts();
         }
 
         if (categoryName) {
-          // Filter products by category name if categoryName is present
           const filteredProducts = productData.filter(
             (product) => product.category.toLowerCase() === categoryName.toLowerCase()
           );
-          setProducts(filteredProducts);
+          setProductsState(filteredProducts);
         } else {
-          // Otherwise, load all products
-          setProducts(productData);
+          setProductsState(productData);
         }
         setIsLoading(false);
       } catch (error) {
@@ -41,7 +44,11 @@ const Shop = () => {
     };
 
     loadProducts();
-  }, [categoryName, location.state?.searchResults]); // Re-run effect when categoryName or searchResults changes
+  }, [categoryName, location.state?.searchResults, dispatch]);
+
+  const handleReset = () => {
+    dispatch(resetCart());
+  };
 
   return (
     <div className='shop-container'>
@@ -53,6 +60,7 @@ const Shop = () => {
         {categoryName ? `${categoryName}` : 'Products'}
       </h1>
       <ProductList products={products} isLoading={isLoading} error={error} />
+      <button onClick={handleReset}>Reset Cart</button>
     </div>
   );
 };

@@ -1,69 +1,98 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// Initial state of the slice
 const initialState = {
-    wishlist: [],
-    cart: [], // Use an array to store product objects with IDs and quantities
+  wishlist: [],
+  cart: [], // Array of objects: { productId, quantity }
+  products: [], // Array to store product details
 };
 
 const shopSlice = createSlice({
-    name: 'shop',
-    initialState,
-    reducers: {
-        addToWishlist: (state, action) => {
-            const productId = action.payload; // Assume action payload contains the product ID
-            if (!state.wishlist.includes(productId)) {
-                state.wishlist.push(productId); // Add to wishlist if not already present
-            }
-        },
-        removeFromWishlist: (state, action) => {
-            const productId = action.payload;
-            state.wishlist = state.wishlist.filter((id) => id !== productId); // Remove from wishlist
-        },
-        resetWishlist: (state) => {
-            state.wishlist = [];
-        },
-        addToCart: (state, action) => {
-            const { productId, quantity } = action.payload;
-            const existingProduct = state.cart.find(item => item.productId === productId);
-            
-            if (existingProduct) {
-                existingProduct.quantity += quantity; // Increase quantity if product already in cart
-            } else {
-                state.cart.push({ productId, quantity }); // Add new product with quantity
-            }
-        },
-        removeFromCart: (state, action) => {
-            const productId = action.payload.toString();
-            state.cart = state.cart.filter(item => item.productId !== productId);   
-        },        
-        updateQuantity: (state, action) => {
-            const { productId, quantity } = action.payload;
-            const existingProduct = state.cart.find(item => item.productId === productId);
-            
-            if (existingProduct) {
-                if (quantity <= 0) {
-                    // If quantity is 0 or less, remove the product from the cart
-                    state.cart = state.cart.filter(item => item.productId !== productId);
-                } else {
-                    existingProduct.quantity = quantity; // Update quantity
-                }
-            }
-        },
-        resetCart: (state) => {
-            state.cart = [];
-        },
+  name: 'shop',
+  initialState,
+  reducers: {
+    addToWishlist: (state, action) => {
+      const productId = action.payload;
+      if (!state.wishlist.includes(productId)) {
+        state.wishlist.push(productId);
+      }
     },
+    removeFromWishlist: (state, action) => {
+      const productId = action.payload;
+      state.wishlist = state.wishlist.filter(id => id !== productId);
+    },
+    resetWishlist: (state) => {
+      state.wishlist = [];
+    },
+    addToCart: (state, action) => {
+      const { productId, quantity } = action.payload;
+      const existingCartItem = state.cart.find(item => item.productId === productId);
+
+      if (existingCartItem) {
+        existingCartItem.quantity += quantity; // Update quantity if item already exists
+      } else {
+        state.cart.push({ productId, quantity });
+      }
+    },
+    removeFromCart: (state, action) => {
+      const { productId } = action.payload;
+      const existingCartItem = state.cart.find(item => item.productId === productId);
+
+      if (existingCartItem) {
+        if (existingCartItem.quantity > 1) {
+          existingCartItem.quantity -= 1; // Reduce quantity if more than one
+        } else {
+          state.cart = state.cart.filter(item => item.productId !== productId); // Remove item if quantity is zero
+        }
+        state.products = state.products.filter(product => product.id !== productId); // Remove from products list
+      }
+    },
+    updateQuantity: (state, action) => {
+      const { productId, quantity } = action.payload;
+      const cartItem = state.cart.find(item => item.productId === productId);
+
+      if (cartItem) {
+        if (quantity <= 0) {
+          state.cart = state.cart.filter(item => item.productId !== productId);
+        } else {
+          cartItem.quantity = quantity;
+        }
+      }
+      
+      // Update products list if necessary
+      const productIndex = state.products.findIndex(product => product.id === productId);
+      if (productIndex > -1) {
+        if (quantity <= 0) {
+          state.products.splice(productIndex, 1);
+        } else {
+          state.products[productIndex].quantity = quantity;
+        }
+      }
+    },
+    addToProducts: (state, action) => {
+      const product = action.payload;
+      const existingProductIndex = state.products.findIndex(p => p.id === product.id);
+      if (existingProductIndex > -1) {
+        state.products[existingProductIndex] = product;
+      } else {
+        state.products.push(product);
+      }
+    },
+    resetCart: (state) => {
+      state.cart = [];
+      state.products = [];
+    },
+  },
 });
 
 export const {
-    addToWishlist,
-    removeFromWishlist,
-    resetWishlist,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    resetCart,
+  addToWishlist,
+  removeFromWishlist,
+  resetWishlist,
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  addToProducts,
+  resetCart,
 } = shopSlice.actions;
 
 export default shopSlice.reducer;
