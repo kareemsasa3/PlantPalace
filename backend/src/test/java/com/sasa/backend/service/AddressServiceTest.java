@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.sasa.backend.dto.AddressDTO;
 import com.sasa.backend.entity.Address;
 import com.sasa.backend.entity.AddressType;
+import com.sasa.backend.entity.User;
 import com.sasa.backend.exception.ResourceNotFoundException;
 import com.sasa.backend.mapper.AddressMapper;
 import com.sasa.backend.repository.AddressRepository;
@@ -29,6 +30,9 @@ class AddressServiceTest {
 
     @Mock
     private AddressRepository addressRepository;
+
+    @Mock
+    private UserServiceImpl userService;
 
     @BeforeEach
     void setUp() {
@@ -89,14 +93,39 @@ class AddressServiceTest {
     @Test
     void testCreateAddress() {
         AddressDTO addressDTO = new AddressDTO();
-        addressDTO.setAddressType(AddressType.HOME.name()); // Set non-null AddressType
-        Address address = AddressMapper.toEntity(addressDTO);
+        addressDTO.setStreetAddress("101 Olive Lane");
+        addressDTO.setAddressType(AddressType.HOME.name());
+        addressDTO.setCity("Cupertino");
+        addressDTO.setState("California");
+        addressDTO.setPostalCode("77077");
+        addressDTO.setFirstName("John");
+        addressDTO.setLastName("Smith");
+        addressDTO.setEmailAddress("newuser@test.com");
+        addressDTO.setUserId(1L);
 
-        when(addressRepository.save(address)).thenReturn(address);
+        User mockUser = new User();
+        mockUser.setId(1L);
+        when(userService.findById(addressDTO.getUserId())).thenReturn(mockUser);
+
+        Address address = AddressMapper.toEntity(addressDTO);
+        address.setUser(mockUser);
+
+        when(addressRepository.save(any(Address.class))).thenReturn(address);
+
         AddressDTO result = addressService.createAddress(addressDTO);
 
         assertNotNull(result);
         assertEquals(addressDTO.getAddressType(), result.getAddressType());
+        assertEquals(addressDTO.getCity(), result.getCity());
+        assertEquals(addressDTO.getState(), result.getState());
+        assertEquals(addressDTO.getPostalCode(), result.getPostalCode());
+        assertEquals(addressDTO.getFirstName(), result.getFirstName());
+        assertEquals(addressDTO.getLastName(), result.getLastName());
+        assertEquals(addressDTO.getEmailAddress(), result.getEmailAddress());
+        assertEquals(addressDTO, result);
+
+        verify(userService).findById(addressDTO.getUserId());
+        verify(addressRepository).save(any(Address.class));
     }
 
     @Test

@@ -17,6 +17,10 @@ import jakarta.persistence.*;
 @Table(name = "addresses")
 public class Address {
 
+    public Address() {
+        user = new User();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

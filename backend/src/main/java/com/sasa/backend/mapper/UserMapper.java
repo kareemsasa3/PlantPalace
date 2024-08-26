@@ -45,7 +45,7 @@ public final class UserMapper {
 
     public static User toEntity(UserDTO userDTO) {
         if (userDTO == null) {
-            return null; // Handle null DTOs gracefully
+            return null;
         }
 
         return User.builder()

@@ -3,17 +3,22 @@ package com.sasa.backend.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.validation.constraints.NotBlank;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserDTO {
+
+    public UserDTO() {
+        orderHistory = new ArrayList<>();
+        roles = new ArrayList<>();
+        addresses = new ArrayList<>();
+    }
     
     private Long id;
 
