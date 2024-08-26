@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 import Menu from '../Menu';
-import { searchProducts } from '../../api/fetchProducts'; // Adjust import as necessary
-
+import { searchProducts } from '../../api/fetchProducts';
 import './Header.css';
 import { Button } from 'semantic-ui-react';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,6 +27,10 @@ const Header = () => {
     } catch (error) {
       console.error('Error searching products:', error);
     }
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   return (
@@ -48,12 +52,24 @@ const Header = () => {
             🔍
           </Button>
         </div>
+        <button className="sidebar-toggle" onClick={toggleSidebar}>
+          ☰
+        </button>
       </div>
       <div className="header-middle">
         <NavBar />
       </div>
-      <div className='header-bottom'>
+      <div className="header-bottom">
         <Menu />
+      </div>
+      <div className={`sidebar ${sidebarOpen ? 'active' : ''}`}>
+        <div className="logo">
+          <Link to="/">
+            <h1>Plant Palace</h1>
+          </Link>
+        </div>
+        <button className="close-btn" onClick={toggleSidebar}>×</button>
+        <Menu onMenuItemClick={toggleSidebar} />
       </div>
     </header>
   );

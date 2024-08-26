@@ -1,55 +1,29 @@
-/* Cart Item */
-.cart-item {
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Align items vertically */
-    justify-content: space-between; /* Space out the items */
-    flex-wrap: wrap;
-    padding: 10px;
-    margin: 2rem;
-    text-align: left; /* Align text to the left */
-    border: 1px solid white;
-    border-radius: 12px;
-}
-
-/* Product details container */
-.cart-item-details {
-    flex: 1; /* Allow the details to take up available space */
-    margin-right: 15px; /* Space between details and image */
-}
-
-/* Product image styling */
-.product-image {
-    width: 100px; /* Fixed width for images */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Crop image to fit */
-}
-
 /* Cart Widget */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 .cart-widget {
-    position: absolute;
-    right: 0;
-    margin-top: 12rem;
-    margin-right: 5rem;
-    z-index: 1000;
-    width: 5%;
+    position: fixed; /* Changed from absolute to fixed to keep it in place relative to the viewport */
+    right: 1rem; /* Adjusted right position to ensure it is not too close to the edge */
+    bottom: 2rem; /* Positioned at the bottom to avoid overlap with the sidebar */
+    z-index: 1000; /* Ensure it appears above the content but below the sidebar */
     border-radius: 100px;
     transition: all 0.3s ease; /* Smooth transition for color changes */
 }
- 
+
 .cart-button {
-    border-radius: 100px;
-    background-color: transparent !important;
-    color: white !important;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1000px !important;
+    background-color: gold !important;
+    color: black !important;
     transition: color 0.3s ease; /* Smooth transition for text color change */
 }
 
 .cart-count {
     position: absolute;
     top: -3px;
-    right: 10px;
-    background-color: gold;
+    right: 1px;
+    background-color: red;
     color: black;
     border-radius: 50%;
     padding: 2px 6px;
@@ -64,98 +38,4 @@
 .cart-widget:hover .cart-count {
     background-color: red; /* Darker background for count when hovered */
     color: #fff; /* Brighter text color for count when hovered */
-}
-  
-/* Cart Container */
-.cart-container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    margin-top: 16rem;
-    padding-top: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1001;
-    transition: opacity 0.3s ease;
-}
-  
-.overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-  
-.cart-content {
-    background: #1a1a1a;
-    border-radius: 8px;
-    width: 100%;
-    position: relative;
-    z-index: 1002;
-    font-family: 'Orbitron', sans-serif;
-}
-  
-.hidden {
-    display: none;
-}
-  
-.checkout-button {
-    background-color: #ffcc00;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.cart-summary {
-    margin-top: 20px;
-    padding-top: 10px;
-}
-
-.summary-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-}
-
-.summary-item.total {
-    font-weight: bold;
-}
-
-.product-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px; /* Space below the name */
-}
-
-.product-price, .product-amount, .product-type {
-    font-size: 14px;
-    color: #555; /* Slightly darker color for better readability */
-    margin-bottom: 5px; /* Space below each detail */
-}
-
-/* Quantity controls */
-.quantity-controls {
-    display: flex;
-    align-items: center;
-    margin-top: 10px; /* Space above the quantity controls */
-}
-
-.quantity-button {
-    background-color: #f5f5f5; /* Light background for buttons */
-    border: 1px solid #ccc; /* Border color for buttons */
-    border-radius: 4px; /* Rounded corners */
-    padding: 5px;
-    margin: 0 5px; /* Space between buttons and quantity value */
-    cursor: pointer;
-}
-
-.quantity-value {
-    font-size: 16px; /* Size of the quantity value */
-    margin: 0 10px; /* Space around the quantity value */
 }

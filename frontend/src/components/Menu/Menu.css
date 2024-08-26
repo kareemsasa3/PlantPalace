@@ -38,3 +38,27 @@
     background-color: #dddddd; /* Background color on hover */
   }
   
+  @media (max-width: 768px) {
+  
+    .menu {
+      padding: 0;
+      margin-top: 5rem;
+    }
+
+    .menu ul {
+      flex-direction: column; /* Stack list items vertically */
+      padding: 0;
+      width: 100%;
+    }
+  
+    .menu li {
+      margin: 0px !important;
+      width: 100%;
+    }
+
+    .menu ul li a {
+      display: block;
+      text-align: left;
+      margin-bottom: 1.3rem;
+    }
+  }
