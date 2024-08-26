@@ -8,13 +8,11 @@ import { signup } from "../../api/authApi";
 const SignUp = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+    const [setError] = useState(null);
+    const [setSuccess] = useState(null);
 
     const navigate = useNavigate();
 
@@ -30,13 +28,11 @@ const SignUp = () => {
         const userData = {
           username,
           email,
-          password,
-          firstName,
-          lastName
+          password
         };
 
         try {
-          const result = await signup(userData);
+          await signup(userData);
           setSuccess('Sign up successful!');
           setError(null);
           navigate('/shop');

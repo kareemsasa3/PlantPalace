@@ -36,7 +36,7 @@ const Account = () => {
         setEditUser(storedUser);
         console.log('User from local storage:', storedUser);
         console.log('wishlist products:', products);
-    }, [navigate]);
+    }, [navigate, products]);
 
     useEffect(() => {
         const fetchWishlistProducts = async () => {

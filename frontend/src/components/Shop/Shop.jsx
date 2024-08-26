@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './Shop.css';
 import Breadcrumbs from '../Breadcrumbs';
 import ProductList from '../ProductList';
 import CartWidget from '../CartWidget';
 import { fetchProducts } from '../../api/fetchProducts';
-import { resetCart, setProducts } from '../../redux/slices/shopSlice';
+import { resetCart } from '../../redux/slices/shopSlice';
 
 const Shop = () => {
   const { categoryName } = useParams();
@@ -15,9 +15,6 @@ const Shop = () => {
   const [products, setProductsState] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const reduxProducts = useSelector((state) => state.shop.products);
-  const cartItems = useSelector((state) => state.shop.cart);
 
   useEffect(() => {
     const loadProducts = async () => {

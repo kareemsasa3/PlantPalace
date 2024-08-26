@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Dropdown.css';
 
 const Dropdown = ({ suggestions, onSelect, showSuggestions, setShowSuggestions }) => {
   const dropdownRef = useRef(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   // Handle clicks outside the dropdown to hide suggestions
   useEffect(() => {
@@ -27,14 +28,17 @@ const Dropdown = ({ suggestions, onSelect, showSuggestions, setShowSuggestions }
               key={index}
               className="dropdown-item"
               role="option"
+              aria-selected={selectedIndex === index ? "true" : "false"} // Set aria-selected
               tabIndex="0"
               onClick={() => {
                 onSelect(suggestion);
+                setSelectedIndex(index); // Update selected index
                 setShowSuggestions(false);
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   onSelect(suggestion);
+                  setSelectedIndex(index); // Update selected index
                   setShowSuggestions(false);
                 }
               }}
