@@ -2,9 +2,24 @@
   background-color: black;
   border-radius: 8px;
   display: flex;
+  flex-direction: row;
+  margin: 2rem;
+}
+
+@media (max-width: 1450px) {
+  .checkout-page {
+    flex-direction: column;
+  }
+}
+
+.checkout-container {
+  display: flex;
   flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+.cart-details {
+  display: flex;
+  flex-direction: column;
 }
 
 .back-to-cart-button {
@@ -16,7 +31,7 @@
   color: white;
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
-  text-align: left;
+  text-align: center;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -61,28 +76,6 @@
   padding-left: 1rem;
   float: right;
 }
-
-.order-summary {
-  margin-top: 20px;
-  color: white;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.summary-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.summary-item.total {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
-
-
-
 
 .breadcrumbs {
   width: 100%;
