@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
@@ -9,14 +9,11 @@ const SHIPPING_COST = 5.00;
 
 const CartSummary = () => {
     const navigate = useNavigate();
-
     const products = useSelector((state) => state.shop.products);
     const cart = useSelector((state) => state.shop.cart);
 
-    const user = JSON.parse(localStorage.getItem('user'));
-    const isAuthenticated = user ? true : false;
-
-    console.log(isAuthenticated);
+    const user = useMemo(() => JSON.parse(localStorage.getItem('user')), []);
+    const isAuthenticated = Boolean(user);
 
     const handleCheckout = () => {
         if (isAuthenticated) {
@@ -26,7 +23,7 @@ const CartSummary = () => {
         }
     };
 
-    const calculateTotals = () => {
+    const { totalPrice, tax, totalWithTax, shipping } = useMemo(() => {
         let totalPrice = 0;
 
         cart.forEach((item) => {
@@ -39,9 +36,7 @@ const CartSummary = () => {
         const tax = totalPrice * TAX_RATE;
         const totalWithTax = totalPrice + tax;
         return { totalPrice, tax, totalWithTax, shipping: SHIPPING_COST };
-    };
-
-    const { totalPrice, tax, totalWithTax, shipping } = calculateTotals();
+    }, [cart, products]);
 
     return (
         <div className="cart-summary">
@@ -66,6 +61,7 @@ const CartSummary = () => {
                 primary
                 className="checkout-button"
                 onClick={handleCheckout}
+                aria-label="Proceed to Secure Checkout"
             >
                 Secure Checkout
             </Button>

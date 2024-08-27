@@ -16,15 +16,15 @@ const Cart = () => {
     if (cartItems.length === 0) {
       navigate('/shop');
     }
-  }, [cartItems, navigate]); // Dependency array includes cartItems and navigate
+  }, [cartItems, navigate]);
 
   return (
     <div className="cart-page">
       <Breadcrumbs />
       <h1 className="cart-title">MY CART</h1>
       <div className='cart-content'>
-        <CartItems />
         <CartSummary />
+        <CartItems />
       </div>
     </div>
   );

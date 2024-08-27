@@ -46,7 +46,17 @@
 
 @media (max-width: 1200px) {
     .cart-summary {
-        width: auto !important;
+        width: 80% !important;
         margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-summary {
+        border-radius: 0;
+    }
+
+    .checkout-button {
+        width: 100%;
     }
 }
