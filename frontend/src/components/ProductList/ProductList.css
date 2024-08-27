@@ -1,21 +1,59 @@
 /* src/components/ProductList/ProductList.css */
 
 .product-list {
-  background-color: black;
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
-.product-list .ui.grid {
-  margin: 0;
-}
-
-.product-list .ui.grid .column {
-  display: flex;
-  justify-content: center;
-}
-
-.product-list .ui.grid .column .product-card {
+  padding: 20px;
   width: 100%;
-  max-width: 20rem; /* Ensure product cards don't exceed the max width */
+}
+
+.ui.grid > .column {
+  padding: 10px !important;
+}
+
+.error {
+  color: red;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.no-products {
+  font-size: 1.5rem;
+  color: #888;
+  text-align: center;
+  margin: 20px 0;
+}
+
+@media (min-width: 768px) {
+  .product-list {
+    padding: 30px;
+  }
+
+  .ui.grid > .column {
+    padding: 15px;
+  }
+}
+
+@media(min-width: 992px) {
+  .product-list {
+    max-width: 1200px;
+  }
+
+  .ui.grid > .column {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .product-list {
+    padding: 10px;
+  }
+
+  .ui.grid > .column {
+    padding: 5px;
+  }
+
+  .no-products,
+  .error {
+    font-size: 1.2rem;
+  }
 }

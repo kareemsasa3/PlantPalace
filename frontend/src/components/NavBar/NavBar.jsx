@@ -47,8 +47,13 @@ const NavBar = () => {
         </ul>
         <ul className="navbar-right">
           <li>
+            <Link to="/cart">
+              <i className='shopping cart icon' />
+            </Link>
+          </li>
+          <li>
             <Link to={isLoggedIn ? "/account" : "/login"}>
-              ACCOUNT
+              <i className='user icon' />
             </Link>
           </li>
         </ul>

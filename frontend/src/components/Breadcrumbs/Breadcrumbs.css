@@ -1,23 +1,46 @@
-/* Breadcrumbs.css */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
+/* General Breadcrumbs Styling */
 .breadcrumbs {
-    text-align: left;
+    display: flex;
+    flex-wrap: wrap; /* Ensure items wrap on smaller screens */
+    align-items: center; /* Align items in the center vertically */
     font-family: 'Orbitron', sans-serif;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.1); /* Slightly visible background for better contrast */
+    padding: 10px;
+    margin: 0 auto; /* Center the breadcrumbs horizontally */
+    max-width: 100%; /* Ensure breadcrumbs do not exceed container width */
 }
 
+/* Breadcrumb Item Styling */
 .breadcrumb-item {
     display: inline;
     text-transform: uppercase;
+    font-size: 1rem; /* Responsive font size */
+    margin-right: 0.5rem; /* Space between breadcrumb items */
 }
 
 .breadcrumb-item a {
     text-decoration: none;
-    font-size: 18px;
-    color: white;
+    color: #fff; /* White color for links */
+    transition: color 0.3s; /* Smooth transition for color change */
 }
 
 .breadcrumb-item a:hover {
     text-decoration: underline;
+    color: #ccc; /* Change color on hover for better visibility */
+}
+
+/* Separator Styling */
+.breadcrumb-separator {
+    color: #fff; /* Color of the separator */
+    margin: 0 0.5rem; /* Spacing around the separator */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .breadcrumb-item {
+        font-size: 0.875rem; /* Slightly smaller font size on smaller screens */
+        margin-right: 0.3rem; /* Reduced spacing on smaller screens */
+    }
 }

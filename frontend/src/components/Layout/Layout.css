@@ -1,47 +1,68 @@
 /* src/components/Layout.css */
 
+/* Layout Container */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header Styling */
+.App-header {
+  background-color: #282c34;
+  color: white;
+  min-height: 60px; /* Height of the header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px; /* Adjust padding as needed */
+  position: fixed; /* Ensure header is fixed at the top */
+  width: 100%; /* Full width */
+  top: 0; /* Stick to the top */
+  left: 0; /* Full width */
+  z-index: 1000; /* Ensure header is above content */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+}
+
+/* Footer Styling */
+.App-footer {
+  background-color: #282c34;
+  color: white;
+  min-height: 60px; /* Height of the footer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px; /* Adjust padding as needed */
+}
+
+/* Main Content Styling */
 .main-content {
-    flex: 1; /* Ensures this section grows to fill available space */
-    display: flex;
-    flex-direction: column;
-    padding: 20px; /* Adjust padding as needed */
+  flex: 1; /* Ensures this section grows to fill available space */
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* Adjust padding as needed */
+  transition: margin-top 0.3s ease-in-out; /* Smooth transition for margin */
+  margin-top: 250px; /* Adjust based on header height */
+}
+
+/* Header visibility classes */
+.header-show {
+  transform: translateY(0); /* Show header */
+}
+
+.header-hide {
+  transform: translateY(-100%); /* Hide header off the top of the screen */
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 768px) {
+  .App-header, .App-footer {
+    min-height: 50px;
+    padding: 0 10px;
   }
-  
-  .App {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+
+  .main-content {
+    padding: 10px;
+    margin-top: 60px;
   }
-  
-  .App-header {
-    background-color: #282c34;
-    color: white;
-    min-height: 60px; /* Height of the header */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px; /* Adjust padding as needed */
-  }
-  
-  .App-footer {
-    background-color: #282c34;
-    color: white;
-    min-height: 60px; /* Height of the footer */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px; /* Adjust padding as needed */
-  }
-  
-  /* Optional: Responsive adjustments */
-  @media (max-width: 768px) {
-    .App-header, .App-footer {
-      min-height: 50px;
-      padding: 0 10px;
-    }
-  
-    .main-content {
-      padding: 10px;
-    }
-  }
-  
+}

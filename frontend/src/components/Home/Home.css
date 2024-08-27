@@ -3,7 +3,6 @@
 
 .home-content {
     padding: 20px;
-    margin: 0 auto;
     color: gold;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/shop.png');
     font-family: 'Courier New', Courier, monospace;
@@ -54,6 +53,7 @@
 }
 
 @media (max-width: 768px) {
+
     .home-title {
         font-size: 1.7rem;
     }

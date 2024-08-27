@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
+import Sidebar from '../Sidebar'; // Import the Sidebar component
 import Menu from '../Menu';
 import { searchProducts } from '../../api/fetchProducts';
 import './Header.css';
@@ -9,12 +10,30 @@ import { Button } from 'semantic-ui-react';
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     setSearchTerm('');
   }, [location]);
+
+  useEffect(() => {
+    let lastScrollTop = 0;
+
+    const handleScroll = () => {
+      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScrollTop > lastScrollTop) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -34,7 +53,7 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header className={`header ${showHeader ? 'show' : 'hide'}`}>
       <div className="header-top">
         <div className="logo">
           <Link to="/">
@@ -62,15 +81,7 @@ const Header = () => {
       <div className="header-bottom">
         <Menu />
       </div>
-      <div className={`sidebar ${sidebarOpen ? 'active' : ''}`}>
-        <div className="logo">
-          <Link to="/">
-            <h1>Plant Palace</h1>
-          </Link>
-        </div>
-        <button className="close-btn" onClick={toggleSidebar}>×</button>
-        <Menu onMenuItemClick={toggleSidebar} />
-      </div>
+      <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
     </header>
   );
 };

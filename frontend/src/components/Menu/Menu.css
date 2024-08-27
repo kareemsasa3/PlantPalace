@@ -23,7 +23,7 @@
   .menu ul li a {
     color: white; /* Text color */
     font-size: 12px; /* Font size */
-    border: 2px solid white; /* Border styling */
+    border: 2px solid gold; /* Border styling */
     border-radius: 8px; /* Rounded corners */
     padding: 8px 12px; /* Adjust padding for spacing inside the button */
     display: inline-block; /* Ensure border and padding are applied */
@@ -35,7 +35,7 @@
   /* Hover effect for menu links */
   .menu ul li a:hover {
     color: black; /* Text color on hover */
-    background-color: #dddddd; /* Background color on hover */
+    background-color: gold; /* Background color on hover */
   }
   
   @media (max-width: 768px) {
@@ -43,6 +43,7 @@
     .menu {
       padding: 0;
       margin-top: 5rem;
+      background-color: black;
     }
 
     .menu ul {

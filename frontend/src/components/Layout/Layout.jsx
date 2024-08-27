@@ -2,7 +2,7 @@
 import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import './Layout.css'; // Create this file for specific layout styling if needed
+import './Layout.css';
 
 const Layout = ({ children }) => {
   return (

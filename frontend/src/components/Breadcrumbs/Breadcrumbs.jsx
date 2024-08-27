@@ -15,7 +15,7 @@ const generateBreadcrumbs = (pathname) => {
     const breadcrumbs = [
         { name: 'Shop', path: '/shop' },
         ...parts.map((part, index) => ({
-            name: part.charAt(0).toUpperCase() + part.slice(1), // Capitalize first letter
+            name: capitalizeName(part), // Capitalize first letter and handle multi-word names
             path: '/' + parts.slice(0, index + 1).join('/') // Build breadcrumb path
         }))
     ];
@@ -23,16 +23,21 @@ const generateBreadcrumbs = (pathname) => {
     return breadcrumbs;
 };
 
+// Function to capitalize breadcrumb names
+const capitalizeName = (name) => {
+    return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Handle hyphenated words
+};
+
 const Breadcrumbs = () => {
     const location = useLocation();
     const breadcrumbs = generateBreadcrumbs(location.pathname);
 
     return (
-        <nav className="breadcrumbs">
+        <nav className="breadcrumbs" aria-label="Breadcrumb">
             {breadcrumbs.map((breadcrumb, index) => (
                 <span key={breadcrumb.path} className="breadcrumb-item">
                     <Link to={breadcrumb.path}>{breadcrumb.name}</Link>
-                    {index < breadcrumbs.length - 1 && ' / '}
+                    {index < breadcrumbs.length - 1 && <span className="breadcrumb-separator"> / </span>}
                 </span>
             ))}
         </nav>

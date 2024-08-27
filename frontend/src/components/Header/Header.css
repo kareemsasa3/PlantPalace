@@ -3,9 +3,20 @@
 
 /* General header styling */
 header {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header.show {
+  transform: translateY(0);
+}
+
+.header.hide {
+  transform: translateY(-100%);
 }
 
 /* Styling for the top section of the header */
@@ -89,7 +100,6 @@ header {
   background: transparent;
   border: none;
   width: 4rem;
-  margin-top: .7rem;
   margin-right: 2rem;
   font-size: 24px;
   color: white;
@@ -120,8 +130,36 @@ header {
 
 /* Sidebar active state */
 .sidebar.active {
+  height: 120vh;
   display: flex;
   transform: translateX(0);
+}
+
+/* Sidebar Icons */
+.sidebar-icons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.sidebar-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: gold;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.sidebar-icon i {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.sidebar-icon:hover {
+  color: white; /* Change to your preferred hover color */
 }
 
 /* Close button styling in sidebar */

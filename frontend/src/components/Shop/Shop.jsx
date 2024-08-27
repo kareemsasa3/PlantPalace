@@ -51,7 +51,6 @@ const Shop = () => {
     <div className='shop-container'>
       <div className='shop-header'>
         <Breadcrumbs />
-        <CartWidget />
       </div>
       <h1 className='products-title'>
         {categoryName ? `${categoryName}` : 'Products'}
