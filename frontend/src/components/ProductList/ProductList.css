@@ -1,8 +1,8 @@
 /* src/components/ProductList/ProductList.css */
 
 .product-list {
-  padding: 20px;
   width: 100%;
+  padding: 20px;
 }
 
 .ui.grid > .column {
@@ -25,7 +25,7 @@
 
 @media (min-width: 768px) {
   .product-list {
-    padding: 30px;
+    padding-top: 30px;
   }
 
   .ui.grid > .column {

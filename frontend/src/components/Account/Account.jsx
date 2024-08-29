@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../api/authApi';
 import { updateUser } from '../../api/userApi';
 import { Button, Grid, Input } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux';
-import { resetWishlist } from '../../redux/slices/shopSlice';
-import { fetchProductById } from '../../api/fetchProducts';
 import Wishlist from '../Wishlist';
 import OrderHistory from '../OrderHistory';
 
@@ -13,7 +10,6 @@ import './Account.css';
 
 const Account = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [isEditing, setIsEditing] = useState(false);
     const [user, setUser] = useState({
         username: '',
@@ -23,8 +19,6 @@ const Account = () => {
         orderHistory: [],
     });
     const [editUser, setEditUser] = useState(user);
-    const [products, setProducts] = useState([]);
-    const wishlist = useSelector((state) => state.shop.wishlist);
 
     useEffect(() => {
         const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -35,24 +29,7 @@ const Account = () => {
         setUser(storedUser);
         setEditUser(storedUser);
         console.log('User from local storage:', storedUser);
-        console.log('wishlist products:', products);
-    }, [navigate, products]);
-
-    useEffect(() => {
-        const fetchWishlistProducts = async () => {
-            try {
-                const productPromises = wishlist.map(id => fetchProductById(id));
-                const productResponses = await Promise.all(productPromises);
-                setProducts(productResponses);
-            } catch (error) {
-                console.error('Failed to fetch wishlist products:', error);
-            }
-        };
-
-        if (wishlist.length > 0) {
-            fetchWishlistProducts();
-        }
-    }, [wishlist]);
+    }, [navigate]);
 
     const handleLogout = () => {
         logout();
@@ -84,10 +61,6 @@ const Account = () => {
         setEditUser({ ...editUser, [name]: value });
     };
 
-    const handleClearWishlist = () => {
-        dispatch(resetWishlist());
-    };
-
     return (
         <div className="account-container">
             <h1>Account</h1>
@@ -103,7 +76,7 @@ const Account = () => {
                 </div>
             )}
             <div className="user-info">
-                <Grid>
+                <Grid stackable>
                     <Grid.Row columns={2}>
                         <Grid.Column>
                             <div className="form-group">
@@ -163,7 +136,7 @@ const Account = () => {
                 </Grid>
             </div>
             <OrderHistory orderHistory={user.orderHistory} />
-            <Wishlist products={products} handleClearWishlist={handleClearWishlist} />
+            <Wishlist />
         </div>
     );
 };

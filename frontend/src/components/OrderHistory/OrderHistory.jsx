@@ -18,14 +18,14 @@ const OrderHistory = ({ orderHistory }) => {
                                     <p><strong>Expected Delivery:</strong> {new Date(order.expectedDeliveryTimestamp).toLocaleString()}</p>
                                     <p><strong>Shipping Address:</strong> {`${order.shippingAddress.streetAddress}, ${order.shippingAddress.city}, ${order.shippingAddress.state}, ${order.shippingAddress.postalCode}`}</p>
                                     <p><strong>Billing Address:</strong> {`${order.billingAddress.streetAddress}, ${order.billingAddress.city}, ${order.billingAddress.state}, ${order.billingAddress.postalCode}`}</p>
-                                    <p><strong>Total Amount:</strong> {order.priceSummary.totalAmount}</p>
-                                    <p><strong>Tax:</strong> {order.priceSummary.tax}</p>
-                                    <p><strong>Total Price:</strong> ${order.priceSummary.totalPrice}</p>
+                                    <p><strong>Total Amount:</strong> {order.priceSummary.totalAmount.toFixed(2)}</p>
+                                    <p><strong>Tax:</strong> {order.priceSummary.tax.toFixed(2)}</p>
+                                    <p><strong>Total Price:</strong> ${order.priceSummary.totalPrice.toFixed(2)}</p>
                                     <strong>Products:</strong>
                                     <ul>
                                         {order.productSummary.map((product) => (
                                             <li key={product.name}>
-                                                {product.name} - {product.amount}g at ${product.price}
+                                                {product.name} - {product.amount}g at ${product.price.toFixed(2)}
                                             </li>
                                         ))}
                                     </ul>
@@ -41,7 +41,6 @@ const OrderHistory = ({ orderHistory }) => {
     );
 };
 
-// Define prop types for the OrderHistory component
 OrderHistory.propTypes = {
     orderHistory: PropTypes.arrayOf(
         PropTypes.shape({

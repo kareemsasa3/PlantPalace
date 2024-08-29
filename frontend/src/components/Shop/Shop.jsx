@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import './Shop.css';
 import Breadcrumbs from '../Breadcrumbs';
 import ProductList from '../ProductList';
-import CartWidget from '../CartWidget';
 import { fetchProducts } from '../../api/fetchProducts';
 import { resetCart } from '../../redux/slices/shopSlice';
 

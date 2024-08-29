@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import LoadingScreen from '../../util/LoadingScreen';
 import { fetchProductById } from '../../api/fetchProducts'; // Adjust path as needed
 import { addToCart, removeFromCart, addToWishlist, removeFromWishlist } from '../../redux/slices/shopSlice'; // Adjust path as needed
 import { Heart } from 'phosphor-react';
+import { Grid, Button, Image, Container } from 'semantic-ui-react';
 import './Product.css';
 
 const Product = () => {
@@ -33,6 +35,7 @@ const Product = () => {
     };
 
     getProduct();
+    console.log(product);
   }, [productId]);
 
   const handleWishlist = () => {
@@ -52,7 +55,7 @@ const Product = () => {
   };
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return <LoadingScreen />;
   }
 
   if (error) {
@@ -64,36 +67,63 @@ const Product = () => {
   }
 
   return (
-    <div className='product-container'>
-      <h1 className='product-title'>{product.name}</h1>
-      <img src={product.image || 'no_image_available.jpeg'} alt={product.name} className='product-img'/>
-      <div className="product-details">
-        <div className='product-desc'>
-          <p>Price: ${product.price}</p>
-          <p>Amount: {product.amount} {product.amount === 1 ? 'Gram' : 'Grams'}</p>
-          <p>Category: {product.category}</p>
-          <p>Type: {product.type}</p>
-          <p>THC: {product.thc}%</p>
-          <p>{product.description}</p>
-          <p>Effects: {product.effects}</p>
-          <p>Terpenes: {Object.entries(product.terpenes).map(([key, value]) => (
+    <Container>
+      <Grid divided stackable className="product-container">
+        <Grid.Row>
+          <Grid.Column width={6}>
+            <Image
+              src={product.image || 'no_image_available.jpeg'}
+              alt={`Image of ${product.name}`}
+              className='product-img'
+              rounded
+            />
+          </Grid.Column>
+          <Grid.Column width={10}>
+            <p className='product-title'>{product.name}</p>
+            <p className='product-subtitle'>by {product.brand}</p>
+            <div className='product-details'>
+              <p>Price: ${product.price}</p>
+              <p>Amount: {product.amount} {product.amount === 1 ? 'Gram' : 'Grams'}</p>
+              <p>Category: {product.category}</p>
+              <p>Type: {product.type}</p>
+              <p>THC: {product.thc}%</p>
+              <p>{product.description}</p>
+              <p>Effects: {product.effects}</p>
+              
+            </div>
+            <Button
+              onClick={handleCart}
+              className={`add-to-cart-btn ${isInCart ? 'in-cart' : ''}`}
+              color={isInCart ? 'grey' : 'black'}
+              fluid
+            >
+              {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+            </Button>
+            <Button
+              onClick={handleWishlist}
+              icon
+              className={`wishlist-btn ${isWishlisted ? 'in-wishlist' : ''}`}
+              aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+              color={isWishlisted ? 'yellow' : 'grey'}
+              circular
+              fluid
+            >
+              <Heart size={32} weight={isWishlisted ? 'fill' : 'regular'} />
+            </Button>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      <div>
+        <p className='product-title'>{product.name}</p>
+        <p className='product-subtitle'>by {product.brand}</p>
+        <div className='product-details'>
+          <p>{Object.entries(product.terpenes).map(([key, value]) => (
             <span key={key}>{key}: {value}% </span>
           ))}</p>
         </div>
-        <button
-          className={`add-to-cart-btn ${isInCart ? 'in-cart' : ''}`}
-          onClick={handleCart}
-        >
-          {isInCart ? 'Remove from Cart' : 'Add to Cart'}
-        </button>
-        <button
-          className={`wishlist-btn ${isWishlisted ? 'in-wishlist' : ''}`}
-          onClick={handleWishlist}
-        >
-          <Heart size={32} weight={isWishlisted ? 'fill' : 'regular'} />
-        </button>
+        
       </div>
-    </div>
+    </Container>
   );
 };
 

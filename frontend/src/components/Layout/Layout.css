@@ -5,6 +5,15 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  transition: margin-top 0.3s;
+}
+
+.main-content.header-visible {
+  margin-top: 00px;
+}
+
+.main-content.header-hidden {
+  padding-top: 0;
 }
 
 /* Header Styling */
@@ -21,7 +30,7 @@
   top: 0; /* Stick to the top */
   left: 0; /* Full width */
   z-index: 1000; /* Ensure header is above content */
-  transition: transform 0.3s ease-in-out; /* Smooth transition for showing/hiding */
+  transition: transform 0.3s ease, height 0.4s ease; /* Smooth transition for showing/hiding */
 }
 
 /* Footer Styling */

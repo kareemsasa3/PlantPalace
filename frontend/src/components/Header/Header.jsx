@@ -7,7 +7,7 @@ import { searchProducts } from '../../api/fetchProducts';
 import './Header.css';
 import { Button } from 'semantic-ui-react';
 
-const Header = () => {
+const Header = ({ onVisibilityChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
@@ -23,17 +23,15 @@ const Header = () => {
 
     const handleScroll = () => {
       const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (currentScrollTop > lastScrollTop) {
-        setShowHeader(false);
-      } else {
-        setShowHeader(true);
-      }
-      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; 
+      const isHeaderVisible = currentScrollTop <= lastScrollTop;
+      setShowHeader(isHeaderVisible);
+      onVisibilityChange(isHeaderVisible);
+      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [onVisibilityChange]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

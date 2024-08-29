@@ -1,122 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
 .product-container {
-  border: solid 1px white;
-  border-radius: 12px;
   background-color: #1a1a1a;
-  display: flex;
-  flex-direction: column; /* Align items side by side */
-  align-items: center; /* Align items to the center of the container */
-  padding: 1rem; /* Add some padding */
-  gap: 2rem; /* Space between image and details */
-}
-
-.product-details {
-  margin-top: 5rem;
-  border-radius: 8px;
-  color: white;
-  font-family: 'Orbitron', sans-serif;
-  display: flex;
-  flex-direction: row;
-  text-align: left; /* Align text to the left */
   padding: 2rem;
-  width: 50%;
+  border-radius: 12px;
 }
 
 .product-title {
-  font-size: 8rem;
-  margin-bottom: 5rem;
+  font-size: 2rem;
   font-family: 'Orbitron', sans-serif;
   color: white;
-  text-align: center; /* Center title for better alignment */
+  text-align: left;
+  border: 2px solid red;
+  margin: 0;
+}
+
+.product-subtitle {
+  border: 2px solid green;
+  color: #9a9a9a;
+  font-size: 1.6rem;
+  font-family: 'Orbitron', sans-serif;
+  text-align: left;
+  margin-bottom: 2rem;
+
+}
+
+.product-details {
+  border: 2px solid blue;
+  text-align: left;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: 2rem;
 }
 
 .product-img {
-  transform: scale(1.9);
-  width: 20rem; /* Set width for consistent sizing */
-  height: auto; /* Maintain aspect ratio */
   border-radius: 12px;
+  width: 100%;
+  object-fit: cover;
+  border: 2px solid pink;
 }
 
-.wishlist-btn {
-  position: absolute;
-  top: 32rem;
-  right: 37rem;
-  background: transparent !important;
-  color: white !important;
-  border: none !important;
-  cursor: pointer !important;
-  transform: scale(1.5);
-
-  z-index: 2;
-}
-
-.wishlist-btn.in-wishlist {
-  color: gold; /* Example color for items in the wishlist */
-}
-
-.add-to-cart-btn {
-  width: 25rem;
-  height: 3rem;
-  background: #1a1a1a;
-  color: white;
-  border: 1px solid white;
-  border-radius: 12px;
-  cursor: pointer;
-  font-family: 'Orbitron', sans-serif;
-  transition: background-color 0.3s, color 0.3s;
-  position: absolute;
-  right: 30rem;
-}
-
-.add-to-cart-btn:hover {
-  background-color: white;
-  color: black;
-}
-
-.add-to-cart-btn.in-cart {
-  background: white; /* Example color for items in the cart */
-  color: black;
-}
-
-.add-to-cart-btn.in-cart:hover {
-  background-color: black;
-  color: white;
-}
-
-.product-desc {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: larger;
-  color: white;
+.add-to-cart-btn, .wishlist-btn {
+  margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
-  .product-container {
-    padding: 0.5rem;
-  }
-
   .product-title {
-    font-size: 4rem;
-    margin-bottom: 2rem;
-  }
-
-  .product-details {
-    flex-direction: column;
-    margin: 0;
-  }
-
-  .product-img {
-    transform: scale(1.5);
-    width: 15rem;
-  }
-
-  .wishlist-btn {
-    position: static;
-    transform: scale(1.2);
-  }
-
-  .add-to-cart-btn {
-    width: 100%;
-    margin-bottom: 1rem;
+    font-size: 2rem;
   }
 }
