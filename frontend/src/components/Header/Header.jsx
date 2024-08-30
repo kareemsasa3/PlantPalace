@@ -1,3 +1,4 @@
+// src/components/Header.js
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
@@ -11,6 +12,8 @@ const Header = ({ onVisibilityChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollTop, setLastScrollTop] = useState(0); // Track the last scroll position
+  const [isScrollingUp, setIsScrollingUp] = useState(false); // Track scroll direction
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,19 +22,28 @@ const Header = ({ onVisibilityChange }) => {
   }, [location]);
 
   useEffect(() => {
-    let lastScrollTop = 0;
-
     const handleScroll = () => {
       const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const isHeaderVisible = currentScrollTop <= lastScrollTop;
-      setShowHeader(isHeaderVisible);
-      onVisibilityChange(isHeaderVisible);
-      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+      const isScrollingUpNow = currentScrollTop < lastScrollTop;
+
+      if (isScrollingUpNow !== isScrollingUp) {
+        setIsScrollingUp(isScrollingUpNow);
+      }
+
+      if (isScrollingUpNow && !showHeader) {
+        setShowHeader(true);
+        onVisibilityChange(true);
+      } else if (!isScrollingUpNow && currentScrollTop > 100 && showHeader) {
+        setShowHeader(false);
+        onVisibilityChange(false);
+      }
+
+      setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [onVisibilityChange]);
+  }, [isScrollingUp, lastScrollTop, onVisibilityChange, showHeader]);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);

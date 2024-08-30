@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Segment, Grid } from 'semantic-ui-react';
+import { Button, Segment, List } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { resetWishlist } from '../../redux/slices/shopSlice';
 import { fetchProductById } from '../../api/fetchProducts';
@@ -13,12 +13,10 @@ const Wishlist = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Function to reset the wishlist in the Redux store
     const handleResetWishlist = () => {
         dispatch(resetWishlist());
     };
 
-    // Fetch wishlist products when wishlist changes
     useEffect(() => {
         const fetchWishlistProducts = async () => {
             setLoading(true);
@@ -46,11 +44,11 @@ const Wishlist = () => {
     if (error) return <Segment>{error}</Segment>;
 
     return (
-        <div className="wishlist">
+        <div className="wishlist-container">
             <h2>Wishlist</h2>
             {products.length > 0 ? (
                 <div>
-                    <Grid stackable doubling columns={2} className="wishlist-grid">
+                    <List divided relaxed className="wishlist-list">
                         {products.map((product) => {
                             const { id, name, price, amount, effects, description, image } = product || {};
 
@@ -59,29 +57,29 @@ const Wishlist = () => {
                             }
 
                             return (
-                                <Grid.Column 
-                                    key={id} 
-                                    mobile={16} 
-                                    tablet={8} 
-                                    computer={8} 
-                                    className="wishlist-item"
-                                >
-                                    <Link to={`/products/${id}`}>
-                                        <h3>{name}</h3>
-                                        <p><strong>Price:</strong> ${price.toFixed(2)}</p>
-                                        <p><strong>Amount:</strong> {amount} grams</p>
-                                        <p><strong>Effects:</strong> {effects}</p>
-                                        <p><strong>Description:</strong> {description}</p>
+                                <List.Item key={id} className="wishlist-item">
+                                    <List.Content floated="right">
                                         <img 
                                             src={image} 
                                             alt={`Image of ${name}`} 
                                             className="product-img-wishlist" 
                                         />
-                                    </Link>
-                                </Grid.Column>
+                                    </List.Content>
+                                    <List.Content>
+                                        <List.Header as={Link} to={`/products/${id}`}>
+                                            {name}
+                                        </List.Header>
+                                        <List.Description>
+                                            <p><strong>Price:</strong> ${price.toFixed(2)}</p>
+                                            <p><strong>Amount:</strong> {amount} grams</p>
+                                            <p><strong>Effects:</strong> {effects}</p>
+                                            <p><strong>Description:</strong> {description}</p>
+                                        </List.Description>
+                                    </List.Content>
+                                </List.Item>
                             );
                         })}
-                    </Grid>
+                    </List>
                     <Button 
                         className="clear-wishlist-btn" 
                         onClick={handleResetWishlist}
@@ -90,7 +88,7 @@ const Wishlist = () => {
                     </Button>
                 </div>
             ) : (
-                <Segment>No items in wishlist.</Segment>
+                <Segment className='no-items-segment'>No items in wishlist.</Segment>
             )}
         </div>
     );

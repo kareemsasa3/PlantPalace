@@ -89,6 +89,7 @@ header {
 /* Styling for the bottom section of the header */
 .header-bottom {
   padding: 20px;
+  background-color: black;
 }
 
 /* Sidebar toggle button styling */

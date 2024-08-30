@@ -64,18 +64,8 @@ const Account = () => {
     return (
         <div className="account-container">
             <h1>Account</h1>
-            {isEditing ? (
-                <div className="edit-buttons">
-                    <Button onClick={handleCancel} className="cancel-btn">Cancel</Button>
-                    <Button onClick={handleSave} className="save-btn">Save</Button>
-                </div>
-            ) : (
-                <div className='user-buttons'>
-                    <Button onClick={handleEdit} className="edit-btn">Edit</Button>
-                    <Button onClick={handleLogout} className="logout-btn">Logout</Button>
-                </div>
-            )}
             <div className="user-info">
+                
                 <Grid stackable>
                     <Grid.Row columns={2}>
                         <Grid.Column>
@@ -134,6 +124,17 @@ const Account = () => {
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
+                {isEditing ? (
+                    <div className="edit-buttons">
+                        <Button onClick={handleCancel} className="cancel-btn">Cancel</Button>
+                        <Button onClick={handleSave} className="save-btn">Save</Button>
+                    </div>
+                ) : (
+                    <div className='user-buttons'>
+                        <Button onClick={handleEdit} className="edit-btn">Edit</Button>
+                        <Button onClick={handleLogout} className="logout-btn">Logout</Button>
+                    </div>
+                )}
             </div>
             <OrderHistory orderHistory={user.orderHistory} />
             <Wishlist />
