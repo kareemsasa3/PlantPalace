@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
-import ProductCard from '../ProductCard'; // Import the new ProductCard component
+import ProductCard from '../ProductCard';
 import './ProductList.css';
 import LoadingScreen from '../../util/LoadingScreen';
 
@@ -28,6 +29,25 @@ const ProductList = ({ products, isLoading, error }) => {
       </Grid>
     </div>
   );
+};
+
+ProductList.propTypes = {
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      name: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.shape({
+    message: PropTypes.string,
+  }),
+};
+
+ProductList.defaultProps = {
+  error: null,
 };
 
 export default ProductList;

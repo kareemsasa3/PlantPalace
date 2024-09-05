@@ -6,7 +6,7 @@ import './CartItems.css';
 
 const CartItems = () => {
   const cartItems = useSelector((state) => state.shop.cart);
-  const products = useSelector((state) => state.shop.products); // Get products from Redux store
+  const products = useSelector((state) => state.shop.products);
   const dispatch = useDispatch();
 
   const productMap = new Map(products.map(product => [product.id, product]));
