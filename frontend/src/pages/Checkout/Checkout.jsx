@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button, Icon } from 'semantic-ui-react';
-import Breadcrumbs from '../Breadcrumbs';
-import CartSummary from '../CartSummary';
-import CartItems from '../CartItems';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import CartSummary from '../../components/CartSummary';
+import CartItems from '../../components/CartItems';
 import './Checkout.css';
-import ContactInformationForm from '../ContactInformationForm';
-import ShippingInformationForm from '../ShippingInformationForm/ShippingInformationForm';
+import ContactInformationForm from '../../components/ContactInformationForm';
+import ShippingInformationForm from '../../components/ShippingInformationForm';
 
 const Checkout = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);

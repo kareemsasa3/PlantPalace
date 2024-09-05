@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
 import './AgeVerification.css';
 
 const AgeVerification = ({ onConfirm }) => {
   const [isVerified, setIsVerified] = useState(false);
-  const history = useHistory();
   const verificationDuration = 60 * 60 * 1000; // 1 hour
 
   useEffect(() => {
@@ -32,7 +29,7 @@ const AgeVerification = ({ onConfirm }) => {
   };
 
   const handleDeny = () => {
-    history.push('/underage');
+    console.log('User not old enough to enter');
   };
 
   if (isVerified) {
@@ -41,14 +38,14 @@ const AgeVerification = ({ onConfirm }) => {
 
   return (
     <div className="age-verification-modal">
-        <h1 className='app-title'>Plant Palace</h1>
-        <div className="modal-content">
-            <h2>Are you over 21?</h2>
-            <div className="modal-buttons">
-              <Button onClick={handleConfirm}>Yes</Button>
-              <Button onClick={handleDeny}>No</Button>
-            </div>
+      <h1 className='app-title'>Plant Palace</h1>
+      <div className="modal-content">
+        <h2>Are you over 21?</h2>
+        <div className="modal-buttons">
+          <button className="confirm-button" onClick={handleConfirm}>Yes</button>
+          <button className="deny-button" onClick={handleDeny}>No</button>
         </div>
+      </div>
     </div>
   );
 };

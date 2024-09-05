@@ -5,15 +5,16 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  transition: margin-top 0.3s;
 }
 
-.main-content.header-visible {
-  margin-top: 00px;
-}
-
-.main-content.header-hidden {
-  padding-top: 0;
+/* Main Content Styling */
+.main-content {
+  flex: 1; /* Ensures this section grows to fill available space */
+  display: flex;
+  flex-direction: column;
+  padding: 20px; /* Adjust padding as needed */
+  transition: margin-top 0.3s ease-in-out; /* Smooth transition for margin */
+  margin-top: 60px; /* Adjust based on header height */
 }
 
 /* Header Styling */
@@ -44,23 +45,13 @@
   padding: 0 20px; /* Adjust padding as needed */
 }
 
-/* Main Content Styling */
-.main-content {
-  flex: 1; /* Ensures this section grows to fill available space */
-  display: flex;
-  flex-direction: column;
-  padding: 20px; /* Adjust padding as needed */
-  transition: margin-top 0.3s ease-in-out; /* Smooth transition for margin */
-  margin-top: 250px; /* Adjust based on header height */
-}
-
 /* Header visibility classes */
-.header-show {
-  transform: translateY(0); /* Show header */
+.header-visible {
+  margin-top: 16rem; /* Space for the header */
 }
 
-.header-hide {
-  transform: translateY(-100%); /* Hide header off the top of the screen */
+.header-hidden {
+  margin-top: 0; /* No space for the header when hidden */
 }
 
 /* Optional: Responsive adjustments */
@@ -72,6 +63,6 @@
 
   .main-content {
     padding: 10px;
-    margin-top: 60px;
+    margin-top: 50px; /* Adjust based on header height */
   }
 }

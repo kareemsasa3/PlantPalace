@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
 import './CartSummary.css';
 
 const TAX_RATE = 0.08;
@@ -57,14 +56,13 @@ const CartSummary = () => {
                 <span className="item-left">Estimated Total:</span>
                 <span className="item-right">${(totalWithTax + shipping).toFixed(2)}</span>
             </div>
-            <Button
-                primary
+            <button
                 className="checkout-button"
                 onClick={handleCheckout}
                 aria-label="Proceed to Secure Checkout"
             >
                 Secure Checkout
-            </Button>
+            </button>
         </div>
     );
 };

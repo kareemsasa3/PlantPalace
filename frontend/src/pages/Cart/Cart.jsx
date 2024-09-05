@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Breadcrumbs from '../Breadcrumbs';
-import CartItems from '../CartItems';
-import CartSummary from '../CartSummary';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import CartItems from '../../components/CartItems';
+import CartSummary from '../../components/CartSummary';
 
 import './Cart.css';
 

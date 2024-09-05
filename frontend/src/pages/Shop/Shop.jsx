@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './Shop.css';
-import Breadcrumbs from '../Breadcrumbs';
-import ProductList from '../ProductList';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import ProductList from '../../components/ProductList';
 import { fetchProducts } from '../../api/fetchProducts';
 import { resetCart } from '../../redux/slices/shopSlice';
 
@@ -11,7 +11,7 @@ const Shop = () => {
   const { categoryName } = useParams();
   const location = useLocation();
   const dispatch = useDispatch();
-  const [products, setProductsState] = useState([]);
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,9 +28,9 @@ const Shop = () => {
           const filteredProducts = productData.filter(
             (product) => product.category.toLowerCase() === categoryName.toLowerCase()
           );
-          setProductsState(filteredProducts);
+          setProducts(filteredProducts);
         } else {
-          setProductsState(productData);
+          setProducts(productData);
         }
         setIsLoading(false);
       } catch (error) {

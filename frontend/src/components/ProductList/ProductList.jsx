@@ -5,7 +5,7 @@ import ProductCard from '../ProductCard';
 import './ProductList.css';
 import LoadingScreen from '../../util/LoadingScreen';
 
-const ProductList = ({ products, isLoading, error }) => {
+const ProductList = ({ products = [], isLoading = false, error = null }) => {
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -32,22 +32,9 @@ const ProductList = ({ products, isLoading, error }) => {
 };
 
 ProductList.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.shape({
-    message: PropTypes.string,
-  }),
-};
-
-ProductList.defaultProps = {
-  error: null,
+  products: PropTypes.array,
+  isLoading: PropTypes.bool,
+  error: PropTypes.object,
 };
 
 export default ProductList;

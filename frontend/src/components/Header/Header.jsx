@@ -1,12 +1,11 @@
-// src/components/Header.js
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 import Sidebar from '../Sidebar'; // Import the Sidebar component
 import Menu from '../Menu';
 import { searchProducts } from '../../api/fetchProducts';
 import './Header.css';
-import { Button } from 'semantic-ui-react';
 
 const Header = ({ onVisibilityChange }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,7 +22,7 @@ const Header = ({ onVisibilityChange }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
       const isScrollingUpNow = currentScrollTop < lastScrollTop;
 
       if (isScrollingUpNow !== isScrollingUp) {
@@ -77,9 +76,9 @@ const Header = ({ onVisibilityChange }) => {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <Button type="button" onClick={handleSearchSubmit}>
+          <button type="button" onClick={handleSearchSubmit} className="search-button">
             🔍
-          </Button>
+          </button>
         </div>
         <button className="sidebar-toggle" onClick={toggleSidebar}>
           ☰
@@ -94,6 +93,11 @@ const Header = ({ onVisibilityChange }) => {
       <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
     </header>
   );
+};
+
+// Define PropTypes
+Header.propTypes = {
+  onVisibilityChange: PropTypes.func.isRequired,
 };
 
 export default Header;

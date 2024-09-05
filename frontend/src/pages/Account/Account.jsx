@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../../api/authApi';
 import { updateUser } from '../../api/userApi';
 import { Button, Grid, Input } from 'semantic-ui-react';
-import Wishlist from '../Wishlist';
-import OrderHistory from '../OrderHistory';
+import Wishlist from '../../components/Wishlist';
+import OrderHistory from '../../components/OrderHistory';
 
 import './Account.css';
 

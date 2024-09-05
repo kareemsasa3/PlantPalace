@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
-import { login } from "../../api/authApi";
+import { login } from '../../api/authApi';
 
-const Login = ({ redirectTo = '/account' }) => {  // Default to /account if no prop is passed
+const Login = ({ redirectTo = '/account' }) => {  // Default parameter value
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Login = ({ redirectTo = '/account' }) => {  // Default to /account if no p
                         required
                     />
                 </div>
-                <Button type="submit" className="login-btn">Login</Button>
+                <button type="submit" className="login-btn">Login</button>
                 {error && <p className="error-message">{error}</p>}
                 <div className="login-links">
                     <Link to="/forgot-password">Forgot Password?</Link>
@@ -53,6 +53,10 @@ const Login = ({ redirectTo = '/account' }) => {  // Default to /account if no p
             </form>
         </div>
     );
+};
+
+Login.propTypes = {
+    redirectTo: PropTypes.string
 };
 
 export default Login;

@@ -2,15 +2,15 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Home from './components/Home';
-import Shop from './components/Shop';
-import Product from './components/Product';
-import Cart from './components/Cart';
-import Checkout from './components/Checkout';
-import Terms from './components/Terms/Terms';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
-import Account from './components/Account';
+import Home from './pages/Home';
+import Shop from './pages/Shop';
+import Product from './pages/Product';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import Terms from './pages/Terms/Terms';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Account from './pages/Account';
 import AgeVerification from './components/AgeVerification';
 import Layout from './components/Layout'; // Import the Layout component
 
