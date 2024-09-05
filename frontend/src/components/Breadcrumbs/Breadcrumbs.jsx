@@ -2,30 +2,27 @@ import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import './Breadcrumbs.css';
 
-// Function to generate breadcrumb items from the path
 const generateBreadcrumbs = (pathname) => {
-    const parts = pathname.split('/').filter(part => part); // Split path and remove empty parts
+    const parts = pathname.split('/').filter(part => part);
+    const normalizedPathname = pathname.replace(/\/$/, '');
 
-    // If the path is exactly "/shop", return only the "Shop" breadcrumb
-    if (pathname === '/shop') {
+    const capitalizeName = (name) => {
+        return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    };
+
+    if (normalizedPathname === '/shop') {
         return [{ name: 'Shop', path: '/shop' }];
     }
 
-    // Add "Shop" as the first breadcrumb and generate the rest
     const breadcrumbs = [
         { name: 'Shop', path: '/shop' },
         ...parts.map((part, index) => ({
-            name: capitalizeName(part), // Capitalize first letter and handle multi-word names
-            path: '/' + parts.slice(0, index + 1).join('/') // Build breadcrumb path
+            name: capitalizeName(part),
+            path: '/' + parts.slice(0, index + 1).join('/')
         }))
     ];
 
     return breadcrumbs;
-};
-
-// Function to capitalize breadcrumb names
-const capitalizeName = (name) => {
-    return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '); // Handle hyphenated words
 };
 
 const Breadcrumbs = () => {
@@ -34,12 +31,20 @@ const Breadcrumbs = () => {
 
     return (
         <nav className="breadcrumbs" aria-label="Breadcrumb">
-            {breadcrumbs.map((breadcrumb, index) => (
-                <span key={breadcrumb.path} className="breadcrumb-item">
-                    <Link to={breadcrumb.path}>{breadcrumb.name}</Link>
-                    {index < breadcrumbs.length - 1 && <span className="breadcrumb-separator"> / </span>}
-                </span>
-            ))}
+            <ol>
+                {breadcrumbs.map((breadcrumb, index) => (
+                    <li key={breadcrumb.path} className="breadcrumb-item">
+                        {index < breadcrumbs.length - 1 ? (
+                            <>
+                                <Link to={breadcrumb.path}>{breadcrumb.name}</Link>
+                                <span className="breadcrumb-separator"> / </span>
+                            </>
+                        ) : (
+                            <span aria-current="page">{breadcrumb.name}</span>
+                        )}
+                    </li>
+                ))}
+            </ol>
         </nav>
     );
 };
