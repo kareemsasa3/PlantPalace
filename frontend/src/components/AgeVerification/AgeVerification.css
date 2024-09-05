@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black; /* Semi-transparent black background */
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +49,7 @@
   }
   
   .modal-buttons button:first-child {
-    background-color: #28a745; /* Green for 'Yes' */
+    background-color: #28a745;
     color: white;
   }
   
@@ -58,7 +58,7 @@
   }
   
   .modal-buttons button:last-child {
-    background-color: #dc3545; /* Red for 'No' */
+    background-color: #dc3545;
     color: white;
   }
   
@@ -73,7 +73,6 @@
     text-align: center;
   }
   
-  /* Optional: Adding some responsiveness */
   @media (max-width: 480px) {
     .modal-content {
       padding: 20px;
