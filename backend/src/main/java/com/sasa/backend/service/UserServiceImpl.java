@@ -1,13 +1,16 @@
 package com.sasa.backend.service;
 
-import com.sasa.backend.dto.UserDTO;
-import com.sasa.backend.entity.User;
-import com.sasa.backend.entity.UserDetailsImpl;
+import com.sasa.backend.dto.auth.UserRegistrationDTO;
+import com.sasa.backend.dto.user.UserDTO;
+import com.sasa.backend.entity.user.User;
+import com.sasa.backend.entity.user.UserDetailsImpl;
 import com.sasa.backend.exception.DuplicateResourceException;
 import com.sasa.backend.exception.ResourceNotFoundException;
-import com.sasa.backend.mapper.OrderMapper;
-import com.sasa.backend.mapper.UserMapper;
 import com.sasa.backend.repository.UserRepository;
+import com.sasa.backend.util.mapper.order.OrderMapper;
+import com.sasa.backend.util.mapper.user.RoleMapper;
+import com.sasa.backend.util.mapper.user.UserMapper;
+import com.sasa.backend.util.mapper.user.UserRegistrationMapper;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public UserDTO createUser(UserDTO userDTO) {
+    public UserDTO createUser(UserRegistrationDTO userDTO) {
         // Check if username or email already exists
         if (userRepository.existsByUsername(userDTO.getUsername())) {
             throw new DuplicateResourceException("Username already exists");
@@ -55,7 +58,7 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
 
         // Convert DTO to entity and set the encrypted password
-        User user = UserMapper.toEntity(userDTO);
+        User user = UserRegistrationMapper.toEntity(userDTO);
         user.setPassword(encodedPassword);
 
         // Save user entity to the repository
@@ -77,7 +80,7 @@ public class UserServiceImpl implements UserService {
             user.setFirstName(userDTO.getFirstName());
             user.setLastName(userDTO.getLastName());
             user.setRoles(userDTO.getRoles().stream()
-                .map(UserMapper::roleToEntity)
+                .map(RoleMapper::toEntity)
                 .collect(Collectors.toList()));
             User updatedUser = userRepository.save(user);
             return UserMapper.toDTO(updatedUser);

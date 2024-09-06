@@ -1,4 +1,4 @@
-package com.sasa.backend.entity;
+package com.sasa.backend.entity.order;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
@@ -22,6 +22,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import com.sasa.backend.entity.product.Product;
+import com.sasa.backend.entity.user.Address;
+import com.sasa.backend.entity.user.User;
+
 @Entity
 @Table(name = "orders")
 @Data
@@ -30,6 +34,15 @@ import java.util.Map;
 @Builder
 public class Order {
     
+    public enum OrderStatus {
+        IN_PROGRESS,
+        COMPLETED,
+        PENDING,
+        ERROR,
+        CANCELLED,    // Additional status to consider
+        SHIPPED       // Status when the order is on its way to the customer
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

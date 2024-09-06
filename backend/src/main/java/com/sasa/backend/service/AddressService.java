@@ -2,7 +2,7 @@ package com.sasa.backend.service;
 
 import java.util.List;
 
-import com.sasa.backend.dto.AddressDTO;
+import com.sasa.backend.dto.user.AddressDTO;
 
 public interface AddressService {
     

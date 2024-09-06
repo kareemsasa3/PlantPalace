@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sasa.backend.dto.LoginRequestDTO;
-import com.sasa.backend.dto.LoginResponseDTO;
+import com.sasa.backend.dto.auth.LoginRequestDTO;
+import com.sasa.backend.dto.auth.LoginResponseDTO;
 import com.sasa.backend.service.AuthService;
 
 @RestController

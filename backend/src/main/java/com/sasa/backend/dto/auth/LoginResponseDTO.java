@@ -1,4 +1,6 @@
-package com.sasa.backend.dto;
+package com.sasa.backend.dto.auth;
+
+import com.sasa.backend.dto.user.UserDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

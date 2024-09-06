@@ -1,4 +1,4 @@
-package com.sasa.backend.dto;
+package com.sasa.backend.dto.order;
 
 public class ApiResponse<T> {
     private T data;

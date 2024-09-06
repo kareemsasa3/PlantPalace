@@ -2,8 +2,9 @@ package com.sasa.backend.service;
 
 import java.util.List;
 
-import com.sasa.backend.dto.UserDTO;
-import com.sasa.backend.entity.User;
+import com.sasa.backend.dto.auth.UserRegistrationDTO;
+import com.sasa.backend.dto.user.UserDTO;
+import com.sasa.backend.entity.user.User;
 
 public interface UserService {
 
@@ -11,7 +12,7 @@ public interface UserService {
 
     List<UserDTO> getAllUsers();
 
-    UserDTO createUser(UserDTO userDTO);
+    UserDTO createUser(UserRegistrationDTO userDTO);
 
     UserDTO updateUser(Long id, UserDTO userDTO);
 

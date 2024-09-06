@@ -1,4 +1,4 @@
-package com.sasa.backend.entity;
+package com.sasa.backend.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.sasa.backend.entity.order.Order;
+
+/**
+ * User is a JPA entity used for database operations
+ */
 @Entity
 @Data
 @NoArgsConstructor

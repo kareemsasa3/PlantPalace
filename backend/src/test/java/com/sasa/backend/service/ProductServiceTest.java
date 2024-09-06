@@ -1,12 +1,13 @@
 package com.sasa.backend.service;
 
-import com.sasa.backend.dto.ProductDTO;
+import com.sasa.backend.dto.product.ProductDTO;
 import com.sasa.backend.entity.Category;
-import com.sasa.backend.entity.Product;
 import com.sasa.backend.entity.Type;
+import com.sasa.backend.entity.product.Product;
 import com.sasa.backend.exception.ResourceNotFoundException;
-import com.sasa.backend.mapper.ProductMapper;
 import com.sasa.backend.repository.ProductRepository;
+import com.sasa.backend.util.mapper.ProductMapper;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

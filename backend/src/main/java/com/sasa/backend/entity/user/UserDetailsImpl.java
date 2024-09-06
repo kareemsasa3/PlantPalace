@@ -1,4 +1,4 @@
-package com.sasa.backend.entity;
+package com.sasa.backend.entity.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +12,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * UserDetailsImpl is used by Spring Security to provide user details in the context of
+ * authorization and authentication.
+ */
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -36,7 +41,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(

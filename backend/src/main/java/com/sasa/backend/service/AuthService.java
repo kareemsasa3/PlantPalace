@@ -7,12 +7,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sasa.backend.dto.LoginResponseDTO;
-import com.sasa.backend.dto.UserDTO;
-import com.sasa.backend.entity.User;
-import com.sasa.backend.mapper.UserMapper;
+import com.sasa.backend.dto.auth.LoginResponseDTO;
+import com.sasa.backend.dto.user.UserDTO;
+import com.sasa.backend.entity.user.User;
 import com.sasa.backend.repository.UserRepository;
 import com.sasa.backend.util.JwtUtil;
+import com.sasa.backend.util.mapper.user.UserMapper;
 
 @Service
 public class AuthService {

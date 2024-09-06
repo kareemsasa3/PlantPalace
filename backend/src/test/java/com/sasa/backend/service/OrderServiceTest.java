@@ -1,13 +1,13 @@
 package com.sasa.backend.service;
 
-import com.sasa.backend.dto.OrderDTO;
-import com.sasa.backend.entity.Order;
-import com.sasa.backend.entity.OrderStatus;
+import com.sasa.backend.dto.order.OrderDTO;
+import com.sasa.backend.entity.order.Order;
+import com.sasa.backend.entity.order.OrderStatus;
 import com.sasa.backend.exception.OrderNotFoundException;
-import com.sasa.backend.mapper.OrderMapper;
-
 import com.sasa.backend.repository.OrderRepository;
 import com.sasa.backend.repository.UserRepository;
+import com.sasa.backend.util.mapper.order.OrderMapper;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,7 +1,6 @@
-package com.sasa.backend.dto;
+package com.sasa.backend.dto.product;
 
-import java.util.Map;
-
+import com.sasa.backend.entity.product.Product.ProductCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,14 +14,9 @@ public class ProductDTO {
     private Long id;
     private String name;
     private String brand;
-    private String category;
-    private String type;
-    private Double thc;
-    private Double amount;
+    private ProductCategory productCategory;
     private Double price;
     private Integer quantity;
     private String image;
     private String description;
-    private String effects;
-    private Map<String, Double> terpenes;
 }

@@ -1,6 +1,7 @@
 package com.sasa.backend.controller;
 
-import com.sasa.backend.dto.UserDTO;
+import com.sasa.backend.dto.auth.UserRegistrationDTO;
+import com.sasa.backend.dto.user.UserDTO;
 import com.sasa.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserRegistrationDTO userDTO) {
         UserDTO createdUser = userService.createUser(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }

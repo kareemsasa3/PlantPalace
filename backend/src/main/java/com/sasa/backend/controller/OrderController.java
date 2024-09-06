@@ -1,6 +1,6 @@
 package com.sasa.backend.controller;
 
-import com.sasa.backend.dto.OrderDTO;
+import com.sasa.backend.dto.order.OrderDTO;
 import com.sasa.backend.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,16 +39,6 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
         } else {
             return ResponseEntity.badRequest().build(); // Handle case where the order could not be created
-        }
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<OrderDTO> updateOrder(@PathVariable Long id, @RequestBody OrderDTO orderDTO) {
-        OrderDTO updatedOrder = orderService.updateOrder(id, orderDTO);
-        if (updatedOrder != null) {
-            return ResponseEntity.ok(updatedOrder);
-        } else {
-            return ResponseEntity.notFound().build();
         }
     }
 

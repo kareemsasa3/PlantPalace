@@ -1,31 +1,20 @@
 package com.sasa.backend.service;
 
-import com.sasa.backend.dto.ProductDTO;
-import com.sasa.backend.entity.Category;
-import com.sasa.backend.entity.Type;
-import com.sasa.backend.exception.ResourceNotFoundException;
-import org.springframework.data.domain.Page;
+import com.sasa.backend.dto.product.ProductDTO;
+import com.sasa.backend.entity.product.Product;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductService {
-
-    List<ProductDTO> searchProducts(String name, String category, String type, Double minPrice, Double maxPrice);
-
     List<ProductDTO> getAllProducts();
 
-    Optional<ProductDTO> getProductById(Long id) throws ResourceNotFoundException;
+    ProductDTO getProductById(Long id);
 
-    ProductDTO saveProduct(ProductDTO productDTO);
+    ProductDTO createProduct(ProductDTO productDTO);
 
-    ProductDTO updateProduct(Long id, ProductDTO productDTO) throws ResourceNotFoundException;
+    ProductDTO updateProduct(Long id, ProductDTO productDTO);
 
-    void deleteProduct(Long id) throws ResourceNotFoundException;
+    void deleteProduct(Long id);
 
-    List<ProductDTO> getProductsByCategory(Category category);
-
-    List<ProductDTO> getProductsByType(Type type);
-
-    Page<ProductDTO> getProductsWithPagination(int page, int size);
+    List<ProductDTO> getProductsByCategory(Product.ProductCategory category);
 }

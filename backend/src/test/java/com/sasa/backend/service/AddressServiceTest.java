@@ -7,13 +7,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.sasa.backend.dto.AddressDTO;
-import com.sasa.backend.entity.Address;
-import com.sasa.backend.entity.AddressType;
-import com.sasa.backend.entity.User;
+import com.sasa.backend.dto.user.AddressDTO;
+import com.sasa.backend.entity.user.Address;
+import com.sasa.backend.entity.user.AddressType;
+import com.sasa.backend.entity.user.User;
 import com.sasa.backend.exception.ResourceNotFoundException;
-import com.sasa.backend.mapper.AddressMapper;
 import com.sasa.backend.repository.AddressRepository;
+import com.sasa.backend.util.mapper.user.AddressMapper;
 
 import java.util.Arrays;
 import java.util.List;

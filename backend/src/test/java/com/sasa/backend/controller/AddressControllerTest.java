@@ -1,12 +1,13 @@
 package com.sasa.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sasa.backend.dto.AddressDTO;
-import com.sasa.backend.entity.Address;
-import com.sasa.backend.entity.AddressType;
+import com.sasa.backend.dto.user.AddressDTO;
+import com.sasa.backend.entity.user.Address;
+import com.sasa.backend.entity.user.AddressType;
 import com.sasa.backend.exception.ResourceNotFoundException;
 import com.sasa.backend.service.AddressService;
-import com.sasa.backend.mapper.AddressMapper;
+import com.sasa.backend.util.mapper.user.AddressMapper;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

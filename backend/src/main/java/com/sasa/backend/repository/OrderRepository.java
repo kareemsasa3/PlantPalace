@@ -1,8 +1,9 @@
 package com.sasa.backend.repository;
 
-import com.sasa.backend.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.sasa.backend.entity.order.Order;
 
 import java.util.List;
 

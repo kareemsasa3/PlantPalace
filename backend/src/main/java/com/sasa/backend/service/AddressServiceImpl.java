@@ -4,14 +4,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sasa.backend.constant.Constants;
-import com.sasa.backend.dto.AddressDTO;
-import com.sasa.backend.entity.Address;
-import com.sasa.backend.entity.AddressType;
-import com.sasa.backend.entity.User;
-import com.sasa.backend.exception.InvalidEnumValueException;
+import com.sasa.backend.dto.user.AddressDTO;
+import com.sasa.backend.entity.user.Address;
+import com.sasa.backend.entity.user.User;
 import com.sasa.backend.exception.ResourceNotFoundException;
-import com.sasa.backend.mapper.AddressMapper;
 import com.sasa.backend.repository.AddressRepository;
+import com.sasa.backend.util.mapper.user.AddressMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +68,7 @@ public class AddressServiceImpl implements AddressService {
             existingAddress.setStreetAddress(updatedAddress.getStreetAddress());
         }
         if (addressDTO.getAddressType() != null) {
-            existingAddress.setAddressType(convertStringToEnum(AddressType.class, addressDTO.getAddressType()));
+            existingAddress.setAddressType(addressDTO.getAddressType());
         }
         if (addressDTO.getCity() != null) {
             existingAddress.setCity(updatedAddress.getCity());
@@ -110,14 +108,5 @@ public class AddressServiceImpl implements AddressService {
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Constants.ADDRESS_NOT_FOUND_MESSAGE + id));
         addressRepository.delete(address);
-    }
-
-    private <T extends Enum<T>> T convertStringToEnum(Class<T> enumType, String type) {
-        try {
-            return Enum.valueOf(enumType, type.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidEnumValueException(
-                String.format(Constants.INVALID_ENUM_VALUE_MESSAGE, type, enumType.getSimpleName()));
-        }
     }
 }

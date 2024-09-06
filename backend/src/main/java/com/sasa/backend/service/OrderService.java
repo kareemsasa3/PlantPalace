@@ -2,7 +2,7 @@ package com.sasa.backend.service;
 
 import java.util.List;
 
-import com.sasa.backend.dto.OrderDTO;
+import com.sasa.backend.dto.order.OrderDTO;
 
 public interface OrderService {
     
@@ -11,8 +11,6 @@ public interface OrderService {
     List<OrderDTO> getOrdersByUserId(Long userId);
 
     OrderDTO createOrder(OrderDTO orderDTO);
-
-    OrderDTO updateOrder(Long id, OrderDTO orderDTO);
 
     void deleteOrder(Long id);
 }

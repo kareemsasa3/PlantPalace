@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sasa.backend.dto.AddressDTO;
-import com.sasa.backend.dto.ApiResponse;
+import com.sasa.backend.dto.order.ApiResponse;
+import com.sasa.backend.dto.user.AddressDTO;
 import com.sasa.backend.service.AddressService;
 import com.sasa.backend.exception.ResourceNotFoundException;
 

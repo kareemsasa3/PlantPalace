@@ -1,4 +1,4 @@
-package com.sasa.backend.entity;
+package com.sasa.backend.entity.user;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -16,6 +16,10 @@ import jakarta.persistence.*;
 @EqualsAndHashCode
 @Table(name = "addresses")
 public class Address {
+
+    public enum AddressType {
+        BILLING, SHIPPING, HOME, WORK;
+    }
 
     public Address() {
         user = new User();

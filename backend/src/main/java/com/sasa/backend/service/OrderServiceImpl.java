@@ -1,16 +1,14 @@
 package com.sasa.backend.service;
 
-import com.sasa.backend.dto.OrderDTO;
-import com.sasa.backend.entity.Order;
-import com.sasa.backend.entity.OrderStatus;
-import com.sasa.backend.entity.User;
+import com.sasa.backend.dto.order.OrderDTO;
+import com.sasa.backend.entity.order.Order;
+import com.sasa.backend.entity.user.User;
 import com.sasa.backend.exception.OrderNotFoundException;
 import com.sasa.backend.exception.UserNotFoundException;
-import com.sasa.backend.mapper.AddressMapper;
-import com.sasa.backend.mapper.OrderMapper;
-import com.sasa.backend.mapper.ProductMapper;
 import com.sasa.backend.repository.OrderRepository;
 import com.sasa.backend.repository.UserRepository;
+import com.sasa.backend.util.mapper.order.OrderMapper;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,31 +61,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDTO updateOrder(Long id, OrderDTO orderDTO) {
-        Optional<Order> existingOrder = orderRepository.findById(id);
-        if (existingOrder.isPresent()) {
-            Order order = existingOrder.get();
-
-            // Update fields from DTO
-            order.setStatus(OrderMapper.convertStringToEnum(OrderStatus.class, orderDTO.getStatus()));
-            order.setOrderReceivedTimestamp(orderDTO.getOrderReceivedTimestamp());
-            order.setExpectedDeliveryTimestamp(orderDTO.getExpectedDeliveryTimestamp());
-            order.setBillingAddress(AddressMapper.toEntity(orderDTO.getBillingAddress()));
-            order.setShippingAddress(AddressMapper.toEntity(orderDTO.getShippingAddress()));
-            order.setProductSummary(orderDTO.getProductSummary().stream()
-                .map(ProductMapper::toEntity)
-                .collect(Collectors.toList()));
-            order.setPriceSummary(orderDTO.getPriceSummary());
-
-            // Save the updated order and return the DTO
-            Order updatedOrder = orderRepository.save(order);
-            return OrderMapper.toDTO(updatedOrder);
-        }
-        return null; // Handle order not found case
-    }
-
-    @Override
-    @Transactional
     public void deleteOrder(Long id) {
         if (orderRepository.existsById(id)) {
             orderRepository.deleteById(id);
@@ -95,5 +68,4 @@ public class OrderServiceImpl implements OrderService {
             throw new OrderNotFoundException("Order not found with id: " + id);
         }
     }
-
 }
