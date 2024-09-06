@@ -6,8 +6,11 @@ import com.sasa.backend.entity.product.Product;
 
 public class ProductMapper {
 
-    // Convert Product entity to ProductDTO
-    public ProductDTO toDTO(Product product) {
+    private ProductMapper() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    public static ProductDTO toDTO(Product product) {
         if (product == null) {
             return null;
         }
@@ -25,7 +28,7 @@ public class ProductMapper {
     }
 
     // Convert ProductDTO to Product entity
-    public Product toEntity(ProductDTO productDTO) {
+    public static Product toEntity(ProductDTO productDTO) {
         if (productDTO == null) {
             return null;
         }

@@ -15,18 +15,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    private final ProductMapper productMapper;
-
-    public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.productMapper = productMapper;
     }
 
     @Override
     public List<ProductDTO> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream()
-                .map(productMapper::toDTO)
+                .map(ProductMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
@@ -34,14 +31,14 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + id));
-        return productMapper.toDTO(product);
+        return ProductMapper.toDTO(product);
     }
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) {
-        Product productEntity = productMapper.toEntity(productDTO);
+        Product productEntity = ProductMapper.toEntity(productDTO);
         Product savedProduct = productRepository.save(productEntity);
-        return productMapper.toDTO(savedProduct);
+        return ProductMapper.toDTO(savedProduct);
     }
 
     @Override
@@ -58,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
         existingProduct.setDescription(productDTO.getDescription());
 
         Product updatedProduct = productRepository.save(existingProduct);
-        return productMapper.toDTO(updatedProduct);
+        return ProductMapper.toDTO(updatedProduct);
     }
 
     @Override
@@ -70,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> getProductsByCategory(Product.ProductCategory category) {
         List<Product> products = productRepository.findByProductCategory(category);
         return products.stream()
-                .map(productMapper::toDTO)
+                .map(ProductMapper::toDTO)
                 .collect(Collectors.toList());
     }
 }

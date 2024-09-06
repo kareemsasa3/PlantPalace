@@ -2,9 +2,7 @@ package com.sasa.backend.util.mapper.product;
 
 import com.sasa.backend.dto.product.CannabisProductDTO;
 import com.sasa.backend.entity.product.CannabisProduct;
-import org.springframework.stereotype.Component;
 
-@Component
 public class CannabisProductMapper {
 
     private CannabisProductMapper() {

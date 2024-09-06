@@ -6,7 +6,7 @@ import com.sasa.backend.entity.user.Address;
 public class AddressMapper {
 
     private AddressMapper () {
-        // LEFT BLANK ON PURPOSE
+        throw new IllegalStateException("Utility class");
     }
 
     // Convert AddressDTO to Address entity
