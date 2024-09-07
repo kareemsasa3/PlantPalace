@@ -1,7 +1,10 @@
 package com.sasa.backend.controller;
 
+import com.sasa.backend.dto.product.CannabisProductDTO;
 import com.sasa.backend.dto.product.ProductDTO;
 import com.sasa.backend.service.ProductService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +34,6 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    // Create a new product
-    @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
-        ProductDTO newProduct = productService.createProduct(productDTO);
-        return ResponseEntity.ok(newProduct);
-    }
-
     // Update an existing product
     @PutMapping("/{id}")
     public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO) {
@@ -50,5 +46,24 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Create a new Cannabis Product
+    @PostMapping("/cannabis")
+    public ResponseEntity<CannabisProductDTO> createCannabisProduct(@RequestBody CannabisProductDTO cannabisProductDTO) {
+        CannabisProductDTO createdProduct = productService.createCannabisProduct(cannabisProductDTO);
+        return ResponseEntity.ok(createdProduct);
+    }
+
+    @GetMapping("/cannabis")
+    public ResponseEntity<List<CannabisProductDTO>> getAllCannabisProducts() {
+        List<CannabisProductDTO> cannabisProducts = productService.getAllCannabisProducts();
+        return ResponseEntity.ok(cannabisProducts);
+    }
+
+    @PostMapping("/cannabis/bulk")
+    public ResponseEntity<List<CannabisProductDTO>> createCannabisProducts(@RequestBody List<CannabisProductDTO> cannabisProductDTOs) {
+        List<CannabisProductDTO> createdCannabisProducts = productService.createCannabisProducts(cannabisProductDTOs);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdCannabisProducts);
     }
 }
