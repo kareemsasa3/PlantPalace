@@ -11,9 +11,9 @@ const apiClient = axios.create({
  * @returns {Promise<Array>} A promise that resolves to an array of product objects.
  * @throws Will throw an error if the request fails.
  */
-export const fetchProducts = async () => {
+export const fetchCannabisProducts = async () => {
   try {
-    const response = await apiClient.get('/products');
+    const response = await apiClient.get('/products/cannabis');
     return response.data;
   } catch (error) {
     console.error('Error fetching products:', error);

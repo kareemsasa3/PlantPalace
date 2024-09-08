@@ -4,7 +4,7 @@
 .home-content {
     padding: 20px;
     color: gold;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../public/shop.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5)), url('../../../public/home.jpg');
     background-size: cover;
     background-position: center;
     font-family: 'Courier New', Courier, monospace;

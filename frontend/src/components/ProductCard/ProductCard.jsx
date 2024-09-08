@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
   const wishlist = useSelector((state) => state.shop.wishlist);
   const cart = useSelector((state) => state.shop.cart);
 
-  const { id, name, amount, image, price, type } = product;
+  const { id, name, brand, image, price, cannabisType, cannabisCategory } = product;
 
   const isProductInWishlist = (productId) => wishlist.includes(productId);
   const isProductInCart = (productId) => cart.some(item => item.productId === productId);
@@ -58,11 +58,9 @@ const ProductCard = ({ product }) => {
             />
           </Button>
         </div>
-        <p className="type">{type || 'N/A'}</p>
         <div className="product-info">
-          <span className="amount">
-            {amount || 'N/A'} {amount === 1 ? 'Gram' : 'Grams'}
-          </span>
+          <p className='cannabis-category'>{cannabisCategory || 'N/A'}</p>
+          <p className="cannabis-type">{cannabisType || 'N/A'}</p>
           <span className="price">$ {price || 'N/A'}</span>
         </div>
         <Button

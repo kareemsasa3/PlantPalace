@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import './Shop.css';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ProductList from '../../components/ProductList';
-import { fetchProducts } from '../../api/fetchProducts';
+import { fetchCannabisProducts } from '../../api/fetchProducts';
 import { resetCart } from '../../redux/slices/shopSlice';
 
 const Shop = () => {
@@ -21,20 +21,12 @@ const Shop = () => {
         let productData = location.state?.searchResults || [];
 
         if (productData.length === 0) {
-          productData = await fetchProducts();
+          productData = await fetchCannabisProducts();
         }
-
-        if (categoryName) {
-          const filteredProducts = productData.filter(
-            (product) => product.category.toLowerCase() === categoryName.toLowerCase()
-          );
-          setProducts(filteredProducts);
-        } else {
-          setProducts(productData);
-        }
+        setProducts(productData);
         setIsLoading(false);
       } catch (error) {
-        setError(error.message || 'An error occurred');
+        setError({ message: error.message || 'An error occurred'});
         setIsLoading(false);
       }
     };
@@ -45,6 +37,10 @@ const Shop = () => {
   const handleReset = () => {
     dispatch(resetCart());
   };
+
+  products.forEach((product, index) => {
+    console.log(`Product ${index + 1}:`, product);
+  });
 
   return (
     <div className='shop-container'>
