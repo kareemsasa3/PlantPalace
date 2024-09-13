@@ -1,0 +1,106 @@
+/* General dropdown styling */
+.navlist-container {
+  display: flex;
+  list-style: none;
+  margin: 0rem;
+}
+
+.navlist-container.navbar {
+  flex-direction: row; /* Row layout for navbar */
+
+}
+
+.navlist-container.sidebar {
+  flex-direction: column; /* Column layout for sidebar */
+}
+
+.navlist-container.sidebar .dropdown-list {
+  width: 90%;
+}
+
+/* Dropdown header styles */
+.navlist-container.navbar .dropdown-header {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 0.3s ease;
+  margin-left: 2rem;
+  position: relative;
+}
+
+.navlist-container.sidebar .dropdown-container {
+  position: relative;
+}
+
+.navlist-container.sidebar .dropdown-header {
+  width: 10rem;
+  margin-top: 2rem;
+}
+
+/* Dropdown text styles */
+.dropdown-text {
+  display: flex;
+  font-family: 'Orbitron', sans-serif;
+  color: #4caf50;
+  font-size: clamp(18px, 1.2vw, 24px);
+  margin-right: 5px;
+  transition: color 0.3s ease;
+}
+
+.dropdown-header:hover .dropdown-text {
+  color: #236014;
+}
+
+/* Icon styles */
+.icon {
+  color: #4caf50;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-header:hover .icon {
+  color: #236014;
+}
+
+/* Show dropdowns on hover */
+.dropdown-container:hover .dropdown-list {
+  display: block; /* Show when hovering */
+}
+
+.dropdown-list {
+  display: none; /* Hide by default */
+  list-style: none;
+  background-color: black;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  padding: 1rem;
+  width: 15rem;
+}
+
+/* Dropdown list styles */
+.navlist-container.navbar .dropdown-list {
+  margin: 0;
+  top: 100%; /* Position below the header */
+  left: 0;
+  z-index: 1000; /* Ensure it appears above other content */
+  position: absolute;
+}
+
+.navlist-container.sidebar .dropdown-list {
+  text-align: left;
+  position: relative;
+}
+
+/* Dropdown item styles */
+.dropdown-list li {
+  margin: 1rem 0rem;
+}
+
+.dropdown-list li a {
+  color: #ffd700 !important;
+}
+
+.dropdown-list li a:hover {
+  color: #b8860b !important;
+}

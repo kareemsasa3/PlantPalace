@@ -1,24 +1,20 @@
-// src/components/Layout.js
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Header from '../Header';
-import Footer from '../Footer';
+import { useMediaQuery } from 'react-responsive';
+import NavBar from '../NavBar';
+import Menu from '../Menu';
 import './Layout.css';
 
 const Layout = ({ children }) => {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-
-  const handleHeaderVisibility = (isVisible) => {
-    setIsHeaderVisible(isVisible); // Adjust to match visibility logic
-  };
+  const isMobile = useMediaQuery({ maxWidth: 1080 });
 
   return (
-    <div className="App">
-      <Header className="App-header" onVisibilityChange={handleHeaderVisibility} />
-      <main className={`main-content ${isHeaderVisible ? 'header-visible' : 'header-hidden'}`}>
+    <div className="layout-container">
+      <NavBar />
+      {!isMobile && <Menu />}
+      <main>
         {children}
       </main>
-      <Footer className="App-footer" />
     </div>
   );
 };

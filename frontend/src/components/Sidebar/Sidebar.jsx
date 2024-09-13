@@ -1,26 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Menu from '../Menu';
+import React, { useRef, useEffect } from 'react';
+import { Icon } from 'semantic-ui-react';
+import NavList from '../NavList';
 import './Sidebar.css';
 
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        toggleSidebar();
+      }
+    };
+
+    if (sidebarOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [sidebarOpen, toggleSidebar]);
+
+  const closeSidebar = () => {
+    toggleSidebar();
+  };
+
   return (
-    <div className={`sidebar ${sidebarOpen ? 'active' : ''}`}>
-      <div className="logo">
-        <Link to="/" onClick={toggleSidebar}>
-          <h1>Plant Palace</h1>
-        </Link>
-      </div>
-      <div className="sidebar-icons">
-        <Link to="/account" className="sidebar-icon" onClick={toggleSidebar}>
-          <i className="user icon"></i>
-        </Link>
-        <Link to="/cart" className="sidebar-icon" onClick={toggleSidebar}>
-          <i className="shopping cart icon"></i>
-        </Link>
-      </div>
-      <button className="close-btn" onClick={toggleSidebar}>×</button>
-      <Menu onMenuItemClick={toggleSidebar} />
+    <div className={`sidebar-container ${sidebarOpen ? 'active' : ''}`} ref={sidebarRef}>
+      <button className="close-btn" onClick={toggleSidebar}>
+        <Icon name='close' className='icon'/>
+      </button>
+      <NavList className='sidebar' closeSidebar={closeSidebar} />
     </div>
   );
 };

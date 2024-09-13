@@ -1,48 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 .shop-container {
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    background-color: black;
 }
 
 .shop-header {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0)), url('/public/background3.jpg');
+    width: 100%;
+    background: url('/public/section1.jpg');
     background-size: cover;
     background-position: center;
-    padding: 1rem;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 150px;
-    width: 100%;
-    font-family: 'Orbitron', sans-serif;
 }
 
 .products-title {
+    height: 15rem;
     text-transform: uppercase;
-    color: white;
-    width: 80%;
-    text-align: left; /* Align the text to the left */
+    color: #ffd700;;
+    width: 100% !important;
+    text-align: left !important; /* Align the text to the left */
     font-family: 'Orbitron', sans-serif; /* Ensure consistent font usage */
-}
-
-@media (max-width: 768px) {
-    .shop-container {
-        padding: 10px;
-    }
-
-    .products-title {
-        font-size: 1.5rem;
-        text-align: center;
-        width: 80%;
-    }
-
-    .button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
+    font-size: clamp(48px, 4.5vw, 72px) !important;
+    padding: 3rem;
 }

@@ -1,36 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
 .breadcrumbs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     font-family: 'Orbitron', sans-serif;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    margin: 0 auto;
-    max-width: 100%;
+    background: transparent;
+    padding-top: 2rem;
 }
 
 .breadcrumb-item {
     display: inline;
     text-transform: uppercase;
-    font-size: 1rem;
-    margin-right: 0.5rem;
 }
 
 .breadcrumb-item a {
-    text-decoration: none;
-    color: #fff;
+    color: #4caf50;
     transition: color 0.3s;
 }
 
 .breadcrumb-item a:hover {
-    text-decoration: underline;
-    color: #ccc;
+    color: #236014;
 }
 
 .breadcrumb-separator {
-    color: #fff;
+    color: #4caf50;
     margin: 0 0.5rem;
 }
 

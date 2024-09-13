@@ -1,9 +1,11 @@
 /* Styling for the menu container */
 .menu {
+    background-color: black;
+    font-family: 'Orbitron', sans-serif;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 20px; /* Adjust padding as needed */
+    height: 10rem;
   }
   
   /* Styling for the list items */
@@ -15,7 +17,7 @@
   }
   
   .menu ul li {
-    margin: 0 15px; /* Adjust spacing between items */
+    margin: 0 5px; /* Adjust spacing between items */
   }
   
   /* Styling for menu links */
@@ -35,30 +37,4 @@
   .menu ul li a:hover {
     color: black; /* Text color on hover */
     background-color: gold; /* Background color on hover */
-  }
-  
-  @media (max-width: 768px) {
-  
-    .menu {
-      padding: 0;
-      margin-top: 5rem;
-      background-color: black;
-    }
-
-    .menu ul {
-      flex-direction: column; /* Stack list items vertically */
-      padding: 0;
-      width: 100%;
-    }
-  
-    .menu li {
-      margin: 0px !important;
-      width: 100%;
-    }
-
-    .menu ul li a {
-      display: block;
-      text-align: left;
-      margin-bottom: 1.3rem;
-    }
   }

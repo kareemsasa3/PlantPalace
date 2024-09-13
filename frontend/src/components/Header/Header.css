@@ -1,211 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-/* General header styling */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  transition: transform 0.4s ease-in-out;
-}
-
-.header.show {
-  transform: translateY(0);
-  height: 100px;
-}
-
-.header.hide {
-  transform: translateY(-100%);
-}
-
-/* Styling for the top section of the header */
-.header-top {
+.header-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: black;
-  color: white;
+  padding: 5px 10px;
+  background-color: #000000;
 }
 
-/* Styling for the logo */
-.logo {
+.header-left, .header-right {
   display: flex;
   align-items: center;
 }
 
-/* Logo text styling */
-.logo h1 {
+.header-left h1, .header-right h1 {
   margin: 0;
-  font-size: 34px;
-  color: white;
-  text-decoration: none;
-  font-family: 'Dancing Script', cursive;
-}
-
-/* Search bar container styling */
-.search-bar {
-  display: flex;
-  align-items: center;
-}
-
-/* Search input styling */
-.search-bar input[type="text"] {
-  background-color: black;
-  color: white;
-  padding: 10px;
-  font-size: 12px;
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  color: #FFD700;
   font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
-  border-right: none;
-  flex: 1;
-  width: 200px;
-}
-
-/* Search button styling */
-.search-bar button {
-  width: 50px;
-  font-size: 14px;
-  border: none;
-  background-color: #1a1a1a;
-  color: white;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-}
-
-/* Search button hover effect */
-.search-bar button:hover {
-  background-color: #0056b3;
-}
-
-.header-middle {
-  background-color: black;
-  padding: 10px 20px;
-}
-
-/* Styling for the bottom section of the header */
-.header-bottom {
-  padding: 20px;
-  background-color: black;
-}
-
-/* Sidebar toggle button styling */
-.sidebar-toggle {
-  position: absolute;
-  right: 0;
-  display: none;
-  background: transparent;
-  border: none;
-  width: 4rem;
-  margin-right: 2rem;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
-.sidebar-toggle:hover {
-  background: transparent;
-  color: gold;
-}
-
-/* Sidebar styling */
-.sidebar {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: black;
-  color: white;
-  width: 100%;
-  height: 110%;
-  padding: 20px;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-  transform: translateX(100%); /* Start off-screen */
-  flex-direction: column;
-}
-
-/* Sidebar active state */
-.sidebar.active {
-  height: 120vh;
-  display: flex;
-  transform: translateX(0);
-}
-
-/* Sidebar Icons */
-.sidebar-icons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.sidebar-icon {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  text-decoration: none;
-  color: gold;
-  font-size: 1.2rem;
+  text-transform: uppercase;
   transition: color 0.3s ease;
 }
 
-.sidebar-icon i {
-  margin-right: 10px;
-  font-size: 1.5rem;
-}
-
-.sidebar-icon:hover {
-  color: white; /* Change to your preferred hover color */
-}
-
-/* Close button styling in sidebar */
-.close-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  width: 4rem;
-  margin-right: 1rem;
-}
-
-.close-btn:hover {
-  background-color: transparent;
-  color: gold;
-}
-
-/* NavBar styling */
-.NavBar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-/* Responsive styling for smaller screens */
-@media (max-width: 768px) {
-  .header-top {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .search-bar {
-    display: none; /* Hide search bar on small screens */
-  }
-
-  .sidebar-toggle {
-    display: block; /* Show sidebar toggle button */
-    position: absolute;
-    right: 0;
-  }
-
-  .header-middle,
-  .header-bottom {
-    display: none; /* Hide NavBar and Menu on small screens */
-  }
+.header-left h1:hover, .header-right h1:hover {
+  color: #b8860b;
 }

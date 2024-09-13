@@ -46,10 +46,10 @@ const Shop = () => {
     <div className='shop-container'>
       <div className='shop-header'>
         <Breadcrumbs />
+        <h1 className='products-title'>
+          {categoryName ? `${categoryName}` : 'Products'}
+        </h1>
       </div>
-      <h1 className='products-title'>
-        {categoryName ? `${categoryName}` : 'Products'}
-      </h1>
       <ProductList products={products} isLoading={isLoading} error={error} />
       <button onClick={handleReset}>Reset Cart</button>
     </div>

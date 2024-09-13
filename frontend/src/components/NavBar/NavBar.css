@@ -1,105 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-
-nav {
-  background: black;
+/* NavBar-specific styles */
+.navbar {
+  background-color: black;
+  position: relative;
 }
 
 .navbar-container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  height: 100%;
+  padding-top: 2rem;
+}
+
+.navbar-right {
+  list-style: none;
+  display: flex;
   align-items: center;
 }
 
-.navbar-left, .navbar-right {
+.navbar-right li {
+  margin: 0 20px;
+}
+
+.navbar-right a {
+  color: #4caf50;
+  font-family: 'Orbitron', sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
   display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  align-items: center;
+  margin-right: 2.3rem;
+  font-size: 1.5rem;
 }
 
-.navbar-left li, .navbar-right li {
-  position: relative;
-  margin-right: 40px;
+.sidebar-icon, .cart-icon, .user-icon {
+  color: #4caf50 !important;
+  font-size: 2rem !important;
+  width: 4rem;
+  height: 4rem;
+  margin-left: 2rem !important;
 }
 
-.navbar-left li a, .navbar-right li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1em;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 500;
-  padding: 10px 15px;
-  display: block;
-  background: transparent;
-  border-radius: 4px;
-}
-
-.navbar-left li a:hover, .navbar-right li a:hover {
-  background: transparent;
-  color: #60a2ea;
-}
-
-.dropdown-container {
-  position: relative;
-}
-
-.dropdown-icon {
-  margin-left: 8px;
-  font-size: 0.8em;
-}
-
-.navbar-left li .dropdown {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: black;
-  list-style: none;
-  width: 200px;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  z-index: 1000;
-}
-
-.navbar-left li:hover .dropdown {
-  display: block;
-}
-
-.navbar-left li .dropdown li {
-  padding: 10px 15px;
-  white-space: nowrap;
-}
-
-.navbar-left li .dropdown li a {
-  text-align: left;
-  text-decoration: none;
-  color: white;
-  font-size: 1em;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 500;
-  display: block;
-}
-
-.navbar-left li .dropdown li a:hover {
-  color: #60a2ea;
-}
-
-@media (max-width: 768px) {
-  .navbar-container {
-    flex-direction: column;
-  }
-
-  .navbar-left, .navbar-right {
-    flex-direction: column;
-  }
-
-  .navbar-left li, .navbar-right li {
-    margin: 0;
-  }
-
-  .navbar-left li .dropdown {
-    position: static;
-    width: 100%;
-  }
+.sidebar-icon:hover, .cart-icon:hover, .user-icon:hover {
+  color: #236014 !important;
+  cursor: pointer;
 }

@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
+import { useMediaQuery } from 'react-responsive';
+import Sidebar from '../Sidebar';
+import NavList from '../NavList';
+
 import './NavBar.css';
 
 const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
@@ -12,52 +18,37 @@ const NavBar = () => {
     }
   }, []);
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const isMobile = useMediaQuery({ maxWidth: 1080 });
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <ul className="navbar-left">
-          <li><Link to="/specials">SPECIALS</Link></li>
-          <li><Link to="/rewards">REWARD PROGRAM</Link></li>
-          <li className="dropdown-container">
-            <Link to="/categories">
-              CATEGORIES
-              <span className="dropdown-icon">▼</span>
-            </Link>
-            <ul className="dropdown">
-              <li><Link to="/categories/flower">Flower</Link></li>
-              <li><Link to="/categories/concentrates">Concentrates</Link></li>
-              <li><Link to="/categories/edibles">EDIBLES</Link></li>
-              <li><Link to="/categories/pre-rolls">PRE-ROLLS</Link></li>
-              <li><Link to="/categories/vaporizers">VAPORIZERS</Link></li>
-              <li><Link to="/categories/topicals">TOPICALS</Link></li>
-              <li><Link to="/categories/tinctures">TINCTURES</Link></li>
-              <li><Link to="/categories/accessories">ACCESSORIES</Link></li>
-            </ul>
-          </li>
-          <li className="dropdown-container">
-            <Link to="/resources">
-              RESOURCES
-              <span className="dropdown-icon">▼</span>
-            </Link>
-            <ul className="dropdown">
-              <li><Link to="/contact">CONTACT US</Link></li>
-              <li><Link to="/more">MORE</Link></li>
-            </ul>
-          </li>
-        </ul>
+        {isMobile ? (
+          <div onClick={toggleSidebar}>
+            <Icon name="sidebar" className='sidebar-icon' />
+          </div>
+        ) : (
+          <NavList className="navbar"/>
+        )}
         <ul className="navbar-right">
           <li>
             <Link to="/cart">
-              <i className='shopping cart icon' />
+              <Icon name="shopping cart" className='cart-icon' />
             </Link>
           </li>
           <li>
             <Link to={isLoggedIn ? "/account" : "/login"}>
-              <i className='user icon' />
+              <Icon name="user" className='user-icon' />
             </Link>
           </li>
         </ul>
       </div>
+      
+      {isMobile && <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />}
     </nav>
   );
 };
