@@ -1,29 +1,15 @@
 package com.sasa.backend.entity.order;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import com.sasa.backend.dto.order.OrderDTO;
+import com.sasa.backend.entity.address.Address;
 import com.sasa.backend.entity.product.Product;
-import com.sasa.backend.entity.user.Address;
 import com.sasa.backend.entity.user.User;
 
 @Entity
@@ -33,21 +19,33 @@ import com.sasa.backend.entity.user.User;
 @AllArgsConstructor
 @Builder
 public class Order {
-    
+
+    public Order(OrderDTO dto) {
+        this.id = dto.getId();
+        this.status = OrderStatus.valueOf(dto.getStatus());
+        this.orderReceivedTimestamp = dto.getOrderReceivedTimestamp();
+        this.expectedDeliveryTimestamp = dto.getExpectedDeliveryTimestamp();
+        this.priceSummary = dto.getPriceSummary();
+    }
+
     public enum OrderStatus {
-        IN_PROGRESS,
-        COMPLETED,
         PENDING,
-        ERROR,
-        CANCELLED,    // Additional status to consider
-        SHIPPED       // Status when the order is on its way to the customer
+        PROCESSING,
+        SHIPPED,
+        DELIVERED,
+        CANCELED,
+        RETURNED
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private User user;
+
     @Enumerated(EnumType.STRING)
+    @Column(unique = true, nullable = false)
     private OrderStatus status;
 
     private LocalDateTime orderReceivedTimestamp;
@@ -63,11 +61,8 @@ public class Order {
     private Address billingAddress;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Product> productSummary; // Summary of products in the order (could also be a List<Product> if detailed info is needed)
+    private List<Product> productSummary;
 
     @ElementCollection
-    private Map<String, Double> priceSummary; // Tax, total, etc.
-
-    @ManyToOne
-    private User user;
+    private Map<String, Double> priceSummary;
 }

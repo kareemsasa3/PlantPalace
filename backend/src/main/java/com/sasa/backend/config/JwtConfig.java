@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.sasa.backend.util.JwtUtil;
+import com.sasa.backend.util.jwt.JwtUtil;
 
 @Configuration
 @ConfigurationProperties(prefix = "jwt")

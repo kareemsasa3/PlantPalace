@@ -2,13 +2,16 @@ package com.sasa.backend.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
 
+import com.sasa.backend.dto.user.UserDTO;
+import com.sasa.backend.entity.address.Address;
 import com.sasa.backend.entity.order.Order;
+import com.sasa.backend.entity.role.Role;
 
 /**
  * User is a JPA entity used for database operations
@@ -17,9 +20,20 @@ import com.sasa.backend.entity.order.Order;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class User {
     
+    public User(Long id) {
+        this.id = id;
+    }
+
+    public User(UserDTO dto) {
+        this.id = dto.getId();
+        this.username = dto.getUsername();
+        this.email = dto.getEmail();
+        this.firstName = dto.getFirstName();
+        this.lastName = dto.getLastName();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,17 +48,13 @@ public class User {
 
     private String lastName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Order> orderHistory;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "user_roles", 
-        joinColumns = @JoinColumn(name = "user_id"), 
-        inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orderHistory = Collections.emptyList();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addresses;
+    private List<Address> addresses = Collections.emptyList();
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_name")
+    private Role role;
 }

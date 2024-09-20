@@ -10,6 +10,7 @@ import Terms from './pages/Terms/Terms';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Account from './pages/Account';
+import Categories from './pages/Categories/Categories';
 import AgeVerification from './components/AgeVerification';
 import RouteWrapper from './components/RouteWrapper';
 import NotLoggedInSection from './components/NotLoggedInSection';
@@ -28,6 +29,7 @@ function App() {
   const routes = [
     { path: '/', element: <Home /> },
     { path: '/shop', element: <Shop /> },
+    { path: '/categories', element: <Categories />},
     { path: '/categories/:categoryName', element: <Shop /> },
     { path: '/products/:productId', element: <Product /> },
     { path: '/contact', element: <div>Contact Page</div> },

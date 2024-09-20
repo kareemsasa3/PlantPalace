@@ -21,10 +21,22 @@ const Shop = () => {
         let productData = location.state?.searchResults || [];
 
         if (productData.length === 0) {
-          productData = await fetchCannabisProducts();
+          productData = await fetchCannabisProducts();  // Fetch all products
         }
-        setProducts(productData);
+
+        // If categoryName is present, filter the products by category, otherwise show all
+        const filteredProducts = categoryName
+          ? productData.filter((product) => product.cannabisCategory.toLowerCase() === categoryName.toLowerCase())
+          : productData;
+
+        setProducts(filteredProducts);
         setIsLoading(false);
+
+        // Log each product
+        filteredProducts.forEach((product, index) => {
+          console.log(`Product ${index + 1}:`, product);
+        });
+        
       } catch (error) {
         setError({ message: error.message || 'An error occurred'});
         setIsLoading(false);

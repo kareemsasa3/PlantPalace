@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
+import { categories } from '../../data/categoriesData';
+
 import './NavList.css';
 
 const NavList = ({ className, closeSidebar }) => {
-  // Separate state to track the dropdown index being hovered
   const [hoveredDropdown, setHoveredDropdown] = useState(null);
 
   const handleMouseEnter = (index) => {
-    setHoveredDropdown(index); // Set the hovered dropdown index
+    setHoveredDropdown(index);
   };
 
   const handleMouseLeave = () => {
-    setHoveredDropdown(null); // Reset when leaving dropdown
+    setHoveredDropdown(null);
   };
 
   return (
     <ul className={`navlist-container ${className}`}>
-      {/* First Dropdown */}
+
       <li className="dropdown-container">
         <div
           className={`dropdown-header ${className === 'sidebar' ? '' : 'navbar'}`}
@@ -33,7 +34,7 @@ const NavList = ({ className, closeSidebar }) => {
         </div>
         <ul
           className="dropdown-list"
-          onMouseEnter={() => handleMouseEnter(1)} // Keep icon right when hovering the list
+          onMouseEnter={() => handleMouseEnter(1)}
           onMouseLeave={handleMouseLeave}
         >
           <li><Link to="/contact" onClick={closeSidebar}>Contact</Link></li>
@@ -41,7 +42,6 @@ const NavList = ({ className, closeSidebar }) => {
         </ul>
       </li>
 
-      {/* Second Dropdown */}
       <li className="dropdown-container">
         <div
           className={`dropdown-header ${className === 'sidebar' ? '' : 'navbar'}`}
@@ -57,7 +57,7 @@ const NavList = ({ className, closeSidebar }) => {
         </div>
         <ul
           className="dropdown-list"
-          onMouseEnter={() => handleMouseEnter(2)} // Keep icon right when hovering the list
+          onMouseEnter={() => handleMouseEnter(2)}
           onMouseLeave={handleMouseLeave}
         >
           <li><Link to="/strain-guide" onClick={closeSidebar}>Strain Guide</Link></li>
@@ -66,7 +66,6 @@ const NavList = ({ className, closeSidebar }) => {
         </ul>
       </li>
 
-      {/* Third Dropdown */}
       <li className="dropdown-container">
         <div
           className={`dropdown-header ${className === 'sidebar' ? '' : 'navbar'}`}
@@ -82,7 +81,7 @@ const NavList = ({ className, closeSidebar }) => {
         </div>
         <ul
           className="dropdown-list"
-          onMouseEnter={() => handleMouseEnter(4)} // Keep icon right when hovering the list
+          onMouseEnter={() => handleMouseEnter(4)}
           onMouseLeave={handleMouseLeave}
         >
           <li><Link to="/news/articles" onClick={closeSidebar}>Interesting Articles</Link></li>
@@ -91,7 +90,6 @@ const NavList = ({ className, closeSidebar }) => {
         </ul>
       </li>
 
-      {/* Fourth Dropdown */}
       <li className="dropdown-container">
         <div
           className={`dropdown-header ${className === 'sidebar' ? '' : 'navbar'}`}
@@ -107,18 +105,16 @@ const NavList = ({ className, closeSidebar }) => {
         </div>
         <ul
           className="dropdown-list"
-          onMouseEnter={() => handleMouseEnter(3)} // Keep icon right when hovering the list
+          onMouseEnter={() => handleMouseEnter(3)}
           onMouseLeave={handleMouseLeave}
         >
-          <li><Link to="/shop" onClick={closeSidebar}>Shop All</Link></li>
-          <li><Link to="/categories/flower" onClick={closeSidebar}>Flower</Link></li>
-          <li><Link to="/categories/concentrates" onClick={closeSidebar}>Concentrates</Link></li>
-          <li><Link to="/categories/edibles" onClick={closeSidebar}>Edibles</Link></li>
-          <li><Link to="/categories/pre-rolls" onClick={closeSidebar}>Pre-rolls</Link></li>
-          <li><Link to="/categories/vaporizers" onClick={closeSidebar}>Vaporizers</Link></li>
-          <li><Link to="/categories/topicals" onClick={closeSidebar}>Topicals</Link></li>
-          <li><Link to="/categories/tinctures" onClick={closeSidebar}>Tinctures</Link></li>
-          <li><Link to="/categories/accessories" onClick={closeSidebar}>Accessories</Link></li>
+          {categories.map((category) => (
+            <li key={category.name}>
+              <Link to={category.path} onClick={closeSidebar}>
+                {category.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </li>
     </ul>
