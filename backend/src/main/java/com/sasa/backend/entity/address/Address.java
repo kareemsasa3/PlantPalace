@@ -10,7 +10,6 @@ import com.sasa.backend.dto.address.AddressDTO;
 import com.sasa.backend.entity.user.User;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -56,7 +55,6 @@ public class Address {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    @NotNull
     private AddressType addressType;
     
     private String city;

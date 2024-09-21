@@ -3,6 +3,10 @@ package com.sasa.backend.dto.order;
 import com.sasa.backend.entity.order.Order;
 import com.sasa.backend.entity.product.Product;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,18 +42,25 @@ public class OrderDTO {
 
     private Long id;
 
+    @NotNull(message = "User ID cannot be null")
     private Long userId;
 
+    @NotBlank(message = "Status cannot be blank")
     private String status;
 
+    @NotNull(message = "Order received timestamp cannot be null")
     private LocalDateTime orderReceivedTimestamp;
 
+    @Future(message = "Expected delivery timestamp must be in the future")
     private LocalDateTime expectedDeliveryTimestamp;
 
+    @NotNull(message = "Shipping address ID cannot be null")
     private Long shippingAddressId;
 
+    @NotNull(message = "Billing address ID cannot be null")
     private Long billingAddressId;
 
+    @NotEmpty(message = "Product IDs cannot be empty")
     private List<Long> productIds;
 
     private Map<String, Double> priceSummary;

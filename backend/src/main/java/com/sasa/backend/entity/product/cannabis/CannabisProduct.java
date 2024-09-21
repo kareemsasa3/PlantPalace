@@ -11,8 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.MapKeyColumn;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -66,18 +64,14 @@ public class CannabisProduct extends Product {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @NotNull
     private CannabisType type;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @NotNull
     private CannabisCategory category;
 
-    @Positive
     private Double thcContent;
 
-    @Positive
     private Double cbdContent;
 
     @ElementCollection

@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product {
 
-    public Product(ProductDTO dto) {
+    protected Product(ProductDTO dto) {
         this.id = dto.getId();
         this.name = dto.getName();
         this.brand = dto.getBrand();
